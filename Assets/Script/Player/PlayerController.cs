@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody rigidbody;
-    //private Animator animator;
+    private Animator animator;
     [Header("Movement")]
     private Vector2 curMovementInput;
     public float moveSpeed;
@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
-        //animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
     }
 
     private void Start()
@@ -69,6 +69,7 @@ public class PlayerController : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started && IsGrounded())
         {
+            animator.SetTrigger("Jump");
             rigidbody.AddForce(Vector2.up * (jumpPower), ForceMode.Impulse);
         }
     }
@@ -80,6 +81,10 @@ public class PlayerController : MonoBehaviour
         dir.y = rigidbody.velocity.y;
 
         rigidbody.velocity = dir;
+        if (dir != Vector3.zero)
+            animator.SetBool("IsWalk", true);
+        else
+            animator.SetBool("IsWalk", false);
     }
 
     void CameraLook()
