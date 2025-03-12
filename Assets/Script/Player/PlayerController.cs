@@ -38,6 +38,10 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
+    private void Update()
+    {
+        IsGrounded();
+    }
     private void FixedUpdate()
     {
         Move();
@@ -73,7 +77,13 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetTrigger("Jump");
             rigidbody.AddForce(Vector2.up * (jumpPower), ForceMode.Impulse);
+            //Invoke(nameof(Jump), 0.4f);
         }
+    }
+
+    void Jump()
+    {
+        
     }
 
     private void Move()
@@ -108,10 +118,11 @@ public class PlayerController : MonoBehaviour
         {
             if (Physics.Raycast(rays[i], 0.1f, groundLayerMask))
             {
+                animator.SetBool("IsGround", true);
                 return true;
             }
         }
-
+        animator.SetBool("IsGround", false);
         return false;
     }
 }
