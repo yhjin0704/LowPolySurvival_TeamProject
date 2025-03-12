@@ -58,10 +58,12 @@ public class PlayerController : MonoBehaviour
         if (context.phase == InputActionPhase.Performed)
         {
             curMovementInput = context.ReadValue<Vector2>();
+            animator.SetBool("IsWalk", true);
         }
         else if (context.phase == InputActionPhase.Canceled)
         {
             curMovementInput = Vector2.zero;
+            animator.SetBool("IsWalk", false);
         }
     }
 
@@ -81,10 +83,6 @@ public class PlayerController : MonoBehaviour
         dir.y = rigidbody.velocity.y;
 
         rigidbody.velocity = dir;
-        if (dir != Vector3.zero)
-            animator.SetBool("IsWalk", true);
-        else
-            animator.SetBool("IsWalk", false);
     }
 
     void CameraLook()
