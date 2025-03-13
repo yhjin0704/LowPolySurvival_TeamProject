@@ -375,7 +375,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiCondition: {fileID: 0}
-  noHungerHealthDecay: 0
+  noHungerHealthDecay: 5
 --- !u!1 &470998823004646048
 GameObject:
   m_ObjectHideFlags: 0
