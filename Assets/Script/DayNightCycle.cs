@@ -42,16 +42,6 @@ public class DayNightCycle : MonoBehaviour
         // ¹ãÀÎÁö ³·ÀÎÁö Ã¼Å©
         isNightTime = time >= 0.75f && time <= 1.0f;
 
-        // isNightTime »óÅÂ¸¦ È®ÀÎ
-        if (isNightTime)
-        {
-            Debug.Log("¹ã ½Ã°£ÀÌ ½ÃÀÛµÊ!"); // ¹ãÀÏ ¶§ µð¹ö±×
-        }
-        else
-        {
-            Debug.Log("³· ½Ã°£!"); // ³·ÀÏ ¶§ µð¹ö±×
-        }
-
         UpdateLighting(sun, sunColor, sunIntensity);
         UpdateLighting(moon, moonColor, moonIntensity);
 
