@@ -7,10 +7,12 @@ public class DayNightCycle : MonoBehaviour
 {
     [Range(0.0f, 1.0f)]
     public float time;
-    public float fullDayLength;
+    public float fullDayLength = 120f;
     public float startTime = 0.4f; //0.5f ÀÏ¶§ Á¤¿À
     private float timeRate;
     public Vector3 noon; //Vector 90 0 0
+
+    public bool isNightTime;
 
     [Header("Sun")]
     public Light sun;
@@ -27,7 +29,7 @@ public class DayNightCycle : MonoBehaviour
     public AnimationCurve reflectionIntensityMultiplier;//¹Ý»ç±¤ °­µµ º¯È­ °î¼±
     void Start()
     {
-        timeRate = 1.0f / fullDayLength;
+        timeRate = 0.5f / fullDayLength;
         time = startTime;
     }
 
@@ -35,6 +37,20 @@ public class DayNightCycle : MonoBehaviour
     void Update()
     {
         time = (time + timeRate * Time.deltaTime) % 1.0f;
+
+
+        // ¹ãÀÎÁö ³·ÀÎÁö Ã¼Å©
+        isNightTime = time >= 0.75f && time <= 1.0f;
+
+        // isNightTime »óÅÂ¸¦ È®ÀÎ
+        if (isNightTime)
+        {
+            Debug.Log("¹ã ½Ã°£ÀÌ ½ÃÀÛµÊ!"); // ¹ãÀÏ ¶§ µð¹ö±×
+        }
+        else
+        {
+            Debug.Log("³· ½Ã°£!"); // ³·ÀÏ ¶§ µð¹ö±×
+        }
 
         UpdateLighting(sun, sunColor, sunIntensity);
         UpdateLighting(moon, moonColor, moonIntensity);
