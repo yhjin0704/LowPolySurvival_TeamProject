@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -37,6 +38,7 @@ public class PlayerController : MonoBehaviour
     [HideInInspector]
     public bool canLook = true;
     public bool isDash = false;
+    public Action inventory;
 
     private void Awake()
     {
@@ -62,7 +64,10 @@ public class PlayerController : MonoBehaviour
 
     private void LateUpdate()
     {
-        CameraLook();
+        if (canLook)
+        {
+            CameraLook();
+        }
     }
 
     public void OnLookInput(InputAction.CallbackContext context)
@@ -192,5 +197,21 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("ÆÝÄ¡ÆÝÄ¡");
         }
+    }
+
+    public void OnInventoryButton(InputAction.CallbackContext callbackContext)
+    {
+        if (callbackContext.phase == InputActionPhase.Started)
+        {
+            inventory?.Invoke();
+            ToggleCursor();
+        }
+    }
+
+    void ToggleCursor()
+    {
+        bool toggle = Cursor.lockState == CursorLockMode.Locked;
+        Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;
+        canLook = !toggle;
     }
 }
