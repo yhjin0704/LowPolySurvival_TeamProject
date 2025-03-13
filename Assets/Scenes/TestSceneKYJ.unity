@@ -1253,7 +1253,7 @@ MonoBehaviour:
   maxXLook: 85
   lookSensitivity: 0.2
   attackRate: 1
-  attackDistance: 1
+  attackDistance: 0.8
   punchDamage: 5
   canLook: 1
   isDash: 0

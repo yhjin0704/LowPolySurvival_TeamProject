@@ -32,6 +32,8 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 mouseDelta;
 
+    private Camera camera;
+
     [HideInInspector]
     public bool canLook = true;
     public bool isDash = false;
@@ -46,6 +48,7 @@ public class PlayerController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         resultSpeed = moveSpeed;
+        camera = Camera.main;
     }
 
     private void Update()
@@ -178,5 +181,16 @@ public class PlayerController : MonoBehaviour
     void OnCanAttack()
     {
         attacking = false;
+    }
+
+    public void OnHit()
+    {
+        Ray ray = camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, attackDistance))
+        {
+            Debug.Log("ÆÝÄ¡ÆÝÄ¡");
+        }
     }
 }
