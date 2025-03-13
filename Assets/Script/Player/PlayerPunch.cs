@@ -6,6 +6,6 @@ public class PlayerPunch : PlayerEquipState
 {
     public void ChangeController()
     {
-        Debug.Log("аж╦т╩Себ");
+        PlayerManager.Instance.Player.controller.ChangePunchAnimator();
     }
 }
