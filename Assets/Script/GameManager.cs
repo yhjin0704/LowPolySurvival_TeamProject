@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        DebugTestKey();
     }
 
     void AddComponentToTagObject<T>(string _tagName) where T : Component
@@ -41,6 +41,21 @@ public class GameManager : MonoBehaviour
             {
                 obj.AddComponent<T>();
             }
+        }
+    }
+
+    void DebugTestKey()
+    {
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            // 씬에 있는 모든 Tree 컴포넌트를 찾습니다.
+            Tree[] trees = FindObjectsOfType<Tree>();
+            foreach (Tree tree in trees)
+            {
+                // 각 Tree의 Break() 메서드를 호출합니다.
+                tree.TakeDamage(200f);
+            }
+            Debug.Log("F1");
         }
     }
 }

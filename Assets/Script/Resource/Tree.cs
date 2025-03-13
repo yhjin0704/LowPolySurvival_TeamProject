@@ -2,17 +2,123 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class DropItem
+{
+    public GameObject dropItemPrefab;
+    public int minDropCount;
+    public int maxDropCount;
+}
+
 public class Tree : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public float maxHp = 100f;
+    public float currentHp;
+
+    public float respawnTime = 5f;
+
+    public DropItem[] dropItems;
+
+    private Collider collider_;
+    private Renderer[] renderer_;
+    private GameObject stumpRenderer;
+    private GameObject stumpPrefab;
+
+    private bool isBreak = false;
+
+    void Awake()
     {
-        
+        currentHp = maxHp;
+
+        collider_ = GetComponentInChildren<Collider>();
+        renderer_ = GetComponentsInChildren<Renderer>();
+
+        if (dropItems == null || dropItems.Length == 0)
+        {
+            dropItems = new DropItem[2];
+
+            dropItems[0] = new DropItem();
+            dropItems[0].dropItemPrefab = Resources.Load<GameObject>("Prefabs/Tree/Branch");
+            dropItems[0].minDropCount = 0;
+            dropItems[0].maxDropCount = 3;
+
+            dropItems[1] = new DropItem();
+            dropItems[1].dropItemPrefab = Resources.Load<GameObject>("Prefabs/Tree/Wood");
+            dropItems[1].minDropCount = 1;
+            dropItems[1].maxDropCount = 2;
+        }
+
+        stumpPrefab = Resources.Load<GameObject>("Prefabs/Tree/TreeStump");
     }
 
-    // Update is called once per frame
-    void Update()
+    public void TakeDamage(float _damage)
     {
-        
+        if (isBreak)
+            return;
+
+        currentHp -= _damage;
+
+        if (currentHp <= 0)
+        {
+            Break();
+        }
+    }
+
+    void Break()
+    {
+        isBreak = true;
+
+        if (dropItems != null)
+        {
+            for (int i = 0; i < dropItems.Length; i++)
+            {
+                int dropCount = Random.Range(dropItems[i].minDropCount, dropItems[i].maxDropCount + 1);
+                for (int j = 0; j < dropCount; j++)
+                {
+                    Vector3 dropPosition = new Vector3(
+                        transform.position.x + Random.Range(-1f, 1f),
+                        transform.position.y + 1,
+                        transform.position.z + Random.Range(-1f, 1f)
+                    );
+                    Instantiate(dropItems[i].dropItemPrefab, dropPosition, Quaternion.identity);
+                }
+            }
+        }
+
+        if (collider_ != null)
+            collider_.enabled = false;
+
+        foreach (Renderer rd in renderer_)
+        {
+            rd.enabled = false;
+        }
+
+        if (stumpPrefab != null)
+        {
+            stumpRenderer = Instantiate(stumpPrefab, transform.position, transform.rotation, transform);
+        }
+
+        StartCoroutine(CRespawnCoroutine());
+    }
+
+    IEnumerator CRespawnCoroutine()
+    {
+        yield return new WaitForSeconds(respawnTime);
+
+        currentHp = maxHp;
+        isBreak = false;
+
+        if (collider_ != null)
+            collider_.enabled = true;
+
+        foreach (Renderer rd in renderer_)
+        {
+            rd.enabled = true;
+        }
+
+        if (stumpRenderer != null)
+        {
+            Destroy(stumpRenderer);
+        }
     }
 }
