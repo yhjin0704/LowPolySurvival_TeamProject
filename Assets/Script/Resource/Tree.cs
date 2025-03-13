@@ -10,17 +10,19 @@ public class DropItem
     public int maxDropCount;
 }
 
-public class TreeScript : MonoBehaviour
+public class Tree : MonoBehaviour
 {
     public float maxHp = 100f;
     public float currentHp;
+
+    public float respawnTime = 5f;
 
     public DropItem[] dropItems;
 
     private Collider collider_;
     private Renderer[] renderer_;
-    private GameObject stompRenderer;
-    private GameObject stompPrefab;
+    private GameObject stumpRenderer;
+    private GameObject stumpPrefab;
 
     private bool isBreak = false;
 
@@ -30,14 +32,42 @@ public class TreeScript : MonoBehaviour
 
         collider_ = GetComponentInChildren<Collider>();
         renderer_ = GetComponentsInChildren<Renderer>();
+
+        if (dropItems == null || dropItems.Length == 0)
+        {
+            dropItems = new DropItem[2];
+
+            dropItems[0] = new DropItem();
+            dropItems[0].dropItemPrefab = Resources.Load<GameObject>("Prefabs/Tree/Branch");
+            dropItems[0].minDropCount = 0;
+            dropItems[0].maxDropCount = 3;
+
+            dropItems[1] = new DropItem();
+            dropItems[1].dropItemPrefab = Resources.Load<GameObject>("Prefabs/Tree/Wood");
+            dropItems[1].minDropCount = 1;
+            dropItems[1].maxDropCount = 2;
+        }
+
+        stumpPrefab = Resources.Load<GameObject>("Prefabs/Tree/TreeStump");
     }
 
-    // 나무가 부서질 때 호출되는 메서드
-    public void Break()
+    public void TakeDamage(float _damage)
+    {
+        if (isBreak)
+            return;
+
+        currentHp -= _damage;
+
+        if (currentHp <= 0)
+        {
+            Break();
+        }
+    }
+
+    void Break()
     {
         isBreak = true;
 
-        // 아이템 드랍 처리
         if (dropItems != null)
         {
             for (int i = 0; i < dropItems.Length; i++)
@@ -57,42 +87,38 @@ public class TreeScript : MonoBehaviour
 
         if (collider_ != null)
             collider_.enabled = false;
+
         foreach (Renderer rd in renderer_)
         {
             rd.enabled = false;
         }
 
-        // deadTreeTrunkPrefab이 지정되어 있다면, 현재 나무 위치에서 인스턴스화하여 자식으로 추가합니다.
-        if (deadTreeTrunkPrefab != null)
+        if (stumpPrefab != null)
         {
-            currentDeadTrunk = Instantiate(deadTreeTrunkPrefab, transform.position, transform.rotation, transform);
-            // 인스턴스화된 밑둥의 위치를 부모(나무)의 로컬 좌표 기준으로 조정
-            currentDeadTrunk.transform.localPosition = Vector3.zero;
+            stumpRenderer = Instantiate(stumpPrefab, transform.position, transform.rotation, transform);
         }
 
         StartCoroutine(CRespawnCoroutine());
     }
 
-    // 재활성화를 위한 코루틴 (예: 5초 후 복원)
     IEnumerator CRespawnCoroutine()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(respawnTime);
 
-        // 죽은 나무 밑둥 제거
-        if (currentDeadTrunk != null)
-        {
-            Destroy(currentDeadTrunk);
-        }
+        currentHp = maxHp;
+        isBreak = false;
 
-        // Collider와 Renderer 다시 활성화
         if (collider_ != null)
             collider_.enabled = true;
+
         foreach (Renderer rd in renderer_)
         {
             rd.enabled = true;
         }
 
-        currentHp = maxHp;
-        isBreak = false;
+        if (stumpRenderer != null)
+        {
+            Destroy(stumpRenderer);
+        }
     }
 }

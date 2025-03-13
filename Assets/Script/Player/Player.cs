@@ -14,6 +14,6 @@ public class Player : MonoBehaviour
     {
         PlayerManager.Instance.Player = this;
         controller = GetComponent<PlayerController>();
-        condition = GetComponent<PlayerCondition>();
+        //condition = GetComponent<PlayerCondition>();
     }
 }
