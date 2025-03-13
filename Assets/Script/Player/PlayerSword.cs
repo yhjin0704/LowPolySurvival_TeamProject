@@ -6,7 +6,7 @@ public class PlayerSword : PlayerEquipState
 {
     public void ChangeController()
     {
-        Debug.Log("╟к ╩Себ");
+        PlayerManager.Instance.Player.controller.ChangeSwordAnimator();
     }
 }
 
