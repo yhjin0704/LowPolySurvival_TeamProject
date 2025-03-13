@@ -3188,6 +3188,7 @@ GameObject:
   - component: {fileID: 5420097760516982066}
   - component: {fileID: 459418087401390605}
   - component: {fileID: 7549646762012841061}
+  - component: {fileID: 7549646762012841062}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -4416,6 +4417,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 0}
+  itemData: {fileID: 0}
+  condition: {fileID: 0}
 --- !u!4 &5435014339586175963
 Transform:
   m_ObjectHideFlags: 0
@@ -5420,6 +5423,20 @@ MonoBehaviour:
     m_Bits: 256
   curInteractGameObject: {fileID: 0}
   promptText: {fileID: 232029397}
+--- !u!114 &7549646762012841062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3209616693255072332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6beeffcb0342eac4fb143f2dbb74efbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiCondition: {fileID: 0}
+  noHungerHealthDecay: 0
 --- !u!1 &7673959399411931524
 GameObject:
   m_ObjectHideFlags: 0
