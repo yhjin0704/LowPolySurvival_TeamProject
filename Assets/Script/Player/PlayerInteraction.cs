@@ -45,7 +45,7 @@ public class PlayerInteraction : MonoBehaviour
             {
                 curInteractGameObject = null;
                 curInteractable = null;
-                //promptText.gameObject.SetActive(false);
+                promptText.gameObject.SetActive(false);
             }
         }
     }
