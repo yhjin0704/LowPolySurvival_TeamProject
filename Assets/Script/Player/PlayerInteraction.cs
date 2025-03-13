@@ -30,6 +30,7 @@ public class PlayerInteraction : MonoBehaviour
             lastCheckTime = Time.time;
 
             Ray ray = camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
+            Debug.DrawRay(ray.origin, ray.direction * 10 , Color.red);
             RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit, maxCheckDistance, layerMask))
