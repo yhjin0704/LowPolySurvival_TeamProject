@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed;
     public float dashSpeed;
     public float jumpPower;
+    public float resultSpeed;
     public LayerMask groundLayerMask;
 
     [Header("Look")]
@@ -36,8 +37,13 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        resultSpeed = moveSpeed;
     }
 
+    private void Update()
+    {
+        IsGrounded();
+    }
     private void FixedUpdate()
     {
         Move();
@@ -76,10 +82,35 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void OnDashInput(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            ToggleDash();
+        }
+    }
+
+    void ToggleDash()
+    {
+        if (isDash)
+        {
+            resultSpeed = moveSpeed;
+            isDash = false;
+            animator.SetBool("IsDash", false);
+        }
+        else
+        {
+            resultSpeed = dashSpeed * moveSpeed;
+            isDash = true;
+            animator.SetBool("IsDash", true);
+        }
+    }
+
+
     private void Move()
     {
         Vector3 dir = transform.forward * curMovementInput.y + transform.right * curMovementInput.x;
-        dir *= moveSpeed;
+        dir *= resultSpeed;
         dir.y = rigidbody.velocity.y;
 
         rigidbody.velocity = dir;
@@ -108,10 +139,11 @@ public class PlayerController : MonoBehaviour
         {
             if (Physics.Raycast(rays[i], 0.1f, groundLayerMask))
             {
+                animator.SetBool("IsGround", true);
                 return true;
             }
         }
-
+        animator.SetBool("IsGround", false);
         return false;
     }
 }
