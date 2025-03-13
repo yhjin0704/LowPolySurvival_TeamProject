@@ -3106,7 +3106,19 @@ MonoBehaviour:
     m_ActionId: e1c35ef8-fb1a-487a-82c7-20d64c383a15
     m_ActionName: Player/Dash[/Keyboard/shift]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4857614767183609966}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnInventoryButton
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 17430ff7-c2f7-4d4f-801e-638f2105074c
     m_ActionName: Player/Inventory[/Keyboard/i]
   - m_PersistentCalls:
@@ -3145,6 +3157,7 @@ MonoBehaviour:
   controller: {fileID: 0}
   itemData: {fileID: 0}
   condition: {fileID: 0}
+  dropPosition: {fileID: 0}
 --- !u!114 &4857614767183609966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3180,7 +3193,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8496488359373269871}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c65531e32d1d57641bfefdda4e573071, type: 3}
   m_Name: 
@@ -3219,6 +3232,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiCondition: {fileID: 0}
   noHungerHealthDecay: 0
+  noThirstHealthDecay: 0
 --- !u!1 &8692220124126106327
 GameObject:
   m_ObjectHideFlags: 0
