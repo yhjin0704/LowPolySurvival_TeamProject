@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody rigidbody;
@@ -22,7 +23,16 @@ public class PlayerController : MonoBehaviour
     private float camCurXRot;
     public float lookSensitivity;
 
+    [Header("Combat")]
+    public float attackRate;
+    private bool attacking;
+    private bool LeftPunch;
+    public float attackDistance;
+    public int punchDamage;
+
     private Vector2 mouseDelta;
+
+    private Camera camera;
 
     [HideInInspector]
     public bool canLook = true;
@@ -38,6 +48,7 @@ public class PlayerController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         resultSpeed = moveSpeed;
+        camera = Camera.main;
     }
 
     private void Update()
@@ -145,5 +156,41 @@ public class PlayerController : MonoBehaviour
         }
         animator.SetBool("IsGround", false);
         return false;
+    }
+
+    public void OnAttackInput()
+    {
+        if (!attacking)
+        {
+            attacking = true;
+            if (!LeftPunch)
+            {
+                animator.SetTrigger("LeftPunch");
+                LeftPunch = true;
+            }
+            else
+            {
+                animator.SetTrigger("RightPunch");
+                LeftPunch = false;
+            }
+                
+            Invoke(nameof(OnCanAttack), attackRate);
+        }
+    }
+
+    void OnCanAttack()
+    {
+        attacking = false;
+    }
+
+    public void OnHit()
+    {
+        Ray ray = camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, attackDistance))
+        {
+            Debug.Log("ÆÝÄ¡ÆÝÄ¡");
+        }
     }
 }
