@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DropResource;
+using UnityEngine.AI;
 
 public class Rock : MonoBehaviour, IBreakableObject, IRespawnable
 {
@@ -16,6 +17,7 @@ public class Rock : MonoBehaviour, IBreakableObject, IRespawnable
     private Renderer[] renderer_;
     private GameObject debrisRenderer;
     private GameObject debrisPrefab;
+    private NavMeshObstacle navObstacle;
 
     private bool isBreak = false;
 
@@ -25,6 +27,7 @@ public class Rock : MonoBehaviour, IBreakableObject, IRespawnable
 
         collider_ = GetComponentInChildren<Collider>();
         renderer_ = GetComponentsInChildren<Renderer>();
+        navObstacle = GetComponent<NavMeshObstacle>();
 
         if (dropItems == null || dropItems.Length == 0)
         {
@@ -96,6 +99,9 @@ public class Rock : MonoBehaviour, IBreakableObject, IRespawnable
             debrisRenderer = Instantiate(debrisPrefab, transform.position, transform.rotation, transform);
         }
 
+        if (navObstacle != null)
+            navObstacle.enabled = false;
+
         StartCoroutine(CRespawnCoroutine(respawnTime));
     }
 
@@ -113,6 +119,9 @@ public class Rock : MonoBehaviour, IBreakableObject, IRespawnable
         {
             rd.enabled = true;
         }
+
+        if (navObstacle != null)
+            navObstacle.enabled = true;
 
         if (debrisRenderer != null)
         {
