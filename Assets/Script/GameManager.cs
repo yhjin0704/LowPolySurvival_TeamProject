@@ -1,6 +1,8 @@
+using DropResource;
 using OpenCover.Framework.Model;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -24,6 +26,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         AddComponentToTagObject<Tree>("Tree");
+        AddComponentToTagObject<Rock>("BreakableRock");
     }
 
     // Update is called once per frame
@@ -48,12 +51,10 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F1))
         {
-            // 씬에 있는 모든 Tree 컴포넌트를 찾습니다.
-            Tree[] trees = FindObjectsOfType<Tree>();
-            foreach (Tree tree in trees)
+            IBreakableObject[] baobjs = FindObjectsOfType<MonoBehaviour>().OfType<IBreakableObject>().ToArray();
+            foreach (IBreakableObject baobj in baobjs)
             {
-                // 각 Tree의 Break() 메서드를 호출합니다.
-                tree.TakeDamage(200f);
+                baobj.TakeDamage(200f);
             }
             Debug.Log("F1");
         }

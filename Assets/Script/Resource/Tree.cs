@@ -1,16 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DropResource;
 
-[System.Serializable]
-public class DropItem
-{
-    public GameObject dropItemPrefab;
-    public int minDropCount;
-    public int maxDropCount;
-}
-
-public class Tree : MonoBehaviour
+public class Tree : MonoBehaviour, IBreakableObject, IRespawnable
 {
     public float maxHp = 100f;
     public float currentHp;
@@ -64,7 +57,7 @@ public class Tree : MonoBehaviour
         }
     }
 
-    void Break()
+    public void Break()
     {
         isBreak = true;
 
@@ -95,15 +88,15 @@ public class Tree : MonoBehaviour
 
         if (stumpPrefab != null)
         {
-            stumpRenderer = Instantiate(stumpPrefab, transform.position, transform.rotation, transform);
+            stumpRenderer = Instantiate(stumpPrefab, transform.position, Quaternion.Euler(-90f, 0f, 0f), transform);
         }
 
-        StartCoroutine(CRespawnCoroutine());
+        StartCoroutine(CRespawnCoroutine(respawnTime));
     }
 
-    IEnumerator CRespawnCoroutine()
+    public IEnumerator CRespawnCoroutine(float _respawnTime)
     {
-        yield return new WaitForSeconds(respawnTime);
+        yield return new WaitForSeconds(_respawnTime);
 
         currentHp = maxHp;
         isBreak = false;
