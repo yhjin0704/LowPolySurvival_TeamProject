@@ -19,13 +19,13 @@ public class Equipment : MonoBehaviour
     {         
         if (context.phase == InputActionPhase.Performed && controller.canLook)
         {
-            Debug.Log("¸¶¿ì½º Å¬¸¯");
             if (curEquip!=null)
             {
                 curEquip.OnAttackInput();
             }
             else
             {
+                //ÆÝÄ¡ÆÝÄ¡
                 controller.OnAttackInput();
             }
             
