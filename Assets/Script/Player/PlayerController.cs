@@ -4,6 +4,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Playables;
+using UnityEditor.Animations;
 
 
 public class PlayerController : MonoBehaviour
@@ -15,6 +16,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Override Animator")]
     private Animator animator;
+    public AnimatorController defaultController;
     public AnimatorOverrideController swordController;
 
     [Header("Movement")]
@@ -230,5 +232,10 @@ public class PlayerController : MonoBehaviour
     public void ChangeSwordAnimator()
     {
         animator.runtimeAnimatorController = swordController;
+    }
+
+    public void ChangePunchAnimator()
+    {
+        animator.runtimeAnimatorController = defaultController;
     }
 }
