@@ -3,12 +3,20 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Playables;
 
 
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody rigidbody;
+    PlayerPunch punchState;
+    PlayerSword swordState;
+    PlayerState playerState;
+
+    [Header("Override Animator")]
     private Animator animator;
+    public AnimatorOverrideController swordController;
+
     [Header("Movement")]
     private Vector2 curMovementInput;
     public float moveSpeed;
@@ -48,6 +56,10 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        punchState = new PlayerPunch();
+        swordState = new PlayerSword();
+        playerState = new PlayerState(punchState);
+        playerState.Change();
         Cursor.lockState = CursorLockMode.Locked;
         resultSpeed = moveSpeed;
         camera = Camera.main;
@@ -213,5 +225,10 @@ public class PlayerController : MonoBehaviour
         bool toggle = Cursor.lockState == CursorLockMode.Locked;
         Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;
         canLook = !toggle;
+    }
+
+    public void ChangeSwordAnimator()
+    {
+        animator.runtimeAnimatorController = swordController;
     }
 }

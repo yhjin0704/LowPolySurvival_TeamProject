@@ -1290,6 +1290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d404b99ce92e7684892ed07fff880ebd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  swordController: {fileID: 22100000, guid: 4490efe1d430f924781757113c435a5b, type: 2}
   moveSpeed: 5
   dashSpeed: 2
   jumpPower: 300
@@ -4578,6 +4579,7 @@ MonoBehaviour:
   controller: {fileID: 0}
   itemData: {fileID: 0}
   condition: {fileID: 0}
+  dropPosition: {fileID: 0}
 --- !u!4 &5435014339586175963
 Transform:
   m_ObjectHideFlags: 0
