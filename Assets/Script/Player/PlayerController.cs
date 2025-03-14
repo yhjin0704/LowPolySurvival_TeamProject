@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.Playables;
 using UnityEditor.Animations;
 using DropResource;
+using System.Linq;
 
 
 public class PlayerController : MonoBehaviour
@@ -14,6 +15,9 @@ public class PlayerController : MonoBehaviour
     PlayerPunch punchState;
     PlayerSword swordState;
     PlayerState playerState;
+
+    private GameObject equipSword;
+    private List<Transform> equipPos;
 
     [Header("Override Animator")]
     private Animator animator;
@@ -67,6 +71,11 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         resultSpeed = moveSpeed;
         camera = Camera.main;
+
+        equipPos = GameObject.Find("EquipPos").GetComponentsInChildren<Transform>().Where(t => t != transform).ToList();
+        equipPos.RemoveAt(0);
+        equipSword = GameObject.Find("EquipPos").transform.Find("Equip_Sword").gameObject;
+        Debug.Log(equipSword.name);
     }
 
     private void Update()
@@ -254,5 +263,18 @@ public class PlayerController : MonoBehaviour
     public void SetDamage(float damage)
     {
         nowDamage = damage;
+    }
+
+    public void DisableAllEquipItem()
+    {
+        foreach(Transform objects in equipPos)
+        {
+            objects.gameObject.SetActive(false);
+        }
+    }
+    
+    public void ActiveSword()
+    {
+        equipSword.SetActive(true);
     }
 }
