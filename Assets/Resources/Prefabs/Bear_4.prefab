@@ -1502,6 +1502,7 @@ GameObject:
   - component: {fileID: 921124813290914496}
   - component: {fileID: 8804937101744166235}
   - component: {fileID: 8387986732314974194}
+  - component: {fileID: 4310878545979238859}
   m_Layer: 0
   m_Name: Bear_4
   m_TagString: Untagged
@@ -1590,6 +1591,31 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &4310878545979238859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6594152782141791017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26c0f08af84201143ad7fbf6b505b769, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 200
+  walkSpeed: 1
+  runSpeed: 4
+  dropOnDepth: []
+  detectDistance: 5
+  minWanderDistance: 5
+  maxWanderDistance: 10
+  minWanderWaitTime: 1
+  maxWanderWaitTime: 2
+  damage: 5
+  attackRate: 1.5
+  attackDistance: 2
+  fieldIfView: 120
 --- !u!1 &6682053216711195943
 GameObject:
   m_ObjectHideFlags: 0

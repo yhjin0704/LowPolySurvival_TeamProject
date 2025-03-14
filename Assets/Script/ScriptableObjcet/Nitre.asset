@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a094b6b49173fe245ac3973789164297, type: 3}
-  m_Name: Rock
+  m_Name: Nitre
   m_EditorClassIdentifier: 
-  displayName: "\uB3CC"
-  description: "\uC801\uB2F9\uD55C \uD06C\uAE30\uC758 \uB3CC\uB9F9\uC774. \uC7AC\uB8CC\uB85C
-    \uC0AC\uC6A9\uD560 \uC218 \uC788\uC744 \uAC83 \uAC19\uB2E4."
+  displayName: "\uCD08\uC11D"
+  description: "\uC7AC\uB8CC\uB85C \uC0AC\uC6A9\uD560 \uC218 \uC788\uC744 \uAC83
+    \uAC19\uB2E4."
   type: 0
   icon: {fileID: 0}
   dropPrefab: {fileID: 0}
