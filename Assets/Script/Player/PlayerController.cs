@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Playables;
 using UnityEditor.Animations;
+using DropResource;
 
 
 public class PlayerController : MonoBehaviour
@@ -40,6 +41,7 @@ public class PlayerController : MonoBehaviour
     private bool LeftPunch;
     public float attackDistance;
     public int punchDamage;
+    public LayerMask hitLayer;
 
     private Vector2 mouseDelta;
 
@@ -205,11 +207,18 @@ public class PlayerController : MonoBehaviour
     public void OnHit()
     {
         Ray ray = camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+        //Ray ray = new Ray(transform.position + new Vector3(0, 0.5f,0), Vector3.forward * attackDistance);
+        Debug.DrawRay(ray.origin, ray.direction,Color.white);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, attackDistance))
+        if (Physics.Raycast(ray, out hit, attackDistance, hitLayer))
         {
-            Debug.Log("ÆÝÄ¡ÆÝÄ¡");
+            Debug.Log(hit.collider.name);
+            if(hit.collider.TryGetComponent(out IBreakableObject IBreakableObject))
+            {
+                Debug.Log("ÆÝÄ¡ÆÝÄ¡");
+                IBreakableObject.TakeDamage(punchDamage);
+            }
         }
     }
 
