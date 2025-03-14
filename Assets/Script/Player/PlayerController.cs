@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
     private bool attacking;
     private bool LeftPunch;
     public float attackDistance;
-    public int punchDamage;
+    private float nowDamage;
     public LayerMask hitLayer;
 
     private Vector2 mouseDelta;
@@ -214,10 +214,10 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(ray, out hit, attackDistance, hitLayer))
         {
             Debug.Log(hit.collider.name);
-            if(hit.collider.TryGetComponent(out IBreakableObject IBreakableObject))
+            if(hit.collider.TryGetComponent(out IBreakableObject breakbleObject))
             {
                 Debug.Log("ÆÝÄ¡ÆÝÄ¡");
-                IBreakableObject.TakeDamage(punchDamage);
+                breakbleObject.TakeDamage(nowDamage);
             }
         }
     }
@@ -249,5 +249,10 @@ public class PlayerController : MonoBehaviour
     public void ChangePunchAnimator()
     {
         animator.runtimeAnimatorController = defaultController;
+    }
+
+    public void SetDamage(float damage)
+    {
+        nowDamage = damage;
     }
 }
