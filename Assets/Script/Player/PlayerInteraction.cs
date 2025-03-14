@@ -39,15 +39,20 @@ public class PlayerInteraction : MonoBehaviour
                 {
                     curInteractGameObject = hit.collider.gameObject;
                     curInteractable = hit.collider.GetComponent<IInteractable>();
-                    SetPromptText();   
+                    
+                    if (curInteractable != null)
+                    {
+                        SetPromptText();
+                    }
+                    else
+                    {
+                        curInteractGameObject = null;
+                        curInteractable = null;
+                        promptText.gameObject.SetActive(false);
+                    }
                 }
             }
-            else
-            {
-                curInteractGameObject = null;
-                curInteractable = null;
-                promptText.gameObject.SetActive(false);
-            }
+            
         }
     }
 
