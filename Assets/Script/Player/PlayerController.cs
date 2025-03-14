@@ -226,8 +226,11 @@ public class PlayerController : MonoBehaviour
     {
         if (callbackContext.phase == InputActionPhase.Started)
         {
-            inventory?.Invoke();
-            ToggleCursor();
+            playerState.setState(swordState);
+            playerState.Change();
+
+            //inventory?.Invoke();
+            //ToggleCursor();
         }
     }
 

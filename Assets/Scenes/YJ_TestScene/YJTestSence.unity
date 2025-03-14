@@ -1774,6 +1774,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1375211691734230628, guid: b6bfea0f13282ba4eac01fc65568a50f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4857614767183609966, guid: b6bfea0f13282ba4eac01fc65568a50f, type: 3}
       propertyPath: attackDistance
       value: 2
@@ -1782,6 +1786,10 @@ PrefabInstance:
       propertyPath: hitLayer.m_Bits
       value: 512
       objectReference: {fileID: 0}
+    - target: {fileID: 4857614767183609966, guid: b6bfea0f13282ba4eac01fc65568a50f, type: 3}
+      propertyPath: swordController
+      value: 
+      objectReference: {fileID: 22100000, guid: 4490efe1d430f924781757113c435a5b, type: 2}
     - target: {fileID: 4857614767183609966, guid: b6bfea0f13282ba4eac01fc65568a50f, type: 3}
       propertyPath: defaultController
       value: 
