@@ -77,6 +77,11 @@ public class PlayerCondition : MonoBehaviour
         stamina.Subtract(amount);
     }
 
+    public bool IsStaminaZero()
+    {
+        return stamina.GetPercentage() == 0;
+    }
+
     public void Die()
     {
         Debug.Log("플레이어가 죽었다.");

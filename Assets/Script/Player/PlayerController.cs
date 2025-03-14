@@ -93,6 +93,11 @@ public class PlayerController : MonoBehaviour
         {
             condition.ConsumeStamina(dashStamina);
         }
+
+        if (condition.IsStaminaZero())
+        {
+            ToggleDash();
+        }
     }
 
     private void LateUpdate()
@@ -141,17 +146,17 @@ public class PlayerController : MonoBehaviour
 
     void ToggleDash()
     {
-        if (isDash)
-        {
-            resultSpeed = moveSpeed;
-            isDash = false;
-            animator.SetBool("IsDash", false);
-        }
-        else
+        if (!isDash && !condition.IsStaminaZero())
         {
             resultSpeed = dashSpeed * moveSpeed;
             isDash = true;
             animator.SetBool("IsDash", true);
+        }
+        else
+        {
+            resultSpeed = moveSpeed;
+            isDash = false;
+            animator.SetBool("IsDash", false);
         }
     }
 
@@ -243,10 +248,8 @@ public class PlayerController : MonoBehaviour
     {
         if (callbackContext.phase == InputActionPhase.Started)
         {
-            playerState.setState(swordState);
-            playerState.Change();
-            //inventory?.Invoke();
-            //ToggleCursor();
+            inventory?.Invoke();
+            ToggleCursor();
         }
     }
 
