@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Playables;
 using UnityEditor.Animations;
+using DropResource;
+using System.Linq;
 
 
 public class PlayerController : MonoBehaviour
@@ -13,6 +15,9 @@ public class PlayerController : MonoBehaviour
     PlayerPunch punchState;
     PlayerSword swordState;
     PlayerState playerState;
+
+    private GameObject equipSword;
+    private List<Transform> equipPos;
 
     [Header("Override Animator")]
     private Animator animator;
@@ -39,7 +44,8 @@ public class PlayerController : MonoBehaviour
     private bool attacking;
     private bool LeftPunch;
     public float attackDistance;
-    public int punchDamage;
+    private float nowDamage;
+    public LayerMask hitLayer;
 
     private Vector2 mouseDelta;
 
@@ -65,6 +71,11 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         resultSpeed = moveSpeed;
         camera = Camera.main;
+
+        equipPos = GameObject.Find("EquipPos").GetComponentsInChildren<Transform>().Where(t => t != transform).ToList();
+        equipPos.RemoveAt(0);
+        equipSword = GameObject.Find("EquipPos").transform.Find("Equip_Sword").gameObject;
+        Debug.Log(equipSword.name);
     }
 
     private void Update()
@@ -205,11 +216,18 @@ public class PlayerController : MonoBehaviour
     public void OnHit()
     {
         Ray ray = camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+        //Ray ray = new Ray(transform.position + new Vector3(0, 0.5f,0), Vector3.forward * attackDistance);
+        Debug.DrawRay(ray.origin, ray.direction,Color.white);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, attackDistance))
+        if (Physics.Raycast(ray, out hit, attackDistance, hitLayer))
         {
-            Debug.Log("ÆÝÄ¡ÆÝÄ¡");
+            Debug.Log(hit.collider.name);
+            if(hit.collider.TryGetComponent(out IBreakableObject breakbleObject))
+            {
+                Debug.Log("ÆÝÄ¡ÆÝÄ¡");
+                breakbleObject.TakeDamage(nowDamage);
+            }
         }
     }
 
@@ -217,8 +235,11 @@ public class PlayerController : MonoBehaviour
     {
         if (callbackContext.phase == InputActionPhase.Started)
         {
-            inventory?.Invoke();
-            ToggleCursor();
+            playerState.setState(swordState);
+            playerState.Change();
+
+            //inventory?.Invoke();
+            //ToggleCursor();
         }
     }
 
@@ -237,5 +258,23 @@ public class PlayerController : MonoBehaviour
     public void ChangePunchAnimator()
     {
         animator.runtimeAnimatorController = defaultController;
+    }
+
+    public void SetDamage(float damage)
+    {
+        nowDamage = damage;
+    }
+
+    public void DisableAllEquipItem()
+    {
+        foreach(Transform objects in equipPos)
+        {
+            objects.gameObject.SetActive(false);
+        }
+    }
+    
+    public void ActiveSword()
+    {
+        equipSword.SetActive(true);
     }
 }

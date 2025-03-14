@@ -7,6 +7,8 @@ public class PlayerCondition : MonoBehaviour
 {
     public UICondition uiCondition;
 
+    public DayNightCycle dayNightCycle; //CYS추가코드
+
     Condition health { get { return uiCondition.health; } }
     Condition hunger { get { return uiCondition.hunger; } }
     Condition thirst { get { return uiCondition.thirst; } }
@@ -16,8 +18,23 @@ public class PlayerCondition : MonoBehaviour
     public float noThirstHealthDecay;
     public event Action onTakeDamage;
 
+    
+
     private void Update()
     {
+        if (dayNightCycle != null)
+        {
+            //CYS추가코드
+            if (dayNightCycle.isNightTime)
+            {
+                health.Subtract(1f * Time.deltaTime); // 밤마다 1씩 감소
+            }
+        }
+
+        if(uiCondition == null)
+        {
+            return;
+        }
         hunger.Subtract(hunger.passiveValue * Time.deltaTime);
         thirst.Subtract(thirst.passiveValue * Time.deltaTime);
         stamina.Add(stamina.passiveValue * Time.deltaTime);

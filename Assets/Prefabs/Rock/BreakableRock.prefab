@@ -65,6 +65,10 @@ PrefabInstance:
       value: BreakableRock
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5e6a7ea1b5e021a4b96cc80c5db4dbfe, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5e6a7ea1b5e021a4b96cc80c5db4dbfe, type: 3}
       propertyPath: m_TagString
       value: BreakableRock
       objectReference: {fileID: 0}
@@ -78,6 +82,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5e6a7ea1b5e021a4b96cc80c5db4dbfe, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2237359867849893284}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5e6a7ea1b5e021a4b96cc80c5db4dbfe, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3184151087274881199}
   m_SourcePrefab: {fileID: 100100000, guid: 5e6a7ea1b5e021a4b96cc80c5db4dbfe, type: 3}
 --- !u!1 &3398964524356896765 stripped
 GameObject:
@@ -122,3 +129,28 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: -0.019000001, y: 0.46, z: -0.45600003}
   m_TimeToStationary: 0.5
+--- !u!114 &3184151087274881199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3398964524356896765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ad8e4d867392dc48a405b88d8a184c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHp: 100
+  currentHp: 100
+  respawnTime: 5
+  dropItems:
+  - dropItemPrefab: {fileID: 5676753207040436897, guid: 8272c5ed919d1504798c0596c12a61c8, type: 3}
+    minDropCount: 0
+    maxDropCount: 2
+  - dropItemPrefab: {fileID: 8790374128803915160, guid: 95b7426be5583734e81c7c82e5e7acc2, type: 3}
+    minDropCount: 0
+    maxDropCount: 1
+  - dropItemPrefab: {fileID: 3628251497707902942, guid: 9ed70f3907dd2654eb7d3f11187afd7f, type: 3}
+    minDropCount: 2
+    maxDropCount: 3
