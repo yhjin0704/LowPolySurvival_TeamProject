@@ -48,6 +48,7 @@ public class PlayerController : MonoBehaviour
     private bool LeftPunch;
     public float attackDistance;
     private float nowDamage;
+    public float attackStamina;
     public LayerMask hitLayer;
 
     private Vector2 mouseDelta;
@@ -235,6 +236,8 @@ public class PlayerController : MonoBehaviour
         Debug.DrawRay(ray.origin, ray.direction,Color.white);
         RaycastHit hit;
 
+        condition.ConsumeStamina(attackStamina);
+
         if (Physics.Raycast(ray, out hit, attackDistance, hitLayer))
         {
             Debug.Log(hit.collider.name);
@@ -275,6 +278,11 @@ public class PlayerController : MonoBehaviour
     public void SetDamage(float damage)
     {
         nowDamage = damage;
+    }
+
+    public void SetAttackStamina(float value)
+    {
+        attackStamina = value;
     }
 
     public void DisableAllEquipItem()

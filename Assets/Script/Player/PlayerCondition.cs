@@ -18,8 +18,6 @@ public class PlayerCondition : MonoBehaviour
     public float noThirstHealthDecay;
     public event Action onTakeDamage;
 
-    
-
     private void Update()
     {
         if (uiCondition == null)
