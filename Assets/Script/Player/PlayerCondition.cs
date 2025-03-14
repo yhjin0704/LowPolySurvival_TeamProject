@@ -22,14 +22,19 @@ public class PlayerCondition : MonoBehaviour
 
     private void Update()
     {
-
-        //CYS추가코드
-        if (dayNightCycle.isNightTime)
+        if (dayNightCycle != null)
         {
-            health.Subtract(1f * Time.deltaTime); // 밤마다 1씩 감소
+            //CYS추가코드
+            if (dayNightCycle.isNightTime)
+            {
+                health.Subtract(1f * Time.deltaTime); // 밤마다 1씩 감소
+            }
         }
 
-
+        if(uiCondition == null)
+        {
+            return;
+        }
         hunger.Subtract(hunger.passiveValue * Time.deltaTime);
         thirst.Subtract(thirst.passiveValue * Time.deltaTime);
         stamina.Add(stamina.passiveValue * Time.deltaTime);
