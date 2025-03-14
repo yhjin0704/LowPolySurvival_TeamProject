@@ -2159,6 +2159,10 @@ PrefabInstance:
       propertyPath: dashStamina
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 4857614767183609966, guid: b6bfea0f13282ba4eac01fc65568a50f, type: 3}
+      propertyPath: jumpStamina
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5683824699186561920, guid: b6bfea0f13282ba4eac01fc65568a50f, type: 3}
       propertyPath: m_Enabled
       value: 1

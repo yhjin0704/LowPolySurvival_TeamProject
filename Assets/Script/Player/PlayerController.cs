@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     public float jumpPower;
     public float resultSpeed;
     public float dashStamina;
+    public float jumpStamina;
     public LayerMask groundLayerMask;
 
     [Header("Look")]
@@ -133,6 +134,7 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetTrigger("Jump");
             rigidbody.AddForce(Vector2.up * (jumpPower), ForceMode.Impulse);
+            condition.ConsumeStamina(jumpStamina);
         }
     }
 

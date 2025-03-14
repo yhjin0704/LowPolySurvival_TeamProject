@@ -393,7 +393,7 @@ MonoBehaviour:
   damage: 20
   hitLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
 --- !u!1 &1381010904461283308
 GameObject:
   m_ObjectHideFlags: 0
@@ -3395,6 +3395,8 @@ MonoBehaviour:
   dashSpeed: 2
   jumpPower: 300
   resultSpeed: 0
+  dashStamina: 0.2
+  jumpStamina: 5
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 183
@@ -3448,7 +3450,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8496488359373269871}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6beeffcb0342eac4fb143f2dbb74efbb, type: 3}
   m_Name: 
