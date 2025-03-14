@@ -70,6 +70,7 @@ public class UIInventory : MonoBehaviour
 
     public void Toggle()
     {
+        Debug.Log("토글함수");
         if (IsOpen())
         {
             inventoryWindow.SetActive(false);

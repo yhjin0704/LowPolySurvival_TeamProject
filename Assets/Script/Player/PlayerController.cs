@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     PlayerPunch punchState;
     PlayerSword swordState;
     PlayerState playerState;
+    private PlayerCondition condition;
 
     private GameObject equipSword;
     private List<Transform> equipPos;
@@ -30,6 +31,7 @@ public class PlayerController : MonoBehaviour
     public float dashSpeed;
     public float jumpPower;
     public float resultSpeed;
+    public float dashStamina;
     public LayerMask groundLayerMask;
 
     [Header("Look")]
@@ -64,6 +66,11 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        equipPos = GameObject.Find("EquipPos").GetComponentsInChildren<Transform>().Where(t => t != transform).ToList();
+        equipPos.RemoveAt(0);
+        equipSword = GameObject.Find("EquipPos").transform.Find("Equip_Sword").gameObject;
+        Debug.Log(equipSword.name);
+
         punchState = new PlayerPunch();
         swordState = new PlayerSword();
         playerState = new PlayerState(punchState);
@@ -71,11 +78,8 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         resultSpeed = moveSpeed;
         camera = Camera.main;
+        condition = PlayerManager.Instance.Player.condition;
 
-        equipPos = GameObject.Find("EquipPos").GetComponentsInChildren<Transform>().Where(t => t != transform).ToList();
-        equipPos.RemoveAt(0);
-        equipSword = GameObject.Find("EquipPos").transform.Find("Equip_Sword").gameObject;
-        Debug.Log(equipSword.name);
     }
 
     private void Update()
@@ -85,6 +89,10 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         Move();
+        if (isDash)
+        {
+            condition.ConsumeStamina(dashStamina);
+        }
     }
 
     private void LateUpdate()
@@ -237,7 +245,6 @@ public class PlayerController : MonoBehaviour
         {
             playerState.setState(swordState);
             playerState.Change();
-
             //inventory?.Invoke();
             //ToggleCursor();
         }
