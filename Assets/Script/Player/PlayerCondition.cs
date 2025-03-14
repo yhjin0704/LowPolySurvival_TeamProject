@@ -57,6 +57,11 @@ public class PlayerCondition : MonoBehaviour
         }
     }
 
+    public void TakeDamage(float amount)
+    {
+        health.Subtract(amount);
+    }
+
     public void Heal(float amount)
     {
         health.Add(amount);
