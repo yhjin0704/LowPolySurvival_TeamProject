@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     PlayerPunch punchState;
     PlayerSword swordState;
     PlayerState playerState;
+    private PlayerCondition condition;
 
     private GameObject equipSword;
     private List<Transform> equipPos;
@@ -30,6 +31,8 @@ public class PlayerController : MonoBehaviour
     public float dashSpeed;
     public float jumpPower;
     public float resultSpeed;
+    public float dashStamina;
+    public float jumpStamina;
     public LayerMask groundLayerMask;
 
     [Header("Look")]
@@ -45,6 +48,7 @@ public class PlayerController : MonoBehaviour
     private bool LeftPunch;
     public float attackDistance;
     private float nowDamage;
+    public float attackStamina;
     public LayerMask hitLayer;
 
     private Vector2 mouseDelta;
@@ -64,6 +68,11 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        equipPos = GameObject.Find("EquipPos").GetComponentsInChildren<Transform>().Where(t => t != transform).ToList();
+        equipPos.RemoveAt(0);
+        equipSword = GameObject.Find("EquipPos").transform.Find("Equip_Sword").gameObject;
+        Debug.Log(equipSword.name);
+
         punchState = new PlayerPunch();
         swordState = new PlayerSword();
         playerState = new PlayerState(punchState);
@@ -71,11 +80,8 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         resultSpeed = moveSpeed;
         camera = Camera.main;
+        condition = PlayerManager.Instance.Player.condition;
 
-        equipPos = GameObject.Find("EquipPos").GetComponentsInChildren<Transform>().Where(t => t != transform).ToList();
-        equipPos.RemoveAt(0);
-        equipSword = GameObject.Find("EquipPos").transform.Find("Equip_Sword").gameObject;
-        Debug.Log(equipSword.name);
     }
 
     private void Update()
@@ -85,6 +91,15 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         Move();
+        if (isDash)
+        {
+            condition.ConsumeStamina(dashStamina);
+        }
+
+        if (condition.IsStaminaZero())
+        {
+            ToggleDash();
+        }
     }
 
     private void LateUpdate()
@@ -120,6 +135,7 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetTrigger("Jump");
             rigidbody.AddForce(Vector2.up * (jumpPower), ForceMode.Impulse);
+            condition.ConsumeStamina(jumpStamina);
         }
     }
 
@@ -133,17 +149,17 @@ public class PlayerController : MonoBehaviour
 
     void ToggleDash()
     {
-        if (isDash)
-        {
-            resultSpeed = moveSpeed;
-            isDash = false;
-            animator.SetBool("IsDash", false);
-        }
-        else
+        if (!isDash && !condition.IsStaminaZero())
         {
             resultSpeed = dashSpeed * moveSpeed;
             isDash = true;
             animator.SetBool("IsDash", true);
+        }
+        else
+        {
+            resultSpeed = moveSpeed;
+            isDash = false;
+            animator.SetBool("IsDash", false);
         }
     }
 
@@ -220,6 +236,8 @@ public class PlayerController : MonoBehaviour
         Debug.DrawRay(ray.origin, ray.direction,Color.white);
         RaycastHit hit;
 
+        condition.ConsumeStamina(attackStamina);
+
         if (Physics.Raycast(ray, out hit, attackDistance, hitLayer))
         {
             Debug.Log(hit.collider.name);
@@ -235,11 +253,8 @@ public class PlayerController : MonoBehaviour
     {
         if (callbackContext.phase == InputActionPhase.Started)
         {
-            playerState.setState(swordState);
-            playerState.Change();
-
-            //inventory?.Invoke();
-            //ToggleCursor();
+            inventory?.Invoke();
+            ToggleCursor();
         }
     }
 
@@ -263,6 +278,11 @@ public class PlayerController : MonoBehaviour
     public void SetDamage(float damage)
     {
         nowDamage = damage;
+    }
+
+    public void SetAttackStamina(float value)
+    {
+        attackStamina = value;
     }
 
     public void DisableAllEquipItem()
