@@ -229,11 +229,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9baddcbce8144543b78cb488e36049e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingPrefab: {fileID: 4890344389280460751}
-  buildingPlacementPoint: {fileID: 876131605513172714}
+  buildingPrefab: {fileID: 1667259951044660279, guid: 9aefb3774b4ee4548a158df4c06eb1cc, type: 3}
+  buildingPlacementPoint: {fileID: 6360934078282593790, guid: 753179708cec5034bae7c8caa356f36e, type: 3}
   resourceManager: {fileID: 0}
   requiredWood: 10
-  requiredStone: 10
+  requiredRock: 10
+  uiinventory: {fileID: 0}
 --- !u!114 &5364447855827854532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,7 +260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wood: 0
-  stone: 0
+  rock: 0
 --- !u!114 &-1656412613947787943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,7 +273,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab60dba7e6aa99c4ba23029472bf9aea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingPrefab: {fileID: 0}
+  buildingPrefab: {fileID: 1667259951044660279, guid: 9aefb3774b4ee4548a158df4c06eb1cc, type: 3}
+  targetlayer:
+    serializedVersion: 2
+    m_Bits: 0
+  buildingSystem: {fileID: 0}
 --- !u!1001 &6099169013611869756
 PrefabInstance:
   m_ObjectHideFlags: 0

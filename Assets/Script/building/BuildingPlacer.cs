@@ -6,8 +6,9 @@ public class BuildingPlacer : MonoBehaviour
 {
     public GameObject buildingPrefab; // 설치할 건물 프리팹
     public LayerMask targetlayer;
+    public BuildingSystem buildingSystem;
 
-    private Vector3 placementPosition;
+    //private Vector3 placementPosition;
 
     void Update()
     {
@@ -19,18 +20,8 @@ public class BuildingPlacer : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, 10f, targetlayer))
             {
-                Vector3 buildPosition = hit.point;
-
-                // 건물 설치
-                if (buildingPrefab != null)
-                {
-                    Instantiate(buildingPrefab, buildPosition, Quaternion.identity);
-                    Debug.Log("건물이 설치되었습니다.");
-                }
-                else
-                {
-                    Debug.LogWarning("buildingPrefab이 설정되지 않았습니다!");
-                }
+                buildingSystem.buildingPlacementPoint.position = hit.point;
+                buildingSystem.Build();
             }
         }
     }
