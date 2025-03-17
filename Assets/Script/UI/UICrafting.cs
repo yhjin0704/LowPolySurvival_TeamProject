@@ -170,7 +170,6 @@ public class UICrafting : MonoBehaviour
         RequiredMaterialName.text = string.Empty;
         RequiredMaterialAmount.text = string.Empty;
 
-        Debug.Log(selectedRecipe.ItemRecipe.desiredItem.equipPrefab);
         if (0 < selectedRecipe.ItemRecipe.desiredItem.consumables.Length)
         {
             for (int i = 0; i < selectedRecipe.ItemRecipe.desiredItem.consumables.Length; i++)
@@ -226,7 +225,7 @@ public class UICrafting : MonoBehaviour
                 if (inventory.slots[j].item == recipe.requiredItems[i].materials)
                 {
                     //만약 한 슬롯 안에 충분한 자원이 있다면
-                    if (inventory.slots[j].quantity== amountToRemove)
+                    if (inventory.slots[j].quantity >= amountToRemove)
                     {
                         //필요한 양만큼 차감
                         inventory.slots[j].quantity -= amountToRemove;
@@ -284,7 +283,7 @@ public class UICrafting : MonoBehaviour
                 if (inventory.slots[j].item == recipe.requiredItems[i].materials)
                 {
                     //만약 한 슬롯 안에 충분한 자원이 있다면
-                    if (inventory.slots[j].quantity == amountToRemove)
+                    if (inventory.slots[j].quantity >= amountToRemove)
                     {
                         Found = true;
                     }
