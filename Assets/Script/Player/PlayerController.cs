@@ -72,6 +72,7 @@ public class PlayerController : MonoBehaviour
         equipPos = GameObject.Find("EquipPos").GetComponentsInChildren<Transform>().Where(t => t != transform).ToList();
         equipPos.RemoveAt(0);
         equipSword = GameObject.Find("EquipPos").transform.Find("Equip_Sword").gameObject;
+        equipPos.Add(equipSword.transform);
         Debug.Log(equipSword.name);
 
         punchState = new PlayerPunch();
@@ -302,13 +303,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void UnActiveEquip()
+    public void UnEquip()
     {
-        if (isEquip == true)
-        {
-            isEquip = false;
-            equipSword.SetActive(false);
-        }
+        DisableAllEquipItem();
+        playerState.setState(punchState);
+        playerState.Change();
     }
 
     public void ActiveSword()
@@ -318,5 +317,11 @@ public class PlayerController : MonoBehaviour
             isEquip = true;
             equipSword.SetActive(true);
         }
+    }
+
+    public void EquipSword()
+    {
+        playerState.setState(swordState);
+        playerState.Change();
     }
 }
