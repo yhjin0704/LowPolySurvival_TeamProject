@@ -82,11 +82,11 @@ public class PlayerCondition : MonoBehaviour
         Debug.Log("플레이어가 죽었다.");
     }
 
-    private void Start()
+    //CYS
+    // TakeDamage 메서드를 PlayerCondition에 추가
+    public void TakeDamage(float damage)
     {
-        if (condition == null)
-        {
-            condition = GetComponent<Condition>();  // Condition 컴포넌트를 자동으로 가져오기
-        }
+
+        health.TakeDamage(damage);
     }
 }
