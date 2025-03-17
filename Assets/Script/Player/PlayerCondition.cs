@@ -18,10 +18,13 @@ public class PlayerCondition : MonoBehaviour
     public float noThirstHealthDecay;
     public event Action onTakeDamage;
 
-    
-
     private void Update()
     {
+        if (uiCondition == null)
+        {
+            return;
+        }
+
         if (dayNightCycle != null)
         {
             //CYS추가코드
@@ -31,10 +34,7 @@ public class PlayerCondition : MonoBehaviour
             }
         }
 
-        if(uiCondition == null)
-        {
-            return;
-        }
+        
         hunger.Subtract(hunger.passiveValue * Time.deltaTime);
         thirst.Subtract(thirst.passiveValue * Time.deltaTime);
         stamina.Add(stamina.passiveValue * Time.deltaTime);
@@ -55,6 +55,11 @@ public class PlayerCondition : MonoBehaviour
         }
     }
 
+    public void TakeDamage(float amount)
+    {
+        health.Subtract(amount);
+    }
+
     public void Heal(float amount)
     {
         health.Add(amount);
@@ -68,6 +73,16 @@ public class PlayerCondition : MonoBehaviour
     public void Drink(float amount)
     {
         thirst.Add(amount);
+    }
+
+    public void ConsumeStamina(float amount)
+    {
+        stamina.Subtract(amount);
+    }
+
+    public bool IsStaminaZero()
+    {
+        return stamina.GetPercentage() == 0;
     }
 
     public void Die()

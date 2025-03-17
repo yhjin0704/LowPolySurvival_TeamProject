@@ -41,6 +41,7 @@ public class ItemData : ScriptableObject
     public ItemDataConsumable[] consumables;
 
     [Header("Equip")]
+    public float damage;
     public GameObject equipPrefab;
 
     [Header("Duration")]

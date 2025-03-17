@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Playables;
 using UnityEditor.Animations;
+using DropResource;
+using System.Linq;
 
 
 public class PlayerController : MonoBehaviour
@@ -13,6 +15,10 @@ public class PlayerController : MonoBehaviour
     PlayerPunch punchState;
     PlayerSword swordState;
     PlayerState playerState;
+    private PlayerCondition condition;
+
+    private GameObject equipSword;
+    private List<Transform> equipPos;
 
     [Header("Override Animator")]
     private Animator animator;
@@ -25,6 +31,8 @@ public class PlayerController : MonoBehaviour
     public float dashSpeed;
     public float jumpPower;
     public float resultSpeed;
+    public float dashStamina;
+    public float jumpStamina;
     public LayerMask groundLayerMask;
 
     [Header("Look")]
@@ -39,7 +47,10 @@ public class PlayerController : MonoBehaviour
     private bool attacking;
     private bool LeftPunch;
     public float attackDistance;
-    public int punchDamage;
+    private float nowDamage;
+    public float attackStamina;
+    public LayerMask hitLayer;
+    private bool isEquip = false;
 
     private Vector2 mouseDelta;
 
@@ -58,6 +69,11 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        equipPos = GameObject.Find("EquipPos").GetComponentsInChildren<Transform>().Where(t => t != transform).ToList();
+        equipPos.RemoveAt(0);
+        equipSword = GameObject.Find("EquipPos").transform.Find("Equip_Sword").gameObject;
+        Debug.Log(equipSword.name);
+
         punchState = new PlayerPunch();
         swordState = new PlayerSword();
         playerState = new PlayerState(punchState);
@@ -65,15 +81,34 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         resultSpeed = moveSpeed;
         camera = Camera.main;
+        condition = PlayerManager.Instance.Player.condition;
+
     }
 
     private void Update()
     {
         IsGrounded();
+
+        // °Ë ÀåÂø Å×½ºÆ®¿ë
+        if (Input.GetKeyDown(KeyCode.F2))
+        {
+            playerState.setState(swordState);
+            playerState.Change();
+            Debug.Log("F2");
+        }
     }
     private void FixedUpdate()
     {
         Move();
+        if (isDash)
+        {
+            condition.ConsumeStamina(dashStamina);
+        }
+
+        if (condition.IsStaminaZero())
+        {
+            ToggleDash();
+        }
     }
 
     private void LateUpdate()
@@ -109,6 +144,7 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetTrigger("Jump");
             rigidbody.AddForce(Vector2.up * (jumpPower), ForceMode.Impulse);
+            condition.ConsumeStamina(jumpStamina);
         }
     }
 
@@ -122,17 +158,17 @@ public class PlayerController : MonoBehaviour
 
     void ToggleDash()
     {
-        if (isDash)
-        {
-            resultSpeed = moveSpeed;
-            isDash = false;
-            animator.SetBool("IsDash", false);
-        }
-        else
+        if (!isDash && !condition.IsStaminaZero())
         {
             resultSpeed = dashSpeed * moveSpeed;
             isDash = true;
             animator.SetBool("IsDash", true);
+        }
+        else
+        {
+            resultSpeed = moveSpeed;
+            isDash = false;
+            animator.SetBool("IsDash", false);
         }
     }
 
@@ -192,7 +228,7 @@ public class PlayerController : MonoBehaviour
                 animator.SetTrigger("RightPunch");
                 LeftPunch = false;
             }
-                
+
             Invoke(nameof(OnCanAttack), attackRate);
         }
     }
@@ -205,11 +241,20 @@ public class PlayerController : MonoBehaviour
     public void OnHit()
     {
         Ray ray = camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+        //Ray ray = new Ray(transform.position + new Vector3(0, 0.5f,0), Vector3.forward * attackDistance);
+        Debug.DrawRay(ray.origin, ray.direction, Color.white);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, attackDistance))
+        condition.ConsumeStamina(attackStamina);
+
+        if (Physics.Raycast(ray, out hit, attackDistance, hitLayer))
         {
-            Debug.Log("ÆÝÄ¡ÆÝÄ¡");
+            Debug.Log(hit.collider.name);
+            if (hit.collider.TryGetComponent(out IBreakableObject breakbleObject))
+            {
+                Debug.Log("ÆÝÄ¡ÆÝÄ¡");
+                breakbleObject.TakeDamage(nowDamage);
+            }
         }
     }
 
@@ -237,5 +282,41 @@ public class PlayerController : MonoBehaviour
     public void ChangePunchAnimator()
     {
         animator.runtimeAnimatorController = defaultController;
+    }
+
+    public void SetDamage(float damage)
+    {
+        nowDamage = damage;
+    }
+
+    public void SetAttackStamina(float value)
+    {
+        attackStamina = value;
+    }
+
+    public void DisableAllEquipItem()
+    {
+        foreach (Transform objects in equipPos)
+        {
+            objects.gameObject.SetActive(false);
+        }
+    }
+
+    public void UnActiveEquip()
+    {
+        if (isEquip == true)
+        {
+            isEquip = false;
+            equipSword.SetActive(false);
+        }
+    }
+
+    public void ActiveSword()
+    {
+        if (isEquip == false)
+        {
+            isEquip = true;
+            equipSword.SetActive(true);
+        }
     }
 }
