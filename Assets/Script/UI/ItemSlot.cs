@@ -57,6 +57,8 @@ public class ItemSlot : MonoBehaviour
 
     public void OnClickButton()
     {
+        Debug.Log("버튼클릭");
         inventory.SelectItem(index);
+
     }
 }

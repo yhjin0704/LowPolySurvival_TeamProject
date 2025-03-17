@@ -3406,6 +3406,7 @@ MonoBehaviour:
   lookSensitivity: 0.2
   attackRate: 1
   attackDistance: 2
+  attackStamina: 0
   hitLayer:
     serializedVersion: 2
     m_Bits: 512
@@ -3456,7 +3457,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiCondition: {fileID: 0}
-  dayNightCycle: {fileID: 0}
+  dayNightCycle: {fileID: 7877864282921921605, guid: 8b70016167d993c4c9a7c715200251e6, type: 3}
   noHungerHealthDecay: 0
   noThirstHealthDecay: 0
 --- !u!1 &8692220124126106327
