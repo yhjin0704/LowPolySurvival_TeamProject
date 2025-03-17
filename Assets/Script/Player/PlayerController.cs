@@ -88,6 +88,14 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         IsGrounded();
+
+        // 검 장착 테스트용
+        if (Input.GetKeyDown(KeyCode.F2))
+        {
+            playerState.setState(swordState);
+            playerState.Change();
+            Debug.Log("F2");
+        }
     }
     private void FixedUpdate()
     {
