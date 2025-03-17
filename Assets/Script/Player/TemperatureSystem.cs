@@ -13,13 +13,9 @@ public class TemperatureSystem : MonoBehaviour
     public float temperatureChangeSpeed = 5f;
 
     public float coldThreshold = 0f;
-    //온도가 이 값 이하일 때 플레이어가 피해를 입기 시작합니다. 현재는 0도 이하로 설정되어 있습니다.
     public float coldDamage = 5f;
-    //온도가 coldThreshold 이하로 내려갔을 때 플레이어가 받는 피해량입니다.
     public float damageInterval = 3f;
-    //피해가 주어지는 간격을 설정하는 변수입니다. 3초마다 피해를 줍니다.
     private float damageTimer;
-    //피해를 주는 타이머로, 일정 시간마다 피해를 주기 위한 타이머입니다.
 
     [Header("불 근처 온도 상승 처리")]
     public Transform player;
@@ -50,17 +46,14 @@ public class TemperatureSystem : MonoBehaviour
         // 온도 부드럽게 변경
         currentTemperature = Mathf.Lerp(currentTemperature, targetTemp, Time.deltaTime * temperatureChangeSpeed);
 
-        Debug.Log("Current Temperature: " + currentTemperature);
-
         // 데미지 처리
         if (currentTemperature <= coldThreshold)
         {
             damageTimer += Time.deltaTime;
             if (damageTimer >= damageInterval)
             {
-                //TakeDamage 호출
-                //Debug.Log("Taking cold damage! Current Health: " + playerCondition.health);
-                playerCondition.TakeDamage(coldDamage);
+                // playerCondition의 Condition 컴포넌트를 통해 TakeDamage 호출
+                playerCondition.condition.TakeDamage(coldDamage);  // coldDamage만큼 체력 감소
                 damageTimer = 0f;
             }
         }
@@ -69,4 +62,5 @@ public class TemperatureSystem : MonoBehaviour
             damageTimer = 0f;
         }
     }
+}
 }
