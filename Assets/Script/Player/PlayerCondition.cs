@@ -18,8 +18,6 @@ public class PlayerCondition : MonoBehaviour
     public float noThirstHealthDecay;
     public event Action onTakeDamage;
 
-    
-
     private void Update()
     {
         if (uiCondition == null)
@@ -55,6 +53,11 @@ public class PlayerCondition : MonoBehaviour
         {
             Die();
         }
+    }
+
+    public void TakeDamage(float amount)
+    {
+        health.Subtract(amount);
     }
 
     public void Heal(float amount)
