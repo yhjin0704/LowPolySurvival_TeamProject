@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour
     private float nowDamage;
     public float attackStamina;
     public LayerMask hitLayer;
+    private bool isEquip = false;
 
     private Vector2 mouseDelta;
 
@@ -219,7 +220,7 @@ public class PlayerController : MonoBehaviour
                 animator.SetTrigger("RightPunch");
                 LeftPunch = false;
             }
-                
+
             Invoke(nameof(OnCanAttack), attackRate);
         }
     }
@@ -233,7 +234,7 @@ public class PlayerController : MonoBehaviour
     {
         Ray ray = camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
         //Ray ray = new Ray(transform.position + new Vector3(0, 0.5f,0), Vector3.forward * attackDistance);
-        Debug.DrawRay(ray.origin, ray.direction,Color.white);
+        Debug.DrawRay(ray.origin, ray.direction, Color.white);
         RaycastHit hit;
 
         condition.ConsumeStamina(attackStamina);
@@ -241,7 +242,7 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(ray, out hit, attackDistance, hitLayer))
         {
             Debug.Log(hit.collider.name);
-            if(hit.collider.TryGetComponent(out IBreakableObject breakbleObject))
+            if (hit.collider.TryGetComponent(out IBreakableObject breakbleObject))
             {
                 Debug.Log("ÆÝÄ¡ÆÝÄ¡");
                 breakbleObject.TakeDamage(nowDamage);
@@ -287,14 +288,27 @@ public class PlayerController : MonoBehaviour
 
     public void DisableAllEquipItem()
     {
-        foreach(Transform objects in equipPos)
+        foreach (Transform objects in equipPos)
         {
             objects.gameObject.SetActive(false);
         }
     }
-    
+
+    public void UnActiveEquip()
+    {
+        if (isEquip == true)
+        {
+            isEquip = false;
+            equipSword.SetActive(false);
+        }
+    }
+
     public void ActiveSword()
     {
-        equipSword.SetActive(true);
+        if (isEquip == false)
+        {
+            isEquip = true;
+            equipSword.SetActive(true);
+        }
     }
 }

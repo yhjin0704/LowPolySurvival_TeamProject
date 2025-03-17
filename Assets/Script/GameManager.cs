@@ -58,5 +58,11 @@ public class GameManager : MonoBehaviour
             }
             Debug.Log("F1");
         }
+
+        if (Input.GetKeyDown(KeyCode.F2))
+        {
+            PlayerManager.Instance.Player.controller.ActiveSword();
+            Debug.Log("F2");
+        }
     }
 }
