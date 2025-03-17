@@ -3114,6 +3114,7 @@ GameObject:
   - component: {fileID: 5826667111554205409}
   - component: {fileID: 9111785382698588055}
   - component: {fileID: 5683824699186561920}
+  - component: {fileID: 4207604403746684932}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -3395,6 +3396,7 @@ MonoBehaviour:
   dashSpeed: 2
   jumpPower: 300
   resultSpeed: 0
+  dashStamina: 0
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 183
@@ -3454,9 +3456,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiCondition: {fileID: 0}
+  condition: {fileID: 0}
   dayNightCycle: {fileID: 0}
   noHungerHealthDecay: 0
   noThirstHealthDecay: 0
+--- !u!114 &4207604403746684932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8496488359373269871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 466016e255f802041941374bdd60da74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dayNightCycle: {fileID: 0}
+  playerCondition: {fileID: 0}
+  condition: {fileID: 0}
+  currentTemperature: 20
+  dayTemperature: 20
+  nightTemperature: -5
+  temperatureChangeSpeed: 5
+  coldThreshold: 0
+  coldDamage: 5
+  damageInterval: 3
+  player: {fileID: 0}
+  fireWarmthRange: 5
+  fireHeatBonus: 10
+  fireLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &8692220124126106327
 GameObject:
   m_ObjectHideFlags: 0
