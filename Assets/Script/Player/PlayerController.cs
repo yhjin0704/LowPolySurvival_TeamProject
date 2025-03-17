@@ -215,7 +215,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnAttackInput()
     {
-        if (!attacking)
+        if (!attacking && !condition.IsStaminaZero())
         {
             attacking = true;
             if (!LeftPunch)
