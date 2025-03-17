@@ -25,14 +25,6 @@ public class PlayerCondition : MonoBehaviour
             return;
         }
 
-        if (dayNightCycle != null)
-        {
-            //CYS추가코드
-            if (dayNightCycle.isNightTime)
-            {
-                health.Subtract(1f * Time.deltaTime); // 밤마다 1씩 감소
-            }
-        }
 
         
         hunger.Subtract(hunger.passiveValue * Time.deltaTime);
@@ -89,4 +81,5 @@ public class PlayerCondition : MonoBehaviour
     {
         Debug.Log("플레이어가 죽었다.");
     }
+
 }
