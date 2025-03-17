@@ -47,6 +47,7 @@ public class UICrafting : MonoBehaviour
             slots[i] = slotPanel.GetChild(i).GetComponent<RecipeSlot>();
             slots[i].index = i;
             slots[i].recipeMaker = this;
+            slots[i].Set(); 
         }
 
         ClearSelectedItemWindow();
@@ -169,6 +170,7 @@ public class UICrafting : MonoBehaviour
         RequiredMaterialName.text = string.Empty;
         RequiredMaterialAmount.text = string.Empty;
 
+        Debug.Log(selectedRecipe.ItemRecipe.desiredItem.equipPrefab);
         if (0 < selectedRecipe.ItemRecipe.desiredItem.consumables.Length)
         {
             for (int i = 0; i < selectedRecipe.ItemRecipe.desiredItem.consumables.Length; i++)
@@ -190,8 +192,6 @@ public class UICrafting : MonoBehaviour
 
         for (int i = 0; i < selectedRecipe.ItemRecipe.requiredItems.Length; i++)
         {
-            ItemOptionsName.text = string.Empty;
-            ItemOptionsValue.text = string.Empty;
             RequiredMaterialName.text += selectedRecipe.ItemRecipe.requiredItems[i].materials.displayName.ToString() + "\n";
             RequiredMaterialAmount.text += selectedRecipe.ItemRecipe.requiredItems[i].amount.ToString() + "\n";
         }
@@ -204,6 +204,10 @@ public class UICrafting : MonoBehaviour
         {
             RemoveMaterials();
             AddCraftedItem();
+        }
+        else
+        {
+            Debug.Log("제작불가, 아이템이 없습니다.");
         }
     }
 
@@ -269,17 +273,29 @@ public class UICrafting : MonoBehaviour
     /// <returns></returns>
     public bool HasMaterials()
     {
-        ItemRecipe recipe=selectedRecipe.ItemRecipe;
-        //인벤토리 안에 충분한 양의 아이템이 필요한 자원만큼 있는지 확인하고
+        ItemRecipe recipe = selectedRecipe.ItemRecipe;
         for (int i = 0; i < recipe.requiredItems.Length; i++)
         {
             bool Found = false;
+            int amountToRemove = recipe.requiredItems[i].amount;
             for (int j = 0; j < inventory.slots.Length; j++)
             {
-                if (inventory.slots[j].item == recipe.requiredItems[i].materials && inventory.slots[j].quantity >= recipe.requiredItems[i].amount)
+                //인벤토리의 자원이 제작 레시피의 재료가 맞는지 확인한 뒤
+                if (inventory.slots[j].item == recipe.requiredItems[i].materials)
                 {
-                    Found = true;
-                    break;
+                    //만약 한 슬롯 안에 충분한 자원이 있다면
+                    if (inventory.slots[j].quantity == amountToRemove)
+                    {
+                        Found = true;
+                    }
+                    else //만약 한 슬롯에 충분하지 않은 자원이 있다면
+                    {
+                        amountToRemove -= inventory.slots[j].quantity;
+                        if (amountToRemove == 0)
+                        {
+                            Found = true;
+                        }
+                    }
                 }
             }
             //없다면 false 반환
@@ -288,7 +304,6 @@ public class UICrafting : MonoBehaviour
                 return false;
             }
         }
-
         //전부 있다면(Found=true) true 반환
         return true;
     }
