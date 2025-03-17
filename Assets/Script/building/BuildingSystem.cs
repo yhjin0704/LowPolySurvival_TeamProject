@@ -22,11 +22,6 @@ public class BuildingSystem : MonoBehaviour
 
     void Update()
     {
-        // 마우스 좌클릭으로 건물 배치
-        if (Input.GetMouseButtonDown(0) && canBuild)
-        {
-            Build();
-        }
 
         // 배치 가능한지 체크
         canBuild = placementManager.IsValidPlacement(buildingPlacementPoint.position) &&
