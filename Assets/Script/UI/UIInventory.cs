@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.Playables;
 
 public class UIInventory : MonoBehaviour
 {
@@ -247,7 +248,9 @@ public class UIInventory : MonoBehaviour
         }
 
         slots[selectedItemIndex].equipped = true;
+        controller.EquipSword();
         curEquipIndex = selectedItemIndex;
+        string a = slots[selectedItemIndex].item.displayName;
         //PlayerManager.Instance.Player.equip.EquipNew(selectedItem);
         UpdateUI();
 
@@ -257,6 +260,7 @@ public class UIInventory : MonoBehaviour
     void UnEquip(int index)
     {
         slots[index].equipped = false;
+        controller.UnEquip();
         //PlayerManager.Instance.Player.equip.UnEquip();
         UpdateUI();
 

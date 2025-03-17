@@ -24,6 +24,7 @@ public class PlayerState : MonoBehaviour
 
     public void Change() 
     {
+        PlayerManager.Instance.Player.controller.DisableAllEquipItem();
         state.ChangeController();
     }
 }
