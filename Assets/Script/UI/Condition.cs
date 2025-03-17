@@ -19,6 +19,10 @@ public class Condition : MonoBehaviour
     private void Update()
     {
         uiBar.fillAmount = GetPercentage();
+
+        //CYS 
+        curValue = Mathf.Max(curValue - passiveValue * Time.deltaTime, 0f);
+        uiBar.fillAmount = GetPercentage();
     }
 
     public void Add(float amount)
@@ -34,5 +38,12 @@ public class Condition : MonoBehaviour
     public float GetPercentage()
     {
         return curValue / maxValue;
+    }
+
+    //CYS
+    public void TakeDamage(float amount)
+    {
+        curValue -= amount;
+        curValue = Mathf.Clamp(curValue, 0, maxValue);
     }
 }
