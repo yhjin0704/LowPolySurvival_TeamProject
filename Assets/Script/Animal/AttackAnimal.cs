@@ -56,7 +56,7 @@ public class AttackAnimal : MonoBehaviour
 
     void Update()
     {
-        //playerDistance = Vector3.Distance(transform.position, CharacterManager.Instance.Player.transform.position);
+        playerDistance = Vector3.Distance(transform.position, PlayerManager.Instance.Player.transform.position);
 
         animator.SetBool("Moving", aiState != EAIState.Idle);
 
@@ -136,48 +136,50 @@ public class AttackAnimal : MonoBehaviour
 
     void AttackingUpdate()
     {
-        //if (playerDistance < attackDistance && IsPlayerInFieldOfView())
-        //{
-        //    agent.isStopped = true;
-        //    if (Time.time - lastAttackTime > attackRate)
-        //    {
-        //        lastAttackTime = Time.time;
-        //        Player.Instance.controller.GetComponent<IDamagable>().TakePhysicalDamage(damage);
-        //    }
-        //}
-        //else
-        //{
-        //    if (playerDistance < detectDistance)
-        //    {
-        //        agent.isStopped = false;
-        //        NavMeshPath path = new NavMeshPath();
+        if (playerDistance < attackDistance && IsPlayerInFieldOfView())
+        {
+            agent.isStopped = true;
+            if (Time.time - lastAttackTime > attackRate)
+            {
+                animator.speed = 1;
+                animator.SetTrigger("Attack");
+                lastAttackTime = Time.time;
+                PlayerManager.Instance.Player.condition.TakeDamage(damage);
+            }
+        }
+        else
+        {
+            if (playerDistance < detectDistance)
+            {
+                agent.isStopped = false;
+                NavMeshPath path = new NavMeshPath();
 
-        //        if (agent.CalculatePath(CharacterManager.Instance.Player.transform.position, path))
-        //        {
-        //            agent.SetDestination(CharacterManager.Instance.Player.transform.position);
-        //        }
-        //        else
-        //        {
-        //            agent.SetDestination(transform.position);
-        //            agent.isStopped = true;
-        //            SetState(EAIState.Wandering);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        agent.SetDestination(transform.position);
-        //        agent.isStopped = true;
-        //        SetState(EAIState.Wandering);
-        //    }
-        //}
+                if (agent.CalculatePath(PlayerManager.Instance.Player.transform.position, path))
+                {
+                    agent.SetDestination(PlayerManager.Instance.Player.transform.position);
+                }
+                else
+                {
+                    agent.SetDestination(transform.position);
+                    agent.isStopped = true;
+                    SetState(EAIState.Wandering);
+                }
+            }
+            else
+            {
+                agent.SetDestination(transform.position);
+                agent.isStopped = true;
+                SetState(EAIState.Wandering);
+            }
+        }
     }
 
-    //bool IsPlayerInFieldOfView()
-    //{
-    //    Vector3 directionToPlayer = CharacterManager.Instance.Player.transform.position - transform.position;
-    //    float angle = Vector3.Angle(transform.forward, directionToPlayer);
-    //    return angle < fieldIfView / 2;
-    //}
+    bool IsPlayerInFieldOfView()
+    {
+        Vector3 directionToPlayer = PlayerManager.Instance.Player.transform.position - transform.position;
+        float angle = Vector3.Angle(transform.forward, directionToPlayer);
+        return angle < fieldIfView / 2;
+    }
 
     public void TakeDamage(int damage)
     {

@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ResourceRock
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3097f1f622e816a44a29197e5b5c1230, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
