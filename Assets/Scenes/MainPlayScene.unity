@@ -504,6 +504,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2393428848212714095, guid: 938d90a6bfe319a4dbf48656322ffa76, type: 3}
+      propertyPath: endPanel
+      value: 
+      objectReference: {fileID: 544371309}
     - target: {fileID: 3132378182303873576, guid: 938d90a6bfe319a4dbf48656322ffa76, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -953,7 +957,7 @@ PrefabInstance:
       objectReference: {fileID: 1128309301}
     - target: {fileID: 4895632988306871632, guid: b6bfea0f13282ba4eac01fc65568a50f, type: 3}
       propertyPath: tempDamage
-      value: 0.25
+      value: 0.025
       objectReference: {fileID: 0}
     - target: {fileID: 4895632988306871632, guid: b6bfea0f13282ba4eac01fc65568a50f, type: 3}
       propertyPath: waterDamage
@@ -2670,6 +2674,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3318834232900250208, guid: ca5d3d08ff9c6ae4c98c5e7e6b554574, type: 3}
+      propertyPath: passiveValue
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3806573865019105349, guid: ca5d3d08ff9c6ae4c98c5e7e6b554574, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2973,6 +2981,18 @@ PrefabInstance:
     - target: {fileID: 7476900610629537682, guid: ca5d3d08ff9c6ae4c98c5e7e6b554574, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7552748635026199385, guid: ca5d3d08ff9c6ae4c98c5e7e6b554574, type: 3}
+      propertyPath: maxValue
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 7552748635026199385, guid: ca5d3d08ff9c6ae4c98c5e7e6b554574, type: 3}
+      propertyPath: startValue
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 7552748635026199385, guid: ca5d3d08ff9c6ae4c98c5e7e6b554574, type: 3}
+      propertyPath: passiveValue
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7814576051847924175, guid: ca5d3d08ff9c6ae4c98c5e7e6b554574, type: 3}
       propertyPath: m_AnchorMax.y
