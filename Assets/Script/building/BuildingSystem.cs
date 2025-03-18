@@ -76,7 +76,7 @@ public class BuildingSystem : MonoBehaviour
     {
         RaycastHit hit;
         // Raycast를 아래로 쏘기
-        if (Physics.Raycast(position, Vector3.down, out hit, 1f))
+        if (Physics.Raycast(position, Vector3.down, out hit, 5f))
         {
             // 'Ground' 레이어인지 확인
             if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
