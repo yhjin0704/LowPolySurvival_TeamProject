@@ -10,12 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 53439a99d9be79c44a8fdb20571a991a, type: 3}
-  m_Name: Recipe_Sword
+  m_Name: Recipe_Tent
   m_EditorClassIdentifier: 
-  desiredItem: {fileID: 11400000, guid: 784a20df8b3485a4397aadbe138789aa, type: 2}
+  desiredItem: {fileID: 11400000, guid: cd041320fba70ca4cb8eb808f56f2a52, type: 2}
   quantities: 1
   requiredItems:
   - materials: {fileID: 11400000, guid: 600d3721ab7fd2f4890248281baf8b42, type: 2}
-    amount: 2
+    amount: 10
+  - materials: {fileID: 11400000, guid: 1d1ea4da68b0a9a49a62fd6766194754, type: 2}
+    amount: 3
   - materials: {fileID: 11400000, guid: 668128d1b9b746044bc64e43fcbc0100, type: 2}
     amount: 2
