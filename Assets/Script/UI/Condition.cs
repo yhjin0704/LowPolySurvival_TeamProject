@@ -22,7 +22,7 @@ public class Condition : MonoBehaviour
 
         //CYS 
         //curValue = Mathf.Max(curValue - passiveValue * Time.deltaTime, 0f);
-        uiBar.fillAmount = GetPercentage();
+        //uiBar.fillAmount = GetPercentage();
     }
 
     public void Add(float amount)
