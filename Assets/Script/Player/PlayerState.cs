@@ -34,4 +34,18 @@ public class PlayerState : MonoBehaviour
         PlayerManager.Instance.Player.controller.DisableAllEquipItem();
         state.ChangeController();
     }
+    public void TempChange()
+    {
+        temperartureState.ChangeTemperarture();
+    }
+
+    public PlayerEquipState ReturnState()
+    {
+        return this.state;
+    }
+
+    public PlayerTemperartureState GetTempState()
+    {
+        return this.temperartureState;
+    }
 }

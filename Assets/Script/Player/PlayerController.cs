@@ -14,7 +14,11 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rigidbody;
     PlayerPunch punchState;
     PlayerAttackEquip equipState;
-    PlayerState playerState;
+    public PlayerState playerState;
+    public ColdState coldState;
+    public HotState hotState;
+    public NormalState normalState;
+    PlayerCupEquip cupState;
     private PlayerCondition condition;
 
     private GameObject equipSword;
@@ -66,6 +70,7 @@ public class PlayerController : MonoBehaviour
     public bool canLook = true;
     public bool isDash = false;
     public Action inventory;
+    private bool isDIe = false;
 
     private void Awake()
     {
@@ -102,16 +107,23 @@ public class PlayerController : MonoBehaviour
         {
             condition.TakeDamage(waterDamage);
         }
+
+        if (playerState.GetTempState() == coldState || playerState.GetTempState() == hotState)
+        {
+            condition.TakeDamage(tempDamage);
+            Debug.Log("온도 데미지 받는중");
+        }
     }
     private void FixedUpdate()
     {
-        Move();
-        if (isDash)
+        if(!isDIe)
+            Move();
+        if (isDash && !isDIe)
         {
             condition.ConsumeStamina(dashStamina);
         }
 
-        if (condition.IsStaminaZero() || Approximately(rigidbody.velocity, Vector3.zero, 0.1f))
+        if ((condition.IsStaminaZero() || Approximately(rigidbody.velocity, Vector3.zero, 0.1f)) && !isDIe)
         {
             ToggleDash();
         }
@@ -119,7 +131,7 @@ public class PlayerController : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (canLook)
+        if (canLook && !isDIe)
         {
             CameraLook();
         }
@@ -363,9 +375,75 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void WaterInteraction()
+    {
+        if (playerState.ReturnState() == cupState)
+        {
+            condition.Drink(5f);
+        }
+    }
+
+    public void Die()
+    {
+        animator.SetTrigger("Death");
+        //ToggleCursor();
+        isDIe = true;
+    }
+
+    public void DieEnd()
+    {
+        Time.timeScale = 0;
+    }
+
     bool UnderWater()
     {
         return transform.position.y < -1.6f;
+    }
+
+    public void ChangeColdState()
+    {
+        playerState.SetTemperartureState(coldState);
+        playerState.TempChange();
+    }
+    public void ChangeNormalState()
+    {
+        playerState.SetTemperartureState(normalState);
+        playerState.TempChange();
+    }
+
+    public void ChangeHotState()
+    {
+        playerState.SetTemperartureState(hotState);
+        playerState.TempChange();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("snow"))
+        {
+            ChangeColdState();
+            Debug.Log("스노우 진입");
+            Debug.Log(isTempDamaged);
+            Debug.Log(playerState.GetTempState());
+        }
+
+        else if(other.gameObject.layer == LayerMask.NameToLayer("desert"))
+        {
+            ChangeHotState();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("snow"))
+        {
+            ChangeNormalState();
+        }
+
+        else if (other.gameObject.layer == LayerMask.NameToLayer("desert"))
+        {
+            ChangeNormalState();
+        }
     }
 
     public bool Approximately(Vector3 a, Vector3 b, float threshold)

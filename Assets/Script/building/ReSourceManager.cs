@@ -4,38 +4,21 @@ using UnityEngine;
 
 public class ReSourceManager : MonoBehaviour
 {
-    public int wood = 0;
-    public int rock = 0;  // stone → rock
+    public UIInventory uiinventory;
+    public ItemData[] datas;
 
-
-    //void Start()
-    //{
-    //    AddWood(20);
-    //    AddRock(20);
-    //    Debug.Log($"[초기 자원] wood: {wood}, rock: {rock}");
-    //}
-
-    public void AddWood(int amount)
+    public bool CanBuild(int requiredWood, int requiredRock, int requiredBranch)
     {
-        wood += amount;
+        return uiinventory.GetItemQuantity(datas[0]) >= requiredWood && uiinventory.GetItemQuantity(datas[1]) >= requiredRock && uiinventory.GetItemQuantity(datas[2]) >= requiredBranch;
     }
 
-    public void AddRock(int amount) // AddStone → AddRock
+    public void UseResources(int requiredWood, int requiredRock, int requiredBranch)
     {
-        rock += amount;
-    }
-
-    public bool CanBuild(int requiredWood, int requiredRock) // requiredStone → requiredRock
-    {
-        return wood >= requiredWood && rock >= requiredRock;
-    }
-
-    public void UseResources(int requiredWood, int requiredRock)
-    {
-        if (CanBuild(requiredWood, requiredRock))
+        if (CanBuild(requiredWood, requiredRock, requiredBranch))
         {
-            wood -= requiredWood;
-            rock -= requiredRock;
+            uiinventory.SetItemQunatity(datas[0], requiredWood);
+            uiinventory.SetItemQunatity(datas[1], requiredRock);
+            uiinventory.SetItemQunatity(datas[2], requiredBranch);
         }
     }
 }

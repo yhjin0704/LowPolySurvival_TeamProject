@@ -8,19 +8,23 @@ public class BuildingSystem : MonoBehaviour
 
 
     public GameObject player;
-    public GameObject buildingPrefab;  // ¹èÄ¡ÇÒ °Ç¹°ÀÇ ÇÁ¸®ÆÕ
-    public Transform buildingPlacementPoint;  // °Ç¹° ¹èÄ¡ÇÒ À§Ä¡
-    public ReSourceManager resourceManager;  // ÀÚ¿ø °ü¸® ½Ã½ºÅÛ
-    public int requiredWood = 10;  // °Ç¹°¿¡ ÇÊ¿äÇÑ ¸ñÀç ¼ö
-    public int requiredRock = 10;  // °Ç¹°¿¡ ÇÊ¿äÇÑ µ¹ ¼ö
-    public UIInventory uiinventory;
+    public GameObject buildingPrefab;  // ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½Ç¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public Transform buildingPlacementPoint;  // ï¿½Ç¹ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½Ä¡
+    public ReSourceManager resourceManager;   // ï¿½Ú¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã½ï¿½ï¿½ï¿½
+    private Vector3 placementPosition;
+    private int selectedBuildingIndex = 0; // ï¿½ï¿½ï¿½Ãµï¿½ ï¿½Ç¹ï¿½ ï¿½Îµï¿½ï¿½ï¿½
 
-    private PlacementManager placementManager;  // ¹èÄ¡ °¡´ÉÇÑÁö È®ÀÎÇÏ´Â ¸Å´ÏÀú
-    private bool canBuild = false;  // ¹èÄ¡ °¡´É ¿©ºÎ
+    // ï¿½Ç¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ + ï¿½Ú¿ï¿½ ï¿½ä±¸ ï¿½ï¿½ï¿½ï¿½)
+    public List<BuildingData> buildingDataList;
 
-    void Start()
+    private void Start()
     {
-        // PlacementManager¸¦ Ã£°í, ÃÊ±âÈ­
+        player = PlayerManager.Instance.Player.gameObject;
+    }
+
+    void Update()
+    {
+        // PlacementManagerï¿½ï¿½ Ã£ï¿½ï¿½, ï¿½Ê±ï¿½È­
         placementManager = GetComponent<PlacementManager>();
     }
 
@@ -28,17 +32,17 @@ public class BuildingSystem : MonoBehaviour
     {
         if (resourceManager.CanBuild(requiredWood, requiredRock))
         {
-            // °Ç¹° ¹èÄ¡
-            Instantiate(buildingPrefab, buildingPlacementPoint.position, Quaternion.identity);
-            // ÀÚ¿ø Â÷°¨
-            resourceManager.UseResources(requiredWood, requiredRock);
-            Debug.Log("°Ç¹°ÀÌ ¼º°øÀûÀ¸·Î ¼³Ä¡µÇ¾ú½À´Ï´Ù.");
-
+            // ï¿½Ú¿ï¿½ ï¿½ä±¸ï¿½ï¿½ È®ï¿½ï¿½
+            
+            if (resourceManager.CanBuild(selectedBuilding.wood, selectedBuilding.rock, selectedBuilding.branch))
+            {
+                // ï¿½Ç¹ï¿½ ï¿½ï¿½Ä¡
+                Instantiate(selectedBuilding.prefab, placementPosition, player.transform.rotation);
 
         }
         else
         {
-            Debug.LogWarning("ÀÚ¿øÀÌ ºÎÁ·ÇÏ¿© °Ç¹°À» ¼³Ä¡ÇÒ ¼ö ¾ø½À´Ï´Ù. (ÇÊ¿ä: Wood 10, Rock 10)");
+            Debug.LogWarning("ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½Ç¹ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½. (ï¿½Ê¿ï¿½: Wood 10, Rock 10)");
         }
     }
 }

@@ -7,7 +7,7 @@ public class PlayerCondition : MonoBehaviour
 {
     public UICondition uiCondition;
 
-    public DayNightCycle dayNightCycle; //CYSÃß°¡ÄÚµå
+    public DayNightCycle dayNightCycle; //CYSï¿½ß°ï¿½ï¿½Úµï¿½
 
     Condition health { get { return uiCondition.health; } }
     Condition hunger { get { return uiCondition.hunger; } }
@@ -87,7 +87,7 @@ public class PlayerCondition : MonoBehaviour
 
     public void Die()
     {
-        Debug.Log("ÇÃ·¹ÀÌ¾î°¡ Á×¾ú´Ù.");
+        //PlayerManager.Instance.Player.controller.Die();
     }
 
 }
