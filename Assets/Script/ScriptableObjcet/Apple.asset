@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a094b6b49173fe245ac3973789164297, type: 3}
   m_Name: Apple
   m_EditorClassIdentifier: 
-  ID: 10
   displayName: "\uC0AC\uACFC"
   description: "\uB179\uC0C9 \uBE5B\uC774 \uAC10\uB3C4\uB294 \uC0AC\uACFC. \uBA39\uC744
     \uC218 \uC788\uC744 \uAC83 \uAC19\uB2E4."
@@ -27,6 +26,5 @@ MonoBehaviour:
   - type: 2
     value: 25
   damage: 0
-  useStamina: 0
   equipPrefab: {fileID: 0}
   duration: 0

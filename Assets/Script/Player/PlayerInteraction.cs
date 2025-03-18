@@ -52,13 +52,7 @@ public class PlayerInteraction : MonoBehaviour
                     }
                 }
             }
-            else
-            {
-                curInteractGameObject = null;
-                curInteractable = null;
-                promptText.gameObject.SetActive(false);
-            }
-
+            
         }
     }
 

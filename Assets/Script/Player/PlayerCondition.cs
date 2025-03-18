@@ -7,16 +7,28 @@ public class PlayerCondition : MonoBehaviour
 {
     public UICondition uiCondition;
 
-    public DayNightCycle dayNightCycle; //CYSÃß°¡ÄÚµå
+    public DayNightCycle dayNightCycle; //CYSï¿½ß°ï¿½ï¿½Úµï¿½
 
     Condition health { get { return uiCondition.health; } }
     Condition hunger { get { return uiCondition.hunger; } }
     Condition thirst { get { return uiCondition.thirst; } }
     Condition stamina { get { return uiCondition.stamina; } }
+    Condition temperature { get { return uiCondition.temperature; } }
 
     public float healthDecay;
 
     public event Action onTakeDamage;
+    public TemperatureSystem temperatureSystem;
+    
+
+    private void Awake()
+    {
+        if (temperatureSystem == null)
+        {
+            temperatureSystem = PlayerManager.Instance.Player.GetComponent<TemperatureSystem>();
+        }
+        
+    }
 
     private void Update()
     {
@@ -24,9 +36,10 @@ public class PlayerCondition : MonoBehaviour
         {
             return;
         }
-        hunger.Subtract((hunger.passiveValue + hunger.plusValue) * Time.deltaTime);
-        thirst.Subtract((thirst.passiveValue + thirst.plusValue) * Time.deltaTime);
-        stamina.Add((stamina.passiveValue + stamina.plusValue) * Time.deltaTime);
+
+        hunger.Subtract(hunger.passiveValue * Time.deltaTime);
+        thirst.Subtract(thirst.passiveValue * Time.deltaTime);
+        stamina.Add(stamina.passiveValue * Time.deltaTime);
 
         if (hunger.curValue <= 0f)
         {
@@ -35,7 +48,17 @@ public class PlayerCondition : MonoBehaviour
 
         if (thirst.curValue <= 0f)
         {
-            health.Subtract(healthDecay * Time.deltaTime);
+            health.Subtract(HealthDecay * Time.deltaTime);
+        }
+
+        if (temperatureSystem.currentTemperature <= 0f)
+        {
+            health.Subtract(HealthDecay * Time.deltaTime);
+        }
+
+        if (temperatureSystem.currentTemperature >= 30f)
+        {
+            health.Subtract(HealthDecay * Time.deltaTime);
         }
 
         if (health.curValue <= 0f)
@@ -72,16 +95,6 @@ public class PlayerCondition : MonoBehaviour
     public bool IsStaminaZero()
     {
         return stamina.GetPercentage() == 0;
-    }
-
-    public void ThirstValuePlus(float amount)
-    {
-        thirst.plusValue += amount;
-    }
-
-    public void ResetThirstValuePlus()
-    {
-        thirst.plusValue = 0;
     }
 
     public void Die()

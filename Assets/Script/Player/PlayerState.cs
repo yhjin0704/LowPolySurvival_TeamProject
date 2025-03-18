@@ -9,32 +9,18 @@ public interface PlayerEquipState
     public abstract void ChangeController();
 }
 
-public interface PlayerTemperartureState
+public class PlayerState : MonoBehaviour
 {
-    public abstract void ChangeTemperarture();
-}
+   private PlayerEquipState state;
 
-public class PlayerState
-{
-    private PlayerEquipState state;
-    private PlayerTemperartureState temperartureState;
-
-    public PlayerState(PlayerEquipState state, PlayerTemperartureState TemperartureState)
+    public PlayerState(PlayerEquipState state)
     {
         this.state = state;
-        this.temperartureState = TemperartureState;
     }
 
     public void setState(PlayerEquipState state)
     {
-        if(state != this.state)
-            this.state = state;
-    }
-
-    public void SetTemperartureState(PlayerTemperartureState TemperartureState)
-    {
-        if(temperartureState != TemperartureState)
-            this.temperartureState = TemperartureState;
+        this.state = state;
     }
 
     public void Change(ItemData data) 

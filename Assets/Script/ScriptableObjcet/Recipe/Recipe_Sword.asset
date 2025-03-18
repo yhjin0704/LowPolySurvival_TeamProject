@@ -17,5 +17,3 @@ MonoBehaviour:
   requiredItems:
   - materials: {fileID: 11400000, guid: 600d3721ab7fd2f4890248281baf8b42, type: 2}
     amount: 2
-  - materials: {fileID: 11400000, guid: 668128d1b9b746044bc64e43fcbc0100, type: 2}
-    amount: 2

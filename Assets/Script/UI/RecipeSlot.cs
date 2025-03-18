@@ -31,7 +31,6 @@ public class RecipeSlot : MonoBehaviour
     {
         icon.gameObject.SetActive(true);
         icon.sprite = ItemRecipe.desiredItem.icon;
-        quatityText.text = ItemRecipe.quantities > 1 ? ItemRecipe.quantities.ToString() : string.Empty;
     }
 
     public void OnClickButton()

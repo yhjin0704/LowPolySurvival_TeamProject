@@ -7,8 +7,6 @@ using UnityEngine.Playables;
 using UnityEditor.Animations;
 using DropResource;
 using System.Linq;
-using Unity.VisualScripting;
-using System.Net.NetworkInformation;
 
 
 public class PlayerController : MonoBehaviour
@@ -25,12 +23,7 @@ public class PlayerController : MonoBehaviour
 
     private GameObject equipSword;
     private GameObject equipAxe;
-    private GameObject equipCup;
     private List<Transform> equipPos;
-
-    [Header("TemparatureDamage")]
-    public float tempDamage;
-    public bool isTempDamaged;
 
     [Header("UnderWater")]
     public float waterDamage;
@@ -91,21 +84,14 @@ public class PlayerController : MonoBehaviour
         equipPos.RemoveAt(0);
         //Debug.Log(equipPos[0].name);
         equipSword = GameObject.Find("EquipPos").transform.Find("Equip_Sword").gameObject;
-        equipAxe = GameObject.Find("EquipPos").transform.Find("Equip_Axe").gameObject;
-        equipCup = GameObject.Find("EquipPos").transform.Find("Equip_Cup").gameObject;
+        //equipAxe = GameObject.Find("EquipPos").transform.Find("Equip_Axe").gameObject;
         equipPos.Add(equipSword.transform);
-        equipPos.Add(equipAxe.transform);
-        equipPos.Add(equipCup.transform);
+        //equipPos.Add(equipAxe.transform);
 
         punchState = new PlayerPunch();
         equipState = new PlayerAttackEquip();
-        cupState = new PlayerCupEquip();
-        coldState = new ColdState();
-        hotState = new HotState();
-        normalState = new NormalState();
-        playerState = new PlayerState(punchState, normalState);
+        playerState = new PlayerState(punchState);
         playerState.Change();
-        playerState.TempChange();
         Cursor.lockState = CursorLockMode.Locked;
         resultSpeed = moveSpeed;
         camera = Camera.main;
@@ -296,7 +282,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log(hit.collider.name);
             if (hit.collider.TryGetComponent(out IBreakableObject breakbleObject))
             {
-                Debug.Log("펀치펀치");
+                Debug.Log("��ġ��ġ");
                 breakbleObject.TakeDamage(nowDamage);
             }
         }
@@ -366,12 +352,6 @@ public class PlayerController : MonoBehaviour
         playerState.Change(data);
     }
 
-    public void EquipCupState(ItemData data)
-    {
-        playerState.setState(cupState);
-        playerState.Change(data);
-    }
-
     public void EquipAttack(ItemData data)
     {
         switch (data.ID)
@@ -390,14 +370,6 @@ public class PlayerController : MonoBehaviour
                 {
                     isEquip = true;
                     equipAxe.SetActive(true);
-                }
-                break;
-            case 102:
-                EquipCupState(data);
-                if (isEquip == false)
-                {
-                    isEquip = true;
-                    equipCup.SetActive(true);
                 }
                 break;
         }

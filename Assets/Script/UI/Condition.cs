@@ -9,7 +9,6 @@ public class Condition : MonoBehaviour
     public float maxValue;
     public float startValue;
     public float passiveValue;
-    public float plusValue;
     public Image uiBar;
 
     private void Start()
@@ -23,7 +22,7 @@ public class Condition : MonoBehaviour
 
         //CYS 
         //curValue = Mathf.Max(curValue - passiveValue * Time.deltaTime, 0f);
-        uiBar.fillAmount = GetPercentage();
+        //uiBar.fillAmount = GetPercentage();
     }
 
     public void Add(float amount)

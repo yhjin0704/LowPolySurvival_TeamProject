@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public interface IInteractable
@@ -20,8 +19,6 @@ public class ItemObject : MonoBehaviour, IInteractable
 
     public void OnInteract()
     {
-        if (gameObject.IsDestroyed())
-            return;
         PlayerManager.Instance.Player.itemData = data;
         PlayerManager.Instance.Player.addItem?.Invoke();
         Destroy(gameObject);

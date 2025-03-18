@@ -1,15 +1,20 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class BuildingSystem : MonoBehaviour
 {
-    public GameObject player;
-    public Transform buildingPlacementPoint;  // °Ç¹° ¹èÄ¡ÇÒ À§Ä¡
-    public ReSourceManager resourceManager;   // ÀÚ¿ø °ü¸® ½Ã½ºÅÛ
-    private Vector3 placementPosition;
-    private int selectedBuildingIndex = 0; // ¼±ÅÃµÈ °Ç¹° ÀÎµ¦½º
 
-    // °Ç¹° µ¥ÀÌÅÍ ¸®½ºÆ® (ÇÁ¸®ÆÕ + ÀÚ¿ø ¿ä±¸ »çÇ×)
+
+    public GameObject player;
+    public GameObject buildingPrefab;  // ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½Ç¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public Transform buildingPlacementPoint;  // ï¿½Ç¹ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½Ä¡
+    public ReSourceManager resourceManager;   // ï¿½Ú¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã½ï¿½ï¿½ï¿½
+    private Vector3 placementPosition;
+    private int selectedBuildingIndex = 0; // ï¿½ï¿½ï¿½Ãµï¿½ ï¿½Ç¹ï¿½ ï¿½Îµï¿½ï¿½ï¿½
+
+    // ï¿½Ç¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ + ï¿½Ú¿ï¿½ ï¿½ä±¸ ï¿½ï¿½ï¿½ï¿½)
     public List<BuildingData> buildingDataList;
 
     private void Start()
@@ -19,78 +24,48 @@ public class BuildingSystem : MonoBehaviour
 
     void Update()
     {
-        // °Ç¹° ¼±ÅÃ
-        if (Input.GetKeyDown(KeyCode.Alpha1)) { selectedBuildingIndex = 0; Build(); }
-        if (Input.GetKeyDown(KeyCode.Alpha2)) { selectedBuildingIndex = 1; Build(); }
-        if (Input.GetKeyDown(KeyCode.Alpha3)) { selectedBuildingIndex = 2; Build(); }
-
-        // °Ç¹° ¹èÄ¡ À§Ä¡ ¾÷µ¥ÀÌÆ®
-        UpdateBuildingPlacementPosition();
+        // PlacementManagerï¿½ï¿½ Ã£ï¿½ï¿½, ï¿½Ê±ï¿½È­
+        placementManager = GetComponent<PlacementManager>();
     }
 
-    [System.Serializable]
-    public struct BuildingData
-    {
-        public GameObject prefab;
-        public int wood;
-        public int rock;
-        public int branch;
-    }
-
-    // °Ç¹° ¹èÄ¡ ÇÔ¼ö
     public void Build()
     {
-        // ¼±ÅÃµÈ °Ç¹° µ¥ÀÌÅÍ °¡Á®¿À±â
-        BuildingData selectedBuilding = buildingDataList[selectedBuildingIndex];
-
-        // ¹èÄ¡ÇÒ À§Ä¡ °è»ê
-        placementPosition = buildingPlacementPoint.position;
-
-        // À§Ä¡°¡ À¯È¿ÇÑÁö Ã¼Å©
-        if (IsValidPlacement(placementPosition))
+        if (resourceManager.CanBuild(requiredWood, requiredRock))
         {
-            // ÀÚ¿ø ¿ä±¸·® È®ÀÎ
+            // ï¿½Ú¿ï¿½ ï¿½ä±¸ï¿½ï¿½ È®ï¿½ï¿½
             
             if (resourceManager.CanBuild(selectedBuilding.wood, selectedBuilding.rock, selectedBuilding.branch))
             {
-                // °Ç¹° ¹èÄ¡
+                // ï¿½Ç¹ï¿½ ï¿½ï¿½Ä¡
                 Instantiate(selectedBuilding.prefab, placementPosition, player.transform.rotation);
 
-                // ÀÚ¿ø Â÷°¨
-                resourceManager.UseResources(selectedBuilding.wood, selectedBuilding.rock, selectedBuilding.branch);
-                Debug.Log($"{selectedBuilding.prefab.name} °Ç¹°ÀÌ ¼º°øÀûÀ¸·Î ¼³Ä¡µÇ¾ú½À´Ï´Ù.");
-            }
-            else
-            {
-                Debug.LogWarning($"{selectedBuilding.prefab.name} °Ç¹°À» ¼³Ä¡ÇÒ ¼ö ¾ø½À´Ï´Ù. ÀÚ¿øÀÌ ºÎÁ·ÇÕ´Ï´Ù.");
-            }
         }
         else
         {
-            Debug.LogWarning("¹èÄ¡ÇÒ ¼ö ¾ø´Â À§Ä¡ÀÔ´Ï´Ù.");
+            Debug.LogWarning("ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½Ç¹ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½. (ï¿½Ê¿ï¿½: Wood 10, Rock 10)");
         }
     }
 
-    // ¹èÄ¡ °¡´ÉÇÑ À§Ä¡ÀÎÁö È®ÀÎÇÏ´Â ÇÔ¼ö
+    // ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½
     public bool IsValidPlacement(Vector3 position)
     {
         RaycastHit hit;
-        // Raycast¸¦ ¾Æ·¡·Î ½î±â
+        // Raycastï¿½ï¿½ ï¿½Æ·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         if (Physics.Raycast(position, Vector3.down, out hit, 5f))
         {
-            // 'Ground' ·¹ÀÌ¾îÀÎÁö È®ÀÎ
+            // 'Ground' ï¿½ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
             if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
             {
-                return true; // ¹èÄ¡ °¡´É
+                return true; // ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½
             }
         }
 
-        return false; // ¹èÄ¡ÇÒ ¼ö ¾ø´Â °÷
+        return false; // ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
     }
 
     public void UpdateBuildingPlacementPosition()
     {
-        // ÇÃ·¹ÀÌ¾î ¾Õ 5 À¯´Ö À§Ä¡·Î ¹èÄ¡ÇÒ À§Ä¡ ¾÷µ¥ÀÌÆ®
+        // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ 5 ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
         buildingPlacementPoint.position = player.transform.position + player.transform.forward * 5f;
     }
 }
