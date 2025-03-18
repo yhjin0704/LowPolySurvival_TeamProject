@@ -7,6 +7,7 @@ using UnityEngine.Playables;
 using UnityEditor.Animations;
 using DropResource;
 using System.Linq;
+using Unity.VisualScripting;
 
 
 public class PlayerController : MonoBehaviour
@@ -15,11 +16,18 @@ public class PlayerController : MonoBehaviour
     PlayerPunch punchState;
     PlayerAttackEquip equipState;
     PlayerState playerState;
+    ColdState coldState;
+    HotState hotState;
+    NormalState normalState;
     private PlayerCondition condition;
 
     private GameObject equipSword;
     private GameObject equipAxe;
     private List<Transform> equipPos;
+
+    [Header("TemparatureDamage")]
+    public float tempDamage;
+    public bool isTempDamaged;
 
     [Header("UnderWater")]
     public float waterDamage;
@@ -85,8 +93,12 @@ public class PlayerController : MonoBehaviour
 
         punchState = new PlayerPunch();
         equipState = new PlayerAttackEquip();
-        playerState = new PlayerState(punchState);
+        coldState = new ColdState();
+        hotState = new HotState();
+        normalState = new NormalState();
+        playerState = new PlayerState(punchState, normalState);
         playerState.Change();
+        playerState.TempChange();
         Cursor.lockState = CursorLockMode.Locked;
         resultSpeed = moveSpeed;
         camera = Camera.main;
@@ -101,6 +113,11 @@ public class PlayerController : MonoBehaviour
         if (UnderWater())
         {
             condition.TakeDamage(waterDamage);
+        }
+
+        if (isTempDamaged)
+        {
+            condition.TakeDamage(tempDamage);
         }
     }
     private void FixedUpdate()
@@ -366,6 +383,36 @@ public class PlayerController : MonoBehaviour
     bool UnderWater()
     {
         return transform.position.y < -1.6f;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("snow"))
+        {
+            playerState.SetTemperartureState(coldState);
+            playerState.TempChange();
+        }
+
+        else if(other.gameObject.layer == LayerMask.NameToLayer("desert"))
+        {
+            playerState.SetTemperartureState(hotState);
+            playerState.TempChange();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("snow"))
+        {
+            playerState.SetTemperartureState(normalState);
+            playerState.TempChange();
+        }
+
+        else if (other.gameObject.layer == LayerMask.NameToLayer("desert"))
+        {
+            playerState.SetTemperartureState(normalState);
+            playerState.TempChange();
+        }
     }
 
     public bool Approximately(Vector3 a, Vector3 b, float threshold)

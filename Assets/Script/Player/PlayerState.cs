@@ -9,18 +9,30 @@ public interface PlayerEquipState
     public abstract void ChangeController();
 }
 
-public class PlayerState : MonoBehaviour
+public interface PlayerTemperartureState
 {
-   private PlayerEquipState state;
+    public abstract void ChangeTemperarture();
+}
 
-    public PlayerState(PlayerEquipState state)
+public class PlayerState
+{
+    private PlayerEquipState state;
+    private PlayerTemperartureState temperartureState;
+
+    public PlayerState(PlayerEquipState state, PlayerTemperartureState TemperartureState)
     {
         this.state = state;
+        this.temperartureState = TemperartureState;
     }
 
     public void setState(PlayerEquipState state)
     {
         this.state = state;
+    }
+
+    public void SetTemperartureState(PlayerTemperartureState TemperartureState)
+    {
+        this.temperartureState = TemperartureState;
     }
 
     public void Change(ItemData data) 
@@ -33,5 +45,9 @@ public class PlayerState : MonoBehaviour
     {
         PlayerManager.Instance.Player.controller.DisableAllEquipItem();
         state.ChangeController();
+    }
+    public void TempChange()
+    {
+        temperartureState.ChangeTemperarture();
     }
 }

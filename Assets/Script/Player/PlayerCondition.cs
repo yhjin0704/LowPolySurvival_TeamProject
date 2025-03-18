@@ -24,12 +24,9 @@ public class PlayerCondition : MonoBehaviour
         {
             return;
         }
-
-
-        
-        hunger.Subtract(hunger.passiveValue * Time.deltaTime);
-        thirst.Subtract(thirst.passiveValue * Time.deltaTime);
-        stamina.Add(stamina.passiveValue * Time.deltaTime);
+        hunger.Subtract((hunger.passiveValue + hunger.plusValue) * Time.deltaTime);
+        thirst.Subtract((thirst.passiveValue + thirst.plusValue) * Time.deltaTime);
+        stamina.Add((stamina.passiveValue + stamina.plusValue) * Time.deltaTime);
 
         if (hunger.curValue <= 0f)
         {
@@ -75,6 +72,16 @@ public class PlayerCondition : MonoBehaviour
     public bool IsStaminaZero()
     {
         return stamina.GetPercentage() == 0;
+    }
+
+    public void ThirstValuePlus(float amount)
+    {
+        thirst.plusValue += amount;
+    }
+
+    public void ResetThirstValuePlus()
+    {
+        thirst.plusValue = 0;
     }
 
     public void Die()
