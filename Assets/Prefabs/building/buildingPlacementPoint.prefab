@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6360934078282593790}
-  - component: {fileID: -5490342887860534164}
   - component: {fileID: -3063619175807485125}
   m_Layer: 0
   m_Name: buildingPlacementPoint
@@ -27,31 +26,12 @@ Transform:
   m_GameObject: {fileID: 3202517005892371710}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.3117743, y: 7.8768053, z: -16.936235}
+  m_LocalPosition: {x: -5.0418444, y: 2.8789592, z: 30.925186}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-5490342887860534164
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3202517005892371710}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab60dba7e6aa99c4ba23029472bf9aea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 3202517005892371710}
-  resourceManager: {fileID: -9198651389690882470, guid: 7cf082522baf7664cb32a6c79855bb41, type: 3}
-  buildingPrefab: {fileID: 1667259951044660279, guid: 9aefb3774b4ee4548a158df4c06eb1cc, type: 3}
-  targetlayer:
-    serializedVersion: 2
-    m_Bits: 0
-  buildingSystem: {fileID: 0}
 --- !u!114 &-3063619175807485125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,3 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wood: 0
   rock: 0
+  branch: 0

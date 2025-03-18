@@ -6,6 +6,7 @@ public class TemperatureSystem : MonoBehaviour
 {
     public DayNightCycle dayNightCycle; 
     public PlayerCondition playerCondition;
+    PlayerController playerController;
 
     public float currentTemperature = 20f;
     public float dayTemperature = 20f;
@@ -16,7 +17,7 @@ public class TemperatureSystem : MonoBehaviour
     //온도가 이 값 이하일 때 플레이어가 피해를 입기 시작합니다. 현재는 0도 이하로 설정되어 있습니다.
     public float coldDamage = 5f;
     //온도가 coldThreshold 이하로 내려갔을 때 플레이어가 받는 피해량입니다.
-    public float damageInterval = 3f;
+    public float damageInterval = 120f;
     //피해가 주어지는 간격을 설정하는 변수입니다. 3초마다 피해를 줍니다.
     private float damageTimer;
     //피해를 주는 타이머로, 일정 시간마다 피해를 주기 위한 타이머입니다.
@@ -32,7 +33,8 @@ public class TemperatureSystem : MonoBehaviour
         // playerCondition이 설정되지 않았다면 GetComponent로 가져오기
         if (playerCondition == null)
         {
-            playerCondition = GetComponent<PlayerCondition>();
+            playerCondition = PlayerManager.Instance.Player.condition;
+            playerController = PlayerManager.Instance.Player.controller;
         }
     }
 
@@ -65,13 +67,15 @@ public class TemperatureSystem : MonoBehaviour
             {
                 //TakeDamage 호출
                 //Debug.Log("Taking cold damage! Current Health: " + playerCondition.health);
-                playerCondition.TakeDamage(coldDamage);
-                damageTimer = 0f;
+                //playerCondition.TakeDamage(coldDamage);
+                //damageTimer = 0f;
+                playerController.ChangeColdState();
             }
         }
         else
         {
-            damageTimer = 0f;
+            //damageTimer = 0f;
+            playerController.ChangeNormalState();
         }
     }
 }
