@@ -6,7 +6,6 @@ public class TemperatureSystem : MonoBehaviour
 {
     public DayNightCycle dayNightCycle; 
     public PlayerCondition playerCondition;
-    PlayerController playerController;
 
     public float currentTemperature = 20f;
     public float dayTemperature = 20f;
@@ -28,13 +27,20 @@ public class TemperatureSystem : MonoBehaviour
     public float fireHeatBonus = 10f;
     public LayerMask fireLayer;
 
+    private void Awake()
+    {
+        if (dayNightCycle == null)
+        {
+            dayNightCycle = FindObjectOfType<DayNightCycle>();
+        }
+    }
+
     void Start()
     {
         // playerCondition이 설정되지 않았다면 GetComponent로 가져오기
         if (playerCondition == null)
         {
             playerCondition = PlayerManager.Instance.Player.condition;
-            playerController = PlayerManager.Instance.Player.controller;
         }
     }
 
@@ -69,13 +75,11 @@ public class TemperatureSystem : MonoBehaviour
                 //Debug.Log("Taking cold damage! Current Health: " + playerCondition.health);
                 //playerCondition.TakeDamage(coldDamage);
                 //damageTimer = 0f;
-                playerController.ChangeColdState();
             }
         }
         else
         {
             //damageTimer = 0f;
-            playerController.ChangeNormalState();
         }
     }
 }

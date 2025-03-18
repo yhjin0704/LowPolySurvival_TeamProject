@@ -17,17 +17,6 @@ public class PlayerCondition : MonoBehaviour
 
     public float HealthDecay;
     public event Action onTakeDamage;
-    public TemperatureSystem temperatureSystem;
-    
-
-    private void Awake()
-    {
-        if (temperatureSystem == null)
-        {
-            temperatureSystem = PlayerManager.Instance.Player.GetComponent<TemperatureSystem>();
-        }
-        
-    }
 
     private void Update()
     {
@@ -50,12 +39,12 @@ public class PlayerCondition : MonoBehaviour
             health.Subtract(HealthDecay * Time.deltaTime);
         }
 
-        if (temperatureSystem.currentTemperature <= 0f)
+        if (temperature.curValue - 10f <= 0f)
         {
             health.Subtract(HealthDecay * Time.deltaTime);
         }
 
-        if (temperatureSystem.currentTemperature >= 30f)
+        if (temperature.curValue - 10f >= 30f)
         {
             health.Subtract(HealthDecay * Time.deltaTime);
         }
