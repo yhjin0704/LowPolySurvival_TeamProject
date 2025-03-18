@@ -72,7 +72,7 @@ public class TemperatureSystem : MonoBehaviour
                 playerController.ChangeColdState();
             }
         }
-        else if(currentTemperature >= coldThreshold && playerController.playerState.GetTempState() != playerController.normalState)
+        else if(currentTemperature >= coldThreshold && playerController.playerState.GetTempState() == playerController.normalState)
         {
             //damageTimer = 0f;
             playerController.ChangeNormalState();

@@ -122,6 +122,7 @@ public class PlayerController : MonoBehaviour
             condition.TakeDamage(waterDamage);
         }
 
+        
         if (playerState.GetTempState() == coldState || playerState.GetTempState() == hotState)
         {
             condition.TakeDamage(tempDamage);

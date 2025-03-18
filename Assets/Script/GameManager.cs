@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        endPanel = GameObject.Find("Canvas").transform.Find("EndPanel").gameObject;
         AddComponentToTagObject<Tree>("Tree");
         AddComponentToTagObject<Rock>("BreakableRock");
     }
