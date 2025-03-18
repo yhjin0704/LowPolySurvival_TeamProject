@@ -6,12 +6,11 @@ public class TemperatureSystem : MonoBehaviour
 {
     public DayNightCycle dayNightCycle; 
     public PlayerCondition playerCondition;
-    PlayerController playerController;
 
-    public float currentTemperature = 20f;
-    public float dayTemperature = 20f;
-    public float nightTemperature = -5f;
-    public float temperatureChangeSpeed = 5f;
+    public float currentTemperature = 50f;
+    public float dayTemperature = 50f;
+    public float nightTemperature = 5f;
+    public float temperatureChangeSpeed = 2f;
 
     public float coldThreshold = 0f;
     //온도가 이 값 이하일 때 플레이어가 피해를 입기 시작합니다. 현재는 0도 이하로 설정되어 있습니다.
@@ -28,14 +27,22 @@ public class TemperatureSystem : MonoBehaviour
     public float fireHeatBonus = 10f;
     public LayerMask fireLayer;
 
-    void Start()
+    void Awake()
     {
-        // playerCondition이 설정되지 않았다면 GetComponent로 가져오기
+        if (dayNightCycle == null)
+        {
+            dayNightCycle = FindObjectOfType<DayNightCycle>();
+        }
+
         if (playerCondition == null)
         {
             playerCondition = PlayerManager.Instance.Player.condition;
-            playerController = PlayerManager.Instance.Player.controller;
         }
+    }
+
+    void Start()
+    {
+        
     }
 
     void Update()
