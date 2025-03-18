@@ -34,3 +34,18 @@ public class PlayerAttackEquip : PlayerEquipState
     }
 }
 
+public class PlayerCupEquip : PlayerEquipState
+{
+    public void ChangeController(ItemData data)
+    {
+        PlayerManager.Instance.Player.controller.ChangeAnimatior(data.ID);
+        PlayerManager.Instance.Player.controller.SetDamage(data.damage);
+        PlayerManager.Instance.Player.controller.SetAttackStamina(data.useStamina);
+    }
+
+    public void ChangeController()
+    {
+        //throw new System.NotImplementedException();
+    }
+}
+

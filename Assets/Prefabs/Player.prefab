@@ -969,6 +969,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d404b99ce92e7684892ed07fff880ebd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tempDamage: 0
+  isTempDamaged: 0
   waterDamage: 0
   defaultController: {fileID: 9100000, guid: a637bc55506c28e43b3691b6453a1399, type: 2}
   swordController: {fileID: 22100000, guid: 4490efe1d430f924781757113c435a5b, type: 2}
@@ -1009,7 +1011,7 @@ MonoBehaviour:
   maxCheckDistance: 5
   layerMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 272
   curInteractGameObject: {fileID: 0}
   promptText: {fileID: 0}
 --- !u!114 &3318728611936723730
@@ -1084,7 +1086,6 @@ MonoBehaviour:
   buildingPlacementPoint: {fileID: 0}
   resourceManager: {fileID: 0}
   uiinventory: {fileID: 0}
-  buildingPlacer: {fileID: 0}
   buildingDataList: []
 --- !u!114 &641175705042040717
 MonoBehaviour:

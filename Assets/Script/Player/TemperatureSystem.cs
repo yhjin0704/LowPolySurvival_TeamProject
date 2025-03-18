@@ -33,7 +33,7 @@ public class TemperatureSystem : MonoBehaviour
         // playerCondition이 설정되지 않았다면 GetComponent로 가져오기
         if (playerCondition == null)
         {
-            playerCondition = GetComponent<PlayerCondition>();
+            playerCondition = PlayerManager.Instance.Player.condition;
             playerController = PlayerManager.Instance.Player.controller;
         }
     }
@@ -75,7 +75,7 @@ public class TemperatureSystem : MonoBehaviour
         else
         {
             //damageTimer = 0f;
-            //playerController.ChangeNormalState();
+            playerController.ChangeNormalState();
         }
     }
 }
