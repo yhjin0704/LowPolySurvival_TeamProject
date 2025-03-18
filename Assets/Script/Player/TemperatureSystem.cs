@@ -50,7 +50,7 @@ public class TemperatureSystem : MonoBehaviour
         // 온도 부드럽게 변경
         currentTemperature = Mathf.Lerp(currentTemperature, targetTemp, Time.deltaTime * temperatureChangeSpeed);
 
-        Debug.Log("Current Temperature: " + currentTemperature);
+        //Debug.Log("Current Temperature: " + currentTemperature);
 
         // 데미지 처리
         if (currentTemperature <= coldThreshold)

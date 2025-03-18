@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BuildingPlacer : MonoBehaviour
 {
+    public GameObject player;
     public GameObject buildingPrefab; // 설치할 건물 프리팹
     public LayerMask targetlayer;
     public BuildingSystem buildingSystem;
@@ -24,5 +25,16 @@ public class BuildingPlacer : MonoBehaviour
                 buildingSystem.Build();
             }
         }
+        if (buildingSystem == null)
+        {
+            Debug.LogError("BuildingSystem이 연결되지 않았습니다!");
+            return;
+        }
+        if (buildingSystem.buildingPlacementPoint == null)
+        {
+            Debug.LogError("buildingPlacementPoint가 설정되지 않았습니다!");
+            return;
+        }
+
     }
 }

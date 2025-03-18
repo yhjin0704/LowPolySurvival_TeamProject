@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class BuildingSystem : MonoBehaviour
 {
+    public GameObject player;
     public GameObject buildingPrefab;  // 배치할 건물의 프리팹
     public Transform buildingPlacementPoint;  // 건물 배치할 위치
     public ReSourceManager resourceManager;  // 자원 관리 시스템
@@ -13,7 +14,7 @@ public class BuildingSystem : MonoBehaviour
     public UIInventory uiinventory;
 
     private PlacementManager placementManager;  // 배치 가능한지 확인하는 매니저
-    // private bool canBuild = false;  // 배치 가능 여부
+    private bool canBuild = false;  // 배치 가능 여부
 
     void Start()
     {

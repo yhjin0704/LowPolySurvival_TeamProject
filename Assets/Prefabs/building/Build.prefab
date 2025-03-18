@@ -277,7 +277,7 @@ MonoBehaviour:
   targetlayer:
     serializedVersion: 2
     m_Bits: 0
-  buildingSystem: {fileID: 0}
+  buildingSystem: {fileID: 4556642132331933879}
 --- !u!1001 &6099169013611869756
 PrefabInstance:
   m_ObjectHideFlags: 0
