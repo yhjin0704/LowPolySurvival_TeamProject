@@ -38,6 +38,11 @@ public class TemperatureSystem : MonoBehaviour
 
     void Update()
     {
+        if (dayNightCycle == null)
+        {
+            return;
+        }
+
         float targetTemp = dayNightCycle.isNightTime ? nightTemperature : dayTemperature;
 
         // 불 근처 체크
