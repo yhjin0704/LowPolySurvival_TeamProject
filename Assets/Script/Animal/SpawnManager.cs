@@ -4,23 +4,34 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    [Header("Bear")]
-    protected List<Animal> Bear;
+    private static SpawnManager _instance;
 
-
-    //public List<Animal> Bear;
-    //public List<Animal> Bear;
-    //public List<Animal> Bear;
-
-    // Start is called before the first frame update
-    void Start()
+    public static SpawnManager Instance
     {
-        
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = new GameObject().AddComponent<SpawnManager>();
+            }
+            return _instance;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public List<GameObject> LBear;
+    public List<GameObject> LChicken;
+    public List<GameObject> LDeer;
+    public List<GameObject> LTiger;
+
+    private void Awake()
     {
-        
+        LBear = new List<GameObject>();
+        LChicken = new List<GameObject>();
+        LDeer = new List<GameObject>();
+        LTiger = new List<GameObject>();
+    }
+
+    private void Start()
+    {
     }
 }
