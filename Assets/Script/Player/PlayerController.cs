@@ -13,17 +13,23 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody rigidbody;
     PlayerPunch punchState;
-    PlayerSword swordState;
+    PlayerAttackEquip equipState;
     PlayerState playerState;
     private PlayerCondition condition;
 
     private GameObject equipSword;
+    private GameObject equipAxe;
     private List<Transform> equipPos;
+
+    [Header("UnderWater")]
+    public float waterDamage;
+
 
     [Header("Override Animator")]
     private Animator animator;
     public AnimatorController defaultController;
     public AnimatorOverrideController swordController;
+
 
     [Header("Movement")]
     private Vector2 curMovementInput;
@@ -71,12 +77,14 @@ public class PlayerController : MonoBehaviour
     {
         equipPos = GameObject.Find("EquipPos").GetComponentsInChildren<Transform>().Where(t => t != transform).ToList();
         equipPos.RemoveAt(0);
+        //Debug.Log(equipPos[0].name);
         equipSword = GameObject.Find("EquipPos").transform.Find("Equip_Sword").gameObject;
+        //equipAxe = GameObject.Find("EquipPos").transform.Find("Equip_Axe").gameObject;
         equipPos.Add(equipSword.transform);
-        Debug.Log(equipSword.name);
+        equipPos.Add(equipAxe.transform);
 
         punchState = new PlayerPunch();
-        swordState = new PlayerSword();
+        equipState = new PlayerAttackEquip();
         playerState = new PlayerState(punchState);
         playerState.Change();
         Cursor.lockState = CursorLockMode.Locked;
@@ -90,12 +98,9 @@ public class PlayerController : MonoBehaviour
     {
         IsGrounded();
 
-        // °Ë ÀåÂø Å×½ºÆ®¿ë
-        if (Input.GetKeyDown(KeyCode.F2))
+        if (UnderWater())
         {
-            playerState.setState(swordState);
-            playerState.Change();
-            Debug.Log("F2");
+            condition.TakeDamage(waterDamage);
         }
     }
     private void FixedUpdate()
@@ -106,7 +111,7 @@ public class PlayerController : MonoBehaviour
             condition.ConsumeStamina(dashStamina);
         }
 
-        if (condition.IsStaminaZero())
+        if (condition.IsStaminaZero() || Approximately(rigidbody.velocity, Vector3.zero, 0.1f))
         {
             ToggleDash();
         }
@@ -130,12 +135,12 @@ public class PlayerController : MonoBehaviour
         if (context.phase == InputActionPhase.Performed)
         {
             curMovementInput = context.ReadValue<Vector2>();
-            animator.SetBool("IsWalk", true);
+            
         }
         else if (context.phase == InputActionPhase.Canceled)
         {
             curMovementInput = Vector2.zero;
-            animator.SetBool("IsWalk", false);
+            
         }
     }
 
@@ -162,8 +167,11 @@ public class PlayerController : MonoBehaviour
         if (!isDash && !condition.IsStaminaZero())
         {
             resultSpeed = dashSpeed * moveSpeed;
-            isDash = true;
-            animator.SetBool("IsDash", true);
+            if(!Approximately(rigidbody.velocity, Vector3.zero, 0.1f))
+            {
+                isDash = true;
+                animator.SetBool("IsDash", true);
+            }
         }
         else
         {
@@ -181,6 +189,15 @@ public class PlayerController : MonoBehaviour
         dir.y = rigidbody.velocity.y;
 
         rigidbody.velocity = dir;
+
+        if(!Approximately(rigidbody.velocity, Vector3.zero, 0.1f))
+        {
+            animator.SetBool("IsWalk", true);
+        }
+        else
+        {
+            animator.SetBool("IsWalk", false);
+        }
     }
 
     void CameraLook()
@@ -216,7 +233,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnAttackInput()
     {
-        if (!attacking)
+        if (!attacking && !condition.IsStaminaZero())
         {
             attacking = true;
             if (!LeftPunch)
@@ -253,7 +270,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log(hit.collider.name);
             if (hit.collider.TryGetComponent(out IBreakableObject breakbleObject))
             {
-                Debug.Log("ÆÝÄ¡ÆÝÄ¡");
+                Debug.Log("ï¿½ï¿½Ä¡ï¿½ï¿½Ä¡");
                 breakbleObject.TakeDamage(nowDamage);
             }
         }
@@ -275,14 +292,20 @@ public class PlayerController : MonoBehaviour
         canLook = !toggle;
     }
 
-    public void ChangeSwordAnimator()
+    public void ChangeAnimatior(int id)
     {
-        animator.runtimeAnimatorController = swordController;
-    }
-
-    public void ChangePunchAnimator()
-    {
-        animator.runtimeAnimatorController = defaultController;
+        switch (id)
+        { 
+            case 100:
+                animator.runtimeAnimatorController = swordController;
+                break;
+            case 101:
+                animator.runtimeAnimatorController = swordController;
+                break;
+            default:
+                animator.runtimeAnimatorController = defaultController;
+                break;
+        }
     }
 
     public void SetDamage(float damage)
@@ -306,22 +329,48 @@ public class PlayerController : MonoBehaviour
     public void UnEquip()
     {
         DisableAllEquipItem();
+        isEquip = false;
         playerState.setState(punchState);
         playerState.Change();
     }
 
-    public void ActiveSword()
+    public void EquipAttackState(ItemData data)
     {
-        if (isEquip == false)
+        playerState.setState(equipState);
+        playerState.Change(data);
+    }
+
+    public void EquipAttack(ItemData data)
+    {
+        switch (data.ID)
         {
-            isEquip = true;
-            equipSword.SetActive(true);
+            case 100:
+                EquipAttackState(data);
+                if (isEquip == false)
+                {
+                    isEquip = true;
+                    equipSword.SetActive(true);
+                }
+                break;
+            case 101:
+                EquipAttackState(data);
+                if (isEquip == false)
+                {
+                    isEquip = true;
+                    equipAxe.SetActive(true);
+                }
+                break;
         }
     }
 
-    public void EquipSword()
+    bool UnderWater()
     {
-        playerState.setState(swordState);
-        playerState.Change();
+        return transform.position.y < -1.6f;
+    }
+
+    public bool Approximately(Vector3 a, Vector3 b, float threshold)
+    {
+        float dist = Vector3.Distance(a, b);
+        return dist <= threshold;
     }
 }
