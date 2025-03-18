@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour
         equipPos.RemoveAt(0);
         //Debug.Log(equipPos[0].name);
         equipSword = GameObject.Find("EquipPos").transform.Find("Equip_Sword").gameObject;
-        equipAxe = GameObject.Find("EquipPos").transform.Find("Equip_Axe").gameObject;
+        //equipAxe = GameObject.Find("EquipPos").transform.Find("Equip_Axe").gameObject;
         equipPos.Add(equipSword.transform);
         equipPos.Add(equipAxe.transform);
 
@@ -287,7 +287,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log(hit.collider.name);
             if (hit.collider.TryGetComponent(out IBreakableObject breakbleObject))
             {
-                Debug.Log("ÆÝÄ¡ÆÝÄ¡");
+                Debug.Log("ï¿½ï¿½Ä¡ï¿½ï¿½Ä¡");
                 breakbleObject.TakeDamage(nowDamage);
             }
         }
