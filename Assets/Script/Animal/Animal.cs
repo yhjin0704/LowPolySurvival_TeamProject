@@ -15,7 +15,8 @@ public enum EAIState
 public class Animal : MonoBehaviour, IBreakableObject
 {
     [Header("Stats")]
-    public float health;
+    public float maxHealth;
+    protected float currentHealth;
     public float walkSpeed;
     public float runSpeed;
     public DropItem[] dropOnDepth;
@@ -47,6 +48,8 @@ public class Animal : MonoBehaviour, IBreakableObject
 
     protected virtual void Start()
     {
+        currentHealth = maxHealth;
+
         SetState(EAIState.Wandering);
     }
 
@@ -56,6 +59,13 @@ public class Animal : MonoBehaviour, IBreakableObject
 
         animator.SetBool("Moving", aiState != EAIState.Idle);
 
+    }
+
+    protected void OnEnable()
+    {
+        currentHealth = maxHealth;
+
+        SetState(EAIState.Wandering);
     }
 
     protected virtual void PassiveUpdate()
@@ -120,8 +130,8 @@ public class Animal : MonoBehaviour, IBreakableObject
 
     public virtual void TakeDamage(float _damage)
     {
-        health -= _damage;
-        if (health < 0)
+        maxHealth -= _damage;
+        if (maxHealth < 0)
         {
             Break();
         }
@@ -135,7 +145,8 @@ public class Animal : MonoBehaviour, IBreakableObject
         {
             Instantiate(dropOnDepth[i].dropItemPrefab, transform.position + Vector3.up * 2, Quaternion.identity);
         }
-        Destroy(gameObject);
+
+        gameObject.SetActive(false);
     }
 
     protected IEnumerator CDamageFlash()

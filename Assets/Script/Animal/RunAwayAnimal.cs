@@ -8,11 +8,6 @@ public class RunAwayAnimal : Animal
     [Header("RunAway")]
     public float runAwayDistance;
 
-    protected override void Start()
-    {
-        base.Start();
-    }
-
     protected override void Update()
     {
         base.Update();
@@ -27,11 +22,6 @@ public class RunAwayAnimal : Animal
                 RunningUpdate();
                 break;
         }
-    }
-
-    protected override void PassiveUpdate()
-    {
-        base.PassiveUpdate();
     }
 
     public override void SetState(EAIState _state)

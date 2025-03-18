@@ -90,8 +90,8 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         resultSpeed = moveSpeed;
         camera = Camera.main;
-        condition = PlayerManager.Instance.Player.condition;
 
+        condition = PlayerManager.Instance.Player.condition;
     }
 
     private void Update()
