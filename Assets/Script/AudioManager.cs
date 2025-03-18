@@ -8,7 +8,8 @@ public class AudioManager : MonoBehaviour
 
     private AudioSource bgm;
     public AudioClip bgmClip;
-    private List<AudioSource> sfxList;
+    private AudioSource sfx;
+    public AudioClip[] sfxs;
     public AudioClip[] footstepClips;
 
     private float masterVol;
@@ -18,7 +19,7 @@ public class AudioManager : MonoBehaviour
     public float MasterVol => masterVol;
     public float BgmVol => bgmVol;
     public float SFXVol => sfxVol;
-    public List<AudioSource> SFXList => sfxList;
+    //public List<AudioSource> SFXList => sfxList;
 
     private void Awake()
     {
@@ -32,16 +33,15 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        masterVol = 0.8f;
-        bgmVol = 0.7f; 
-        sfxVol = 0.8f;
+        masterVol = 1.0f;
+        bgmVol = 0.3f; 
+        sfxVol = 1.0f;
 
         bgm = GetComponent<AudioSource>();
+        sfx = GetComponent<AudioSource>();
         bgm.clip = bgmClip;
         bgm.volume = bgmVol * masterVol;
 
-        sfxList = new List<AudioSource>();
-        sfxList.Add(new AudioSource());
     }
 
     private void Start()
@@ -53,10 +53,7 @@ public class AudioManager : MonoBehaviour
     {
         masterVol = figure;
         bgm.volume = bgmVol * masterVol;
-        for (int i = 0; i < sfxList.Count; i++)
-        {
-            sfxList[i].volume = sfxVol * masterVol;
-        }
+        sfx.volume = sfxVol * masterVol;
     }
 
     public void ChangeBGMVolume(float figure)
@@ -68,20 +65,18 @@ public class AudioManager : MonoBehaviour
     public void ChangeSFXVolume(float figure)
     {
         sfxVol = figure;
-        for (int i = 0; i < sfxList.Count; i++)
-        {
-            sfxList[i].volume = sfxVol * masterVol;
-        }
+        sfx.volume = sfxVol * masterVol;
     }
 
     public void PlaySFX(int id)
     {
-        SFXList[id].Play();
+        sfx.clip = sfxs[id];
+        sfx.Play();
     }
 
-    public void PlayFootSteps(AudioClip[] clips)
+    public void PlayFootSteps()
     {
-        sfxList[0].PlayOneShot(clips[Random.Range(0, clips.Length)]);
+        sfx.PlayOneShot(footstepClips[Random.Range(0, footstepClips.Length)]);
     }
 
 }

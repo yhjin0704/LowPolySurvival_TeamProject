@@ -24,7 +24,7 @@ public class Footsteps : MonoBehaviour
                 if (Time.time - footStepTime > footstepRate)
                 {
                     footStepTime = Time.time;
-                    AudioManager.Instance.PlaySFX(0);
+                    AudioManager.Instance.PlayFootSteps();
                 }
             }
         }
