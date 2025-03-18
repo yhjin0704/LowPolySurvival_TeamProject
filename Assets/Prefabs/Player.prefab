@@ -3117,7 +3117,6 @@ GameObject:
   - component: {fileID: 4207604403746684932}
   - component: {fileID: 3346346812722482148}
   - component: {fileID: 6524136571238448261}
-  - component: {fileID: 1093460064090400018}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -3529,20 +3528,6 @@ MonoBehaviour:
   requiredWood: 10
   requiredRock: 10
   uiinventory: {fileID: 0}
---- !u!114 &1093460064090400018
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8496488359373269871}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 924ef129fd3a5e9438d512d7ebd59787, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wood: 0
-  rock: 0
 --- !u!1 &8692220124126106327
 GameObject:
   m_ObjectHideFlags: 0

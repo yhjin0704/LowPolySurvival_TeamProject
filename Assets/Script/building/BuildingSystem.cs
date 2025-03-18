@@ -15,14 +15,9 @@ public class BuildingSystem : MonoBehaviour
     public int requiredRock = 10;  // 건물에 필요한 돌 수
     public UIInventory uiinventory;
 
-    private PlacementManager placementManager;  // 배치 가능한지 확인하는 매니저
     private bool canBuild = false;  // 배치 가능 여부
 
-    void Start()
-    {
-        // PlacementManager를 찾고, 초기화
-        placementManager = GetComponent<PlacementManager>();
-    }
+
 
     public void Build()
     {

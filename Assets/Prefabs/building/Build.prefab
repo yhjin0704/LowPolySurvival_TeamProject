@@ -118,10 +118,6 @@ GameObject:
   - component: {fileID: 1087983524323709435}
   - component: {fileID: 685413706654948958}
   - component: {fileID: 4061149543466488327}
-  - component: {fileID: 4556642132331933879}
-  - component: {fileID: 5364447855827854532}
-  - component: {fileID: 7060447822928978669}
-  - component: {fileID: -1656412613947787943}
   m_Layer: 0
   m_Name: Build
   m_TagString: Untagged
@@ -217,70 +213,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4556642132331933879
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4890344389280460751}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9baddcbce8144543b78cb488e36049e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  buildingPrefab: {fileID: 1667259951044660279, guid: 9aefb3774b4ee4548a158df4c06eb1cc, type: 3}
-  buildingPlacementPoint: {fileID: 6360934078282593790, guid: 753179708cec5034bae7c8caa356f36e, type: 3}
-  resourceManager: {fileID: 0}
-  requiredWood: 10
-  requiredRock: 10
-  uiinventory: {fileID: 0}
---- !u!114 &5364447855827854532
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4890344389280460751}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84b60321582c3ef49b0c21dc6e9e4244, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &7060447822928978669
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4890344389280460751}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 924ef129fd3a5e9438d512d7ebd59787, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wood: 0
-  rock: 0
---- !u!114 &-1656412613947787943
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4890344389280460751}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab60dba7e6aa99c4ba23029472bf9aea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  resourceManager: {fileID: -3063619175807485125, guid: 753179708cec5034bae7c8caa356f36e, type: 3}
-  buildingPrefab: {fileID: 1667259951044660279, guid: 9aefb3774b4ee4548a158df4c06eb1cc, type: 3}
-  targetlayer:
-    serializedVersion: 2
-    m_Bits: 0
-  buildingSystem: {fileID: 4556642132331933879}
 --- !u!1001 &6099169013611869756
 PrefabInstance:
   m_ObjectHideFlags: 0
