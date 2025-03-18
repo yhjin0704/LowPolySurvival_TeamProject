@@ -386,12 +386,13 @@ public class PlayerController : MonoBehaviour
     public void Die()
     {
         animator.SetTrigger("Death");
-        //ToggleCursor();
+        ToggleCursor();
         isDIe = true;
     }
 
     public void DieEnd()
     {
+        GameManager.instance.endPanel.SetActive(true);
         Time.timeScale = 0;
     }
 

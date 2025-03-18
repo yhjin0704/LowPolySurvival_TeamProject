@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -46,6 +47,7 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
+        bgm.loop = true;
         bgm.Play();
     }
 

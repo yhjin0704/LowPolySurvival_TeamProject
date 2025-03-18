@@ -7,7 +7,9 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private static GameManager instance;
+    public static GameManager instance;
+
+    public GameObject endPanel;
 
     void Awake()
     {
@@ -25,7 +27,6 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Time.timeScale = 1f;
         AddComponentToTagObject<Tree>("Tree");
         AddComponentToTagObject<Rock>("BreakableRock");
     }
