@@ -1,33 +1,11 @@
+using DropResource;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public enum EAIState
+public class AttackAnimal : Animal
 {
-    Idle,
-    Wandering,
-    Attacking
-}
-
-public class AttackAnimal : MonoBehaviour
-{
-    [Header("Stats")]
-    public int health;
-    public float walkSpeed;
-    public float runSpeed;
-    public ItemData[] dropOnDepth;
-
-    [Header("AI")]
-    private NavMeshAgent agent;
-    public float detectDistance; // 목표 지점까지의 최소 거리
-    private EAIState aiState;
-
-    [Header("Wandering")]
-    public float minWanderDistance;
-    public float maxWanderDistance;
-    public float minWanderWaitTime;
-    public float maxWanderWaitTime;
 
     [Header("Combat")]
     public int damage;
@@ -35,30 +13,14 @@ public class AttackAnimal : MonoBehaviour
     private float lastAttackTime;
     public float attackDistance;
 
-    private float playerDistance;
-
-    public float fieldIfView = 120f;
-
-    private Animator animator;
-    private SkinnedMeshRenderer[] meshRenderers;
-
-    void Awake()
+    protected override void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
-        animator = GetComponent<Animator>();
-        meshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
+        base.Start();
     }
 
-    private void Start()
+    protected override void Update()
     {
-        SetState(EAIState.Wandering);
-    }
-
-    void Update()
-    {
-        playerDistance = Vector3.Distance(transform.position, PlayerManager.Instance.Player.transform.position);
-
-        animator.SetBool("Moving", aiState != EAIState.Idle);
+        base.Update();
 
         switch (aiState)
         {
@@ -72,7 +34,7 @@ public class AttackAnimal : MonoBehaviour
         }
     }
 
-    public void SetState(EAIState state)
+    public override void SetState(EAIState state)
     {
         aiState = state;
 
@@ -95,43 +57,14 @@ public class AttackAnimal : MonoBehaviour
         animator.speed = agent.speed / walkSpeed;
     }
 
-    void PassiveUpdate()
+    protected override void PassiveUpdate()
     {
-        if (aiState == EAIState.Wandering && agent.remainingDistance < 0.1f)
-        {
-            SetState(EAIState.Idle);
-            Invoke("WanderToNewLocation", Random.Range(minWanderWaitTime, maxWanderWaitTime));
-        }
+        base.PassiveUpdate();
 
         if (playerDistance < detectDistance)
         {
             SetState(EAIState.Attacking);
         }
-    }
-
-    void WanderToNewLocation()
-    {
-        if (aiState != EAIState.Idle) return;
-
-        SetState(EAIState.Wandering);
-        agent.SetDestination(GetWanderLocation());
-    }
-
-    Vector3 GetWanderLocation()
-    {
-        NavMeshHit hit;
-
-        NavMesh.SamplePosition(transform.position + (Random.onUnitSphere * Random.Range(minWanderDistance, maxWanderDistance)), out hit, maxWanderDistance, NavMesh.AllAreas);
-
-        int i = 0;
-        while (Vector3.Distance(transform.position, hit.position) < detectDistance)
-        {
-            NavMesh.SamplePosition(transform.position + (Random.onUnitSphere * Random.Range(minWanderDistance, maxWanderDistance)), out hit, maxWanderDistance, NavMesh.AllAreas);
-            i++;
-            if (i == 30) break;
-        }
-
-        return hit.position;
     }
 
     void AttackingUpdate()
@@ -173,47 +106,4 @@ public class AttackAnimal : MonoBehaviour
             }
         }
     }
-
-    bool IsPlayerInFieldOfView()
-    {
-        Vector3 directionToPlayer = PlayerManager.Instance.Player.transform.position - transform.position;
-        float angle = Vector3.Angle(transform.forward, directionToPlayer);
-        return angle < fieldIfView / 2;
-    }
-
-    public void TakeDamage(int damage)
-    {
-        health -= damage;
-        if (health < 0)
-        {
-            Die();
-        }
-
-        StartCoroutine(DamageFlash());
-    }
-
-    void Die()
-    {
-        for (int i = 0; i < dropOnDepth.Length; i++)
-        {
-            Instantiate(dropOnDepth[i].dropPrefab, transform.position + Vector3.up * 2, Quaternion.identity);
-        }
-        Destroy(gameObject);
-    }
-
-    IEnumerator DamageFlash()
-    {
-        for (int i = 0; i < meshRenderers.Length; i++)
-        {
-            meshRenderers[i].material.color = new Color(1f, 0.6f, 0.6f);
-        }
-
-        yield return new WaitForSeconds(0.1f);
-
-        for (int i = 0; i < meshRenderers.Length; i++)
-        {
-            meshRenderers[i].material.color = Color.white;
-        }
-    }
-
 }
