@@ -8,6 +8,7 @@ using UnityEditor.Animations;
 using DropResource;
 using System.Linq;
 using Unity.VisualScripting;
+using System.Net.NetworkInformation;
 
 
 public class PlayerController : MonoBehaviour
@@ -19,10 +20,12 @@ public class PlayerController : MonoBehaviour
     ColdState coldState;
     HotState hotState;
     NormalState normalState;
+    PlayerCupEquip cupState;
     private PlayerCondition condition;
 
     private GameObject equipSword;
     private GameObject equipAxe;
+    private GameObject equipCup;
     private List<Transform> equipPos;
 
     [Header("TemparatureDamage")]
@@ -88,11 +91,14 @@ public class PlayerController : MonoBehaviour
         //Debug.Log(equipPos[0].name);
         equipSword = GameObject.Find("EquipPos").transform.Find("Equip_Sword").gameObject;
         equipAxe = GameObject.Find("EquipPos").transform.Find("Equip_Axe").gameObject;
+        equipCup = GameObject.Find("EquipPos").transform.Find("Equip_Cup").gameObject;
         equipPos.Add(equipSword.transform);
         equipPos.Add(equipAxe.transform);
+        equipPos.Add(equipCup.transform);
 
         punchState = new PlayerPunch();
         equipState = new PlayerAttackEquip();
+        cupState = new PlayerCupEquip();
         coldState = new ColdState();
         hotState = new HotState();
         normalState = new NormalState();
@@ -357,6 +363,12 @@ public class PlayerController : MonoBehaviour
         playerState.Change(data);
     }
 
+    public void EquipCupState(ItemData data)
+    {
+        playerState.setState(cupState);
+        playerState.Change(data);
+    }
+
     public void EquipAttack(ItemData data)
     {
         switch (data.ID)
@@ -377,6 +389,22 @@ public class PlayerController : MonoBehaviour
                     equipAxe.SetActive(true);
                 }
                 break;
+            case 102:
+                EquipCupState(data);
+                if (isEquip == false)
+                {
+                    isEquip = true;
+                    equipCup.SetActive(true);
+                }
+                break;
+        }
+    }
+
+    public void WaterInteraction()
+    {
+        if (playerState.ReturnState() == cupState)
+        {
+            condition.Drink(5f);
         }
     }
 

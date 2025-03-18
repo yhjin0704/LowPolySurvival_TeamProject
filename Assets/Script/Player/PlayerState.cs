@@ -52,4 +52,9 @@ public class PlayerState
     {
         temperartureState.ChangeTemperarture();
     }
+
+    public PlayerEquipState ReturnState()
+    {
+        return this.state;
+    }
 }

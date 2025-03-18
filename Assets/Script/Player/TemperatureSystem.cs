@@ -75,7 +75,7 @@ public class TemperatureSystem : MonoBehaviour
         else
         {
             //damageTimer = 0f;
-            //playerController.ChangeNormalState();
+            playerController.ChangeNormalState();
         }
     }
 }
