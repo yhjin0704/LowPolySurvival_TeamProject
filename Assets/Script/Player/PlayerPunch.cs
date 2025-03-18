@@ -8,7 +8,6 @@ public class PlayerPunch : PlayerEquipState
     private float punchStamina = 10f;
     public void ChangeController()
     {
-        PlayerManager.Instance.Player.controller.DisableAllEquipItem();
         PlayerManager.Instance.Player.controller.ChangePunchAnimator();
         PlayerManager.Instance.Player.controller.SetDamage(punchDamage);
         PlayerManager.Instance.Player.controller.SetAttackStamina(punchStamina);

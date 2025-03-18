@@ -9,7 +9,7 @@ public class PlayerSword : PlayerEquipState
     private float swordStamina = 20f;
     public void ChangeController()
     {
-        PlayerManager.Instance.Player.controller.DisableAllEquipItem();
+        
         PlayerManager.Instance.Player.controller.ChangeSwordAnimator();
         PlayerManager.Instance.Player.controller.SetDamage(swordDamage);
         PlayerManager.Instance.Player.controller.SetAttackStamina(swordStamina);
