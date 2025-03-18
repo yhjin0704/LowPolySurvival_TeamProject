@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 501295248461903503}
   - component: {fileID: 501295248461903500}
   - component: {fileID: 4134586633405174354}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4917,10 +4917,10 @@ GameObject:
   - component: {fileID: 501295248943452728}
   - component: {fileID: 501295248944255512}
   - component: {fileID: 501295248945221848}
-  - component: {fileID: -4235116373199053782}
+  - component: {fileID: -8731479967769885855}
   - component: {fileID: 6261845391821856929}
   - component: {fileID: -1923734482826748363}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CampFire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4993,8 +4993,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &-4235116373199053782
-MeshCollider:
+--- !u!65 &-8731479967769885855
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -5011,10 +5011,9 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 76e0ad8bbe5fca64f90e1cb33a04e75e, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 1.0856155, y: 0.4652093, z: 0.86354613}
+  m_Center: {x: 0.06976879, y: 0.2259494, z: 0.016719982}
 --- !u!54 &6261845391821856929
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5041,7 +5040,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &-1923734482826748363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5054,4 +5053,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2594edfc743df74eae572bf50086029, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 0}
+  data: {fileID: 11400000, guid: 22f7c78e6db9228448e53bcbee0dc185, type: 2}
