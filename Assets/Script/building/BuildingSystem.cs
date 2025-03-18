@@ -45,4 +45,27 @@ public class BuildingSystem : MonoBehaviour
             Debug.LogWarning("�ڿ��� �����Ͽ� �ǹ��� ��ġ�� �� �����ϴ�. (�ʿ�: Wood 10, Rock 10)");
         }
     }
+
+    // ��ġ ������ ��ġ���� Ȯ���ϴ� �Լ�
+    public bool IsValidPlacement(Vector3 position)
+    {
+        RaycastHit hit;
+        // Raycast�� �Ʒ��� ���
+        if (Physics.Raycast(position, Vector3.down, out hit, 5f))
+        {
+            // 'Ground' ���̾����� Ȯ��
+            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
+            {
+                return true; // ��ġ ����
+            }
+        }
+
+        return false; // ��ġ�� �� ���� ��
+    }
+
+    public void UpdateBuildingPlacementPosition()
+    {
+        // �÷��̾� �� 5 ���� ��ġ�� ��ġ�� ��ġ ������Ʈ
+        buildingPlacementPoint.position = player.transform.position + player.transform.forward * 5f;
+    }
 }
