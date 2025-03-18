@@ -27,12 +27,14 @@ public class PlayerState
 
     public void setState(PlayerEquipState state)
     {
-        this.state = state;
+        if(state != this.state)
+            this.state = state;
     }
 
     public void SetTemperartureState(PlayerTemperartureState TemperartureState)
     {
-        this.temperartureState = TemperartureState;
+        if(temperartureState != TemperartureState)
+            this.temperartureState = TemperartureState;
     }
 
     public void Change(ItemData data) 

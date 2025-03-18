@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rigidbody;
     PlayerPunch punchState;
     PlayerAttackEquip equipState;
-    PlayerState playerState;
+    public PlayerState playerState;
     ColdState coldState;
     HotState hotState;
     NormalState normalState;
@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour
         equipSword = GameObject.Find("EquipPos").transform.Find("Equip_Sword").gameObject;
         //equipAxe = GameObject.Find("EquipPos").transform.Find("Equip_Axe").gameObject;
         equipPos.Add(equipSword.transform);
-        equipPos.Add(equipAxe.transform);
+        //equipPos.Add(equipAxe.transform);
 
         punchState = new PlayerPunch();
         equipState = new PlayerAttackEquip();
@@ -287,7 +287,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log(hit.collider.name);
             if (hit.collider.TryGetComponent(out IBreakableObject breakbleObject))
             {
-                Debug.Log("��ġ��ġ");
+                Debug.Log("펀치펀치");
                 breakbleObject.TakeDamage(nowDamage);
             }
         }
@@ -385,18 +385,33 @@ public class PlayerController : MonoBehaviour
         return transform.position.y < -1.6f;
     }
 
+    public void ChangeColdState()
+    {
+        playerState.SetTemperartureState(coldState);
+        playerState.TempChange();
+    }
+    public void ChangeNormalState()
+    {
+        playerState.SetTemperartureState(normalState);
+        playerState.TempChange();
+    }
+
+    public void ChangeHotState()
+    {
+        playerState.SetTemperartureState(hotState);
+        playerState.TempChange();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("snow"))
         {
-            playerState.SetTemperartureState(coldState);
-            playerState.TempChange();
+            ChangeColdState();
         }
 
         else if(other.gameObject.layer == LayerMask.NameToLayer("desert"))
         {
-            playerState.SetTemperartureState(hotState);
-            playerState.TempChange();
+            ChangeHotState();
         }
     }
 
@@ -404,14 +419,12 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("snow"))
         {
-            playerState.SetTemperartureState(normalState);
-            playerState.TempChange();
+            ChangeNormalState();
         }
 
         else if (other.gameObject.layer == LayerMask.NameToLayer("desert"))
         {
-            playerState.SetTemperartureState(normalState);
-            playerState.TempChange();
+            ChangeNormalState();
         }
     }
 
