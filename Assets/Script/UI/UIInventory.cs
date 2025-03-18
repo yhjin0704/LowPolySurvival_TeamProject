@@ -212,6 +212,8 @@ public class UIInventory : MonoBehaviour
 
     public void OnDropButton()
     {
+        if (curEquipIndex == selectedItemIndex)
+            UnEquip(curEquipIndex);
         ThrowItem(selectedItem.item);
         RemoveSelctedItem();
     }
@@ -248,7 +250,8 @@ public class UIInventory : MonoBehaviour
         }
 
         slots[selectedItemIndex].equipped = true;
-        controller.EquipSword();
+        controller.EquipAttack(selectedItem.item);
+        Debug.Log(selectedItem.item.ID);
         curEquipIndex = selectedItemIndex;
         string a = slots[selectedItemIndex].item.displayName;
         //PlayerManager.Instance.Player.equip.EquipNew(selectedItem);

@@ -27,6 +27,7 @@ public class ItemDataConsumable
 public class ItemData : ScriptableObject
 {
     [Header("Info")]
+    public int ID;
     public string displayName;
     public string description;
     public ItemType type;
@@ -42,6 +43,7 @@ public class ItemData : ScriptableObject
 
     [Header("Equip")]
     public float damage;
+    public float useStamina;
     public GameObject equipPrefab;
 
     [Header("Duration")]

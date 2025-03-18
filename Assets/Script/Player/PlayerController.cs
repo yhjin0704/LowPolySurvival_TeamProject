@@ -71,6 +71,7 @@ public class PlayerController : MonoBehaviour
     {
         equipPos = GameObject.Find("EquipPos").GetComponentsInChildren<Transform>().Where(t => t != transform).ToList();
         equipPos.RemoveAt(0);
+        //Debug.Log(equipPos[0].name);
         equipSword = GameObject.Find("EquipPos").transform.Find("Equip_Sword").gameObject;
         equipPos.Add(equipSword.transform);
         Debug.Log(equipSword.name);
@@ -89,14 +90,6 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         IsGrounded();
-
-        // 검 장착 테스트용
-        if (Input.GetKeyDown(KeyCode.F2))
-        {
-            playerState.setState(swordState);
-            playerState.Change();
-            Debug.Log("F2");
-        }
     }
     private void FixedUpdate()
     {
@@ -285,6 +278,20 @@ public class PlayerController : MonoBehaviour
         animator.runtimeAnimatorController = defaultController;
     }
 
+    public void ChangeAnimatior(int id)
+    {
+        switch (id)
+        { 
+            case 100:
+                animator.runtimeAnimatorController = swordController;
+                break;
+
+            default:
+                animator.runtimeAnimatorController = defaultController;
+                break;
+        }
+    }
+
     public void SetDamage(float damage)
     {
         nowDamage = damage;
@@ -306,6 +313,7 @@ public class PlayerController : MonoBehaviour
     public void UnEquip()
     {
         DisableAllEquipItem();
+        isEquip = false;
         playerState.setState(punchState);
         playerState.Change();
     }
@@ -319,9 +327,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void EquipSword()
+    public void EquipSword(ItemData data)
     {
         playerState.setState(swordState);
-        playerState.Change();
+        playerState.Change(data);
+    }
+
+    public void EquipAttack(ItemData data)
+    {
+        switch (data.ID)
+        {
+            case 100:
+                EquipSword(data);
+                break;
+        }
     }
 }

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a094b6b49173fe245ac3973789164297, type: 3}
   m_Name: Wood
   m_EditorClassIdentifier: 
+  ID: 5
   displayName: "\uD1B5\uB098\uBB34"
   description: "\uAD75\uC740 \uD1B5\uB098\uBB34. \uC7AC\uB8CC\uB85C \uC0AC\uC6A9\uD560
     \uC218 \uC788\uC744 \uAC83 \uAC19\uB2E4."

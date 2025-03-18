@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+public enum AttackEquip
+{
+    Punch,
+    Sword,
+    Axe
+}
+
 public class Equipment : MonoBehaviour
 {
     public Equip curEquip;
@@ -19,16 +26,7 @@ public class Equipment : MonoBehaviour
     {         
         if (context.phase == InputActionPhase.Performed && controller.canLook)
         {
-            if (curEquip!=null)
-            {
-                curEquip.OnAttackInput();
-            }
-            else
-            {
-                //ÆÝÄ¡ÆÝÄ¡
-                controller.OnAttackInput();
-            }
-            
+            controller.OnAttackInput();   
         }
     }
 }
