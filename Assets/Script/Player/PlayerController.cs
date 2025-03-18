@@ -17,9 +17,9 @@ public class PlayerController : MonoBehaviour
     PlayerPunch punchState;
     PlayerAttackEquip equipState;
     public PlayerState playerState;
-    ColdState coldState;
-    HotState hotState;
-    NormalState normalState;
+    public ColdState coldState;
+    public HotState hotState;
+    public NormalState normalState;
     PlayerCupEquip cupState;
     private PlayerCondition condition;
 
@@ -77,6 +77,7 @@ public class PlayerController : MonoBehaviour
     public bool canLook = true;
     public bool isDash = false;
     public Action inventory;
+    private bool isDIe = false;
 
     private void Awake()
     {
@@ -121,20 +122,22 @@ public class PlayerController : MonoBehaviour
             condition.TakeDamage(waterDamage);
         }
 
-        if (isTempDamaged)
+        if (playerState.GetTempState() == coldState || playerState.GetTempState() == hotState)
         {
             condition.TakeDamage(tempDamage);
+            Debug.Log("온도 데미지 받는중");
         }
     }
     private void FixedUpdate()
     {
-        Move();
-        if (isDash)
+        if(!isDIe)
+            Move();
+        if (isDash && !isDIe)
         {
             condition.ConsumeStamina(dashStamina);
         }
 
-        if (condition.IsStaminaZero() || Approximately(rigidbody.velocity, Vector3.zero, 0.1f))
+        if ((condition.IsStaminaZero() || Approximately(rigidbody.velocity, Vector3.zero, 0.1f)) && !isDIe)
         {
             ToggleDash();
         }
@@ -142,7 +145,7 @@ public class PlayerController : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (canLook)
+        if (canLook && !isDIe)
         {
             CameraLook();
         }
@@ -411,6 +414,13 @@ public class PlayerController : MonoBehaviour
     public void Die()
     {
         animator.SetTrigger("Death");
+        //ToggleCursor();
+        isDIe = true;
+    }
+
+    public void DieEnd()
+    {
+        Time.timeScale = 0;
     }
 
     bool UnderWater()
@@ -440,6 +450,9 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("snow"))
         {
             ChangeColdState();
+            Debug.Log("스노우 진입");
+            Debug.Log(isTempDamaged);
+            Debug.Log(playerState.GetTempState());
         }
 
         else if(other.gameObject.layer == LayerMask.NameToLayer("desert"))

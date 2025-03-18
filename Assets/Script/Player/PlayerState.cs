@@ -57,4 +57,9 @@ public class PlayerState
     {
         return this.state;
     }
+
+    public PlayerTemperartureState GetTempState()
+    {
+        return this.temperartureState;
+    }
 }
