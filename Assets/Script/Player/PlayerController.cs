@@ -77,8 +77,6 @@ public class PlayerController : MonoBehaviour
         equipAxe = GameObject.Find("EquipPos").transform.Find("Equip_Axe").gameObject;
         equipPos.Add(equipSword.transform);
         equipPos.Add(equipAxe.transform);
-        Debug.Log(equipSword.name);
-        Debug.Log(equipAxe.name);
 
         punchState = new PlayerPunch();
         equipState = new PlayerAttackEquip();
