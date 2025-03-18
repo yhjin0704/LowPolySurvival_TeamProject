@@ -11,6 +11,7 @@ public class Tree : MonoBehaviour, IBreakableObject, IRespawnable
     public float respawnTime = 5f;
 
     public DropItem[] dropItems;
+    public GameObject fruitPrefab;
 
     private Collider collider_;
     private Renderer[] renderer_;
@@ -41,6 +42,11 @@ public class Tree : MonoBehaviour, IBreakableObject, IRespawnable
             dropItems[1].maxDropCount = 2;
         }
 
+        if (fruitPrefab == null)
+        {
+            fruitPrefab = Resources.Load<GameObject>("Prefabs/Food/Apple");
+        }
+
         stumpPrefab = Resources.Load<GameObject>("Prefabs/Tree/TreeStump");
     }
 
@@ -50,6 +56,16 @@ public class Tree : MonoBehaviour, IBreakableObject, IRespawnable
             return;
 
         currentHp -= _damage;
+        int fruitDropProbability = Random.Range(0, 5);
+        if (fruitDropProbability < 2)
+        {
+            Vector3 dropPosition = new Vector3(
+                        transform.position.x + Random.Range(-1f, 1f),
+                        transform.position.y + 1,
+                        transform.position.z + Random.Range(-1f, 1f)
+                    );
+            Instantiate(fruitPrefab, dropPosition, Quaternion.identity);
+        }
 
         if (currentHp <= 0)
         {
