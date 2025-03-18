@@ -36,8 +36,6 @@ public class PlayerCondition : MonoBehaviour
             return;
         }
 
-
-        
         hunger.Subtract(hunger.passiveValue * Time.deltaTime);
         thirst.Subtract(thirst.passiveValue * Time.deltaTime);
         stamina.Add(stamina.passiveValue * Time.deltaTime);
@@ -66,10 +64,6 @@ public class PlayerCondition : MonoBehaviour
         {
             Die();
         }
-
- 
-
-
     }
 
     public void TakeDamage(float amount)
