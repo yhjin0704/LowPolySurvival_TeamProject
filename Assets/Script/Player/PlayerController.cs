@@ -21,10 +21,15 @@ public class PlayerController : MonoBehaviour
     private GameObject equipAxe;
     private List<Transform> equipPos;
 
+    [Header("UnderWater")]
+    public float waterDamage;
+
+
     [Header("Override Animator")]
     private Animator animator;
     public AnimatorController defaultController;
     public AnimatorOverrideController swordController;
+
 
     [Header("Movement")]
     private Vector2 curMovementInput;
@@ -92,6 +97,11 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         IsGrounded();
+
+        if (UnderWater())
+        {
+            condition.TakeDamage(waterDamage);
+        }
     }
     private void FixedUpdate()
     {
@@ -351,6 +361,11 @@ public class PlayerController : MonoBehaviour
                 }
                 break;
         }
+    }
+
+    bool UnderWater()
+    {
+        return transform.position.y < -1.6f;
     }
 
     public bool Approximately(Vector3 a, Vector3 b, float threshold)
