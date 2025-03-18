@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     private PlayerCondition condition;
 
     private GameObject equipSword;
+    private GameObject equipAxe;
     private List<Transform> equipPos;
 
     [Header("Override Animator")]
@@ -73,8 +74,11 @@ public class PlayerController : MonoBehaviour
         equipPos.RemoveAt(0);
         //Debug.Log(equipPos[0].name);
         equipSword = GameObject.Find("EquipPos").transform.Find("Equip_Sword").gameObject;
+        equipAxe = GameObject.Find("EquipPos").transform.Find("Equip_Axe").gameObject;
         equipPos.Add(equipSword.transform);
+        equipPos.Add(equipAxe.transform);
         Debug.Log(equipSword.name);
+        Debug.Log(equipAxe.name);
 
         punchState = new PlayerPunch();
         swordState = new PlayerSword();
@@ -268,16 +272,6 @@ public class PlayerController : MonoBehaviour
         canLook = !toggle;
     }
 
-    public void ChangeSwordAnimator()
-    {
-        animator.runtimeAnimatorController = swordController;
-    }
-
-    public void ChangePunchAnimator()
-    {
-        animator.runtimeAnimatorController = defaultController;
-    }
-
     public void ChangeAnimatior(int id)
     {
         switch (id)
@@ -285,7 +279,9 @@ public class PlayerController : MonoBehaviour
             case 100:
                 animator.runtimeAnimatorController = swordController;
                 break;
-
+            case 101:
+                animator.runtimeAnimatorController = swordController;
+                break;
             default:
                 animator.runtimeAnimatorController = defaultController;
                 break;
@@ -318,15 +314,6 @@ public class PlayerController : MonoBehaviour
         playerState.Change();
     }
 
-    public void ActiveSword()
-    {
-        if (isEquip == false)
-        {
-            isEquip = true;
-            equipSword.SetActive(true);
-        }
-    }
-
     public void EquipSword(ItemData data)
     {
         playerState.setState(swordState);
@@ -339,6 +326,19 @@ public class PlayerController : MonoBehaviour
         {
             case 100:
                 EquipSword(data);
+                if (isEquip == false)
+                {
+                    isEquip = true;
+                    equipSword.SetActive(true);
+                }
+                break;
+            case 101:
+                EquipSword(data);
+                if (isEquip == false)
+                {
+                    isEquip = true;
+                    equipAxe.SetActive(true);
+                }
                 break;
         }
     }
