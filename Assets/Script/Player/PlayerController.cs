@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour
             condition.ConsumeStamina(dashStamina);
         }
 
-        if (condition.IsStaminaZero())
+        if (condition.IsStaminaZero() || Approximately(rigidbody.velocity, Vector3.zero, 0.1f))
         {
             ToggleDash();
         }
@@ -125,12 +125,12 @@ public class PlayerController : MonoBehaviour
         if (context.phase == InputActionPhase.Performed)
         {
             curMovementInput = context.ReadValue<Vector2>();
-            animator.SetBool("IsWalk", true);
+            
         }
         else if (context.phase == InputActionPhase.Canceled)
         {
             curMovementInput = Vector2.zero;
-            animator.SetBool("IsWalk", false);
+            
         }
     }
 
@@ -157,8 +157,11 @@ public class PlayerController : MonoBehaviour
         if (!isDash && !condition.IsStaminaZero())
         {
             resultSpeed = dashSpeed * moveSpeed;
-            isDash = true;
-            animator.SetBool("IsDash", true);
+            if(!Approximately(rigidbody.velocity, Vector3.zero, 0.1f))
+            {
+                isDash = true;
+                animator.SetBool("IsDash", true);
+            }
         }
         else
         {
@@ -176,6 +179,15 @@ public class PlayerController : MonoBehaviour
         dir.y = rigidbody.velocity.y;
 
         rigidbody.velocity = dir;
+
+        if(!Approximately(rigidbody.velocity, Vector3.zero, 0.1f))
+        {
+            animator.SetBool("IsWalk", true);
+        }
+        else
+        {
+            animator.SetBool("IsWalk", false);
+        }
     }
 
     void CameraLook()
@@ -339,5 +351,11 @@ public class PlayerController : MonoBehaviour
                 }
                 break;
         }
+    }
+
+    public bool Approximately(Vector3 a, Vector3 b, float threshold)
+    {
+        float dist = Vector3.Distance(a, b);
+        return dist <= threshold;
     }
 }
