@@ -284,12 +284,14 @@ public class UICrafting : MonoBehaviour
     /// <returns></returns>
     public bool HasMaterials()
     {
+        //재료를 찾아야 할 레시피를 지정하고
         ItemRecipe recipe = selectedRecipe.ItemRecipe;
-        for (int i = 0; i < recipe.requiredItems.Length; i++)
+        for (int i = 0; i < recipe.requiredItems.Length; i++) //레시피 안에 들어있는 재료 종류만큼 반복문 시작
         {
+            //찾았다는 표시를 하기 위한 불 값과 제작에 필요한 양을 선언하고
             bool Found = false;
             int amountToRemove = recipe.requiredItems[i].amount;
-            for (int j = 0; j < inventory.slots.Length; j++)
+            for (int j = 0; j < inventory.slots.Length; j++) //인벤토리의 슬롯 수만큼 반복문 시작
             {
                 //인벤토리의 자원이 제작 레시피의 재료가 맞는지 확인한 뒤
                 if (inventory.slots[j].item == recipe.requiredItems[i].materials)
