@@ -209,6 +209,18 @@ public class UICrafting : MonoBehaviour
             Debug.Log("제작불가, 아이템이 없습니다.");
         }
     }
+    public void OnBuildButton()
+    {
+        if(HasMaterials())
+        {
+            RemoveMaterials();
+            //제작 메서드
+        }
+        else
+        {
+            Debug.Log("제작불가, 아이템이 없습니다.");
+        }
+    }
 
     /// <summary>
     /// 제작에 쓰인 재료를 차감하는 메서드
