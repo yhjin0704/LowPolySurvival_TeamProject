@@ -19,16 +19,7 @@ public class Equipment : MonoBehaviour
     {         
         if (context.phase == InputActionPhase.Performed && controller.canLook)
         {
-            if (curEquip!=null)
-            {
-                curEquip.OnAttackInput();
-            }
-            else
-            {
-                //ÆÝÄ¡ÆÝÄ¡
-                controller.OnAttackInput();
-            }
-            
+            controller.OnAttackInput();   
         }
     }
 }
