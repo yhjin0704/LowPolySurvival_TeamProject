@@ -216,7 +216,7 @@ MonoBehaviour:
   - dropItemPrefab: {fileID: 3660585142168724344, guid: 8a22d689f4396d24baca85fc9b87f429, type: 3}
     minDropCount: 2
     maxDropCount: 4
-  detectDistance: 3
+  detectDistance: 6
   minWanderDistance: 5
   maxWanderDistance: 15
   minWanderWaitTime: 1

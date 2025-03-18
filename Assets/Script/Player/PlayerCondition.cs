@@ -87,9 +87,19 @@ public class PlayerCondition : MonoBehaviour
         return stamina.GetPercentage() == 0;
     }
 
+    public void HungerValuePlus(float amount)
+    {
+        hunger.plusValue = amount;
+    }
+
+    public void ResetHungerValuePlus()
+    {
+        hunger.plusValue = 0;
+    }
+
     public void ThirstValuePlus(float amount)
     {
-        thirst.plusValue += amount;
+        thirst.plusValue = amount;
     }
 
     public void ResetThirstValuePlus()

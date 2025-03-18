@@ -15,7 +15,7 @@ MonoBehaviour:
   desiredItem: {fileID: 11400000, guid: 8df0e42b9551b7c46831fbfc9c9de6aa, type: 2}
   quantities: 1
   requiredItems:
-  - materials: {fileID: 11400000, guid: 668128d1b9b746044bc64e43fcbc0100, type: 2}
+  - materials: {fileID: 11400000, guid: 1d1ea4da68b0a9a49a62fd6766194754, type: 2}
     amount: 4
-  - materials: {fileID: 11400000, guid: 600d3721ab7fd2f4890248281baf8b42, type: 2}
-    amount: 4
+  - materials: {fileID: 11400000, guid: cea9ec883831a1e47824230ea1286d5a, type: 2}
+    amount: 2

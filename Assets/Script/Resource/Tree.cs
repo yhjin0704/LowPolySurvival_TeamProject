@@ -8,7 +8,7 @@ public class Tree : MonoBehaviour, IBreakableObject, IRespawnable
     public float maxHp = 100f;
     public float currentHp;
 
-    public float respawnTime = 5f;
+    public float respawnTime = 60f;
 
     public DropItem[] dropItems;
     public GameObject fruitPrefab;

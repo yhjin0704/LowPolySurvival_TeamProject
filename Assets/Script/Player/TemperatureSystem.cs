@@ -7,29 +7,22 @@ public class TemperatureSystem : MonoBehaviour
     Player player;
     public PlayerCondition playerCondition;
     public UICondition uiCondition;
-    public DayNightCycle dayNightCycle; 
+    public DayNightCycle dayNightCycle;
 
     Condition temp { get { return uiCondition.temp; } }
 
     [HideInInspector]
     public float currentTemperature = 50f;
 
-    public float dayTemperature = 50f;
-    public float nightTemperature = 25f;
-    public float temperatureChangeSpeed = 2f;
+    float dayTemperature = 50f;
+    float nightTemperature = 25f;
 
     [HideInInspector]
     public float targetTemp;
 
-    public float hotThreshold = 75f;
-    public float coldThreshold = 30f;
-
     bool isNearFire = false;
     bool isColdArea = false;
     bool isHotArea = false;
-
-    
- 
 
     private void Start()
     {
@@ -61,14 +54,27 @@ public class TemperatureSystem : MonoBehaviour
         SetTargetTemp();
 
         // �µ� �ε巴�� ����
-        currentTemperature = Mathf.Lerp(currentTemperature, targetTemp, Time.deltaTime * temperatureChangeSpeed);
+        currentTemperature = Mathf.Lerp(currentTemperature, targetTemp, Time.deltaTime * 0.5f);
 
         Debug.Log("Current Temperature: " + currentTemperature);
 
-        if (currentTemperature <= 30f || currentTemperature >= 75f)
+        if (currentTemperature <= 30f)
         {
             playerCondition.TakeDamage(playerCondition.healthDecay * Time.deltaTime);
+            playerCondition.HungerValuePlus(5f);
         }
+        else if (currentTemperature >= 75f)
+        {
+            playerCondition.TakeDamage(playerCondition.healthDecay * Time.deltaTime);
+            playerCondition.ThirstValuePlus(5f);
+        }
+        else
+        {
+            playerCondition.ResetHungerValuePlus();
+            playerCondition.ResetThirstValuePlus();
+        }
+
+            temp.curValue = currentTemperature;
     }
 
     private void OnTriggerEnter(Collider other)
