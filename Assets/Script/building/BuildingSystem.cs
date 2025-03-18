@@ -14,6 +14,11 @@ public class BuildingSystem : MonoBehaviour
     // 건물 데이터 리스트 (프리팹 + 자원 요구 사항)
     public List<BuildingData> buildingDataList;
 
+    private void Start()
+    {
+        player = PlayerManager.Instance.Player.gameObject;
+    }
+
     void Update()
     {
         // 건물 선택
@@ -50,7 +55,7 @@ public class BuildingSystem : MonoBehaviour
             if (resourceManager.CanBuild(selectedBuilding.wood, selectedBuilding.rock, selectedBuilding.branch))
             {
                 // 건물 배치
-                Instantiate(selectedBuilding.prefab, placementPosition, Quaternion.identity);
+                Instantiate(selectedBuilding.prefab, placementPosition, player.transform.rotation);
 
                 // 자원 차감
                 resourceManager.UseResources(selectedBuilding.wood, selectedBuilding.rock, selectedBuilding.branch);

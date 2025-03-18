@@ -86,7 +86,7 @@ public class PlayerCondition : MonoBehaviour
 
     public void Die()
     {
-        PlayerManager.Instance.Player.controller.Die();
+        //PlayerManager.Instance.Player.controller.Die();
     }
 
 }
