@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a094b6b49173fe245ac3973789164297, type: 3}
-  m_Name: Nitre
+  m_Name: Ironstone
   m_EditorClassIdentifier: 
   ID: 3
-  displayName: "\uCD08\uC11D"
-  description: "\uC7AC\uB8CC\uB85C \uC0AC\uC6A9\uD560 \uC218 \uC788\uC744 \uAC83
-    \uAC19\uB2E4."
+  displayName: "\uCCA0\uAD11\uC11D"
+  description: "\uC790\uC5F0 \uC0C1\uD0DC\uC758 \uCCA0\uAD11\uC11D. \uC7AC\uB8CC\uB85C
+    \uC0AC\uC6A9\uD560 \uC218 \uC788\uC744 \uAC83 \uAC19\uB2E4."
   type: 0
   icon: {fileID: 0}
   dropPrefab: {fileID: 0}

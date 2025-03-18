@@ -767,6 +767,7 @@ MonoBehaviour:
   minWanderWaitTime: 1
   maxWanderWaitTime: 2
   fieldIfView: 120
+  runAwayDistance: 10
 --- !u!1 &6474063176213210765
 GameObject:
   m_ObjectHideFlags: 0

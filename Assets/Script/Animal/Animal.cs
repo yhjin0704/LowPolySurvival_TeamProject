@@ -12,10 +12,10 @@ public enum EAIState
     Running
 }
 
-public class Animal : MonoBehaviour
+public class Animal : MonoBehaviour, IBreakableObject
 {
     [Header("Stats")]
-    public int health;
+    public float health;
     public float walkSpeed;
     public float runSpeed;
     public DropItem[] dropOnDepth;
@@ -111,18 +111,25 @@ public class Animal : MonoBehaviour
         return hit.position;
     }
 
-    public void TakeDamage(int _damage)
+    protected bool IsPlayerInFieldOfView()
+    {
+        Vector3 directionToPlayer = PlayerManager.Instance.Player.transform.position - transform.position;
+        float angle = Vector3.Angle(transform.forward, directionToPlayer);
+        return angle < fieldIfView / 2;
+    }
+
+    public virtual void TakeDamage(float _damage)
     {
         health -= _damage;
         if (health < 0)
         {
-            Die();
+            Break();
         }
 
         StartCoroutine(CDamageFlash());
     }
 
-    protected void Die()
+    public void Break()
     {
         for (int i = 0; i < dropOnDepth.Length; i++)
         {

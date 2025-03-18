@@ -17,5 +17,10 @@ public class IfVeiwRunAnimal : RunAwayAnimal
     protected override void PassiveUpdate()
     {
         base.PassiveUpdate();
+
+        if (playerDistance < detectDistance && IsPlayerInFieldOfView())
+        {
+            SetState(EAIState.Running);
+        }
     }
 }

@@ -18,4 +18,17 @@ public class IfHitRunAnimal : RunAwayAnimal
     {
         base.PassiveUpdate();
     }
+
+    public override void TakeDamage(float _damage)
+    {
+        health -= _damage;
+        if (health < 0)
+        {
+            Break();
+        }
+
+        StartCoroutine(CDamageFlash());
+
+        SetState(EAIState.Running);
+    }
 }

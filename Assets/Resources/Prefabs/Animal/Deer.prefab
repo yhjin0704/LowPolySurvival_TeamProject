@@ -211,17 +211,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 150
   walkSpeed: 3
-  runSpeed: 6
+  runSpeed: 10
   dropOnDepth:
   - dropItemPrefab: {fileID: 3660585142168724344, guid: 8a22d689f4396d24baca85fc9b87f429, type: 3}
     minDropCount: 2
     maxDropCount: 4
-  detectDistance: 5
+  detectDistance: 3
   minWanderDistance: 5
   maxWanderDistance: 15
   minWanderWaitTime: 1
   maxWanderWaitTime: 2
   fieldIfView: 120
+  runAwayDistance: 20
 --- !u!1 &700603789697747957
 GameObject:
   m_ObjectHideFlags: 0

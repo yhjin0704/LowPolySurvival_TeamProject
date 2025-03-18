@@ -106,11 +106,4 @@ public class AttackAnimal : Animal
             }
         }
     }
-
-    bool IsPlayerInFieldOfView()
-    {
-        Vector3 directionToPlayer = PlayerManager.Instance.Player.transform.position - transform.position;
-        float angle = Vector3.Angle(transform.forward, directionToPlayer);
-        return angle < fieldIfView / 2;
-    }
 }
