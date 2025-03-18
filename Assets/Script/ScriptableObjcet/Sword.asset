@@ -22,5 +22,6 @@ MonoBehaviour:
   maxStackAmount: 0
   consumables: []
   damage: 50
+  useStamina: 10
   equipPrefab: {fileID: 1078549599717391796, guid: 8d41122dcd6d14d4d833cd2d7f640be9, type: 3}
   duration: 0

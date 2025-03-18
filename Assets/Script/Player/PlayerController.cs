@@ -90,14 +90,6 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         IsGrounded();
-
-        // 검 장착 테스트용
-        if (Input.GetKeyDown(KeyCode.F2))
-        {
-            playerState.setState(swordState);
-            playerState.Change();
-            Debug.Log("F2");
-        }
     }
     private void FixedUpdate()
     {
@@ -286,6 +278,20 @@ public class PlayerController : MonoBehaviour
         animator.runtimeAnimatorController = defaultController;
     }
 
+    public void ChangeAnimatior(int id)
+    {
+        switch (id)
+        { 
+            case 100:
+                animator.runtimeAnimatorController = swordController;
+                break;
+
+            default:
+                animator.runtimeAnimatorController = defaultController;
+                break;
+        }
+    }
+
     public void SetDamage(float damage)
     {
         nowDamage = damage;
@@ -321,18 +327,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void EquipSword()
+    public void EquipSword(ItemData data)
     {
         playerState.setState(swordState);
-        playerState.Change();
+        playerState.Change(data);
     }
 
-    public void EquipAttack(int ID)
+    public void EquipAttack(ItemData data)
     {
-        switch (ID)
+        switch (data.ID)
         {
             case 100:
-                EquipSword();
+                EquipSword(data);
                 break;
         }
     }

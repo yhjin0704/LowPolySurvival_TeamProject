@@ -250,7 +250,7 @@ public class UIInventory : MonoBehaviour
         }
 
         slots[selectedItemIndex].equipped = true;
-        controller.EquipAttack(selectedItem.item.ID);
+        controller.EquipAttack(selectedItem.item);
         Debug.Log(selectedItem.item.ID);
         curEquipIndex = selectedItemIndex;
         string a = slots[selectedItemIndex].item.displayName;
