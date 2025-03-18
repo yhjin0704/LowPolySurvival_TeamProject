@@ -167,15 +167,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void OnJumpInput(InputAction.CallbackContext context)
-    {
-        if (context.phase == InputActionPhase.Started && IsGrounded())
-        {
-            animator.SetTrigger("Jump");
-            rigidbody.AddForce(Vector2.up * (jumpPower), ForceMode.Impulse);
-            condition.ConsumeStamina(jumpStamina);
-        }
-    }
+    //public void OnJumpInput(InputAction.CallbackContext context)
+    //{
+    //    if (context.phase == InputActionPhase.Started && IsGrounded())
+    //    {
+    //        animator.SetTrigger("Jump");
+    //        rigidbody.AddForce(Vector2.up * (jumpPower), ForceMode.Impulse);
+    //        condition.ConsumeStamina(jumpStamina);
+    //    }
+    //}
 
     public void OnDashInput(InputAction.CallbackContext context)
     {
