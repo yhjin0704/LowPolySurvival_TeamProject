@@ -6,15 +6,16 @@ public class ReSourceManager : MonoBehaviour
 {
     public int wood = 0;
     public int rock = 0;
-    public int brunch = 0;
+    public int branch = 0;
 
     void Start()
     {
+        Debug.Log("ReSourceManager Start 실행됨"); // 확인용 로그
         AddWood(20);
         AddRock(20);
-        Debug.Log($"[초기 자원] wood: {wood}, rock: {rock}");
+        AddBranch(10);
+        Debug.Log($"[초기 자원] wood: {wood}, rock: {rock}, branch: {branch}");
     }
-
 
 
         public void AddWood(int amount)
@@ -27,23 +28,23 @@ public class ReSourceManager : MonoBehaviour
             rock += amount;
         }
 
-        public void AddBrunch(int amount) // brunch 자원 추가
+        public void AddBranch(int amount)
         {
-            brunch += amount;
+            branch += amount;
         }
 
-        public bool CanBuild(int requiredWood, int requiredRock, int requiredBrunch) // brunch 추가
+        public bool CanBuild(int requiredWood, int requiredRock, int requiredBranch)
         {
-            return wood >= requiredWood && rock >= requiredRock && brunch >= requiredBrunch;
+            return wood >= requiredWood && rock >= requiredRock && branch >= requiredBranch;
         }
 
-        public void UseResources(int requiredWood, int requiredRock, int requiredBrunch) // brunch 추가
+        public void UseResources(int requiredWood, int requiredRock, int requiredBranch) 
         {
-            if (CanBuild(requiredWood, requiredRock, requiredBrunch))
+            if (CanBuild(requiredWood, requiredRock, requiredBranch))
             {
                 wood -= requiredWood;
                 rock -= requiredRock;
-                brunch -= requiredBrunch;
+                branch -= requiredBranch;
             }
         }
     }

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 2849687385816032412}
   - component: {fileID: 4301207060231571488}
   - component: {fileID: 1564593345129666165}
-  - component: {fileID: -6250269838096411925}
   m_Layer: 0
   m_Name: tent_red
   m_TagString: Untagged
@@ -84,22 +83,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-6250269838096411925
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 463778061750964780}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9baddcbce8144543b78cb488e36049e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  buildingPrefab: {fileID: 0}
-  buildingPlacementPoint: {fileID: 0}
-  resourceManager: {fileID: 0}
-  uiinventory: {fileID: 0}
-  buildingPlacer: {fileID: 0}
-  buildingType: 0

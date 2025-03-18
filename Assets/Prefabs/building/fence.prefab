@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5734590494499124481}
   - component: {fileID: 2656578254157361280}
   - component: {fileID: 3512492743317520673}
-  - component: {fileID: 1758878604369985128}
   m_Layer: 0
   m_Name: fence
   m_TagString: Untagged
@@ -84,22 +83,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &1758878604369985128
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7184765353535645508}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9baddcbce8144543b78cb488e36049e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  buildingPrefab: {fileID: 0}
-  buildingPlacementPoint: {fileID: 0}
-  resourceManager: {fileID: 0}
-  uiinventory: {fileID: 0}
-  buildingPlacer: {fileID: 0}
-  buildingType: 0
