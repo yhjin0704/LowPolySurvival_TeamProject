@@ -10,6 +10,7 @@ public class IfHitRunAnimal : RunAwayAnimal
         if (maxHealth < 0)
         {
             Break();
+            return;
         }
 
         StartCoroutine(CDamageFlash());

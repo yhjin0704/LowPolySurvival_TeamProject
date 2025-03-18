@@ -130,10 +130,11 @@ public class Animal : MonoBehaviour, IBreakableObject
 
     public virtual void TakeDamage(float _damage)
     {
-        maxHealth -= _damage;
-        if (maxHealth < 0)
+        currentHealth -= _damage;
+        if (currentHealth < 0)
         {
             Break();
+            return;
         }
 
         StartCoroutine(CDamageFlash());
@@ -143,9 +144,10 @@ public class Animal : MonoBehaviour, IBreakableObject
     {
         for (int i = 0; i < dropOnDepth.Length; i++)
         {
-            Instantiate(dropOnDepth[i].dropItemPrefab, transform.position + Vector3.up * 2, Quaternion.identity);
+            Instantiate(dropOnDepth[i].dropItemPrefab, transform.position + Vector3.up * 3, Quaternion.identity);
         }
 
+        CancelInvoke(nameof(WanderToNewLocation));
         gameObject.SetActive(false);
     }
 

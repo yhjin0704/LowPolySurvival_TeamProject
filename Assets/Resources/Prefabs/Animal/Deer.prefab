@@ -209,7 +209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bc4273c58ecad7458bd162e79357725, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 150
+  maxHealth: 150
   walkSpeed: 3
   runSpeed: 10
   dropOnDepth:
