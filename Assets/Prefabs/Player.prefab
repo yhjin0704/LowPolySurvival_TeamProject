@@ -691,6 +691,8 @@ GameObject:
   - component: {fileID: 3318728611936723730}
   - component: {fileID: 7076834085915614454}
   - component: {fileID: 2036581416382854635}
+  - component: {fileID: 6431135219835290344}
+  - component: {fileID: 641175705042040717}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -967,9 +969,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d404b99ce92e7684892ed07fff880ebd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tempDamage: 0.05
-  isTempDamaged: 0
-  waterDamage: 0.1
+  waterDamage: 0
   defaultController: {fileID: 9100000, guid: a637bc55506c28e43b3691b6453a1399, type: 2}
   swordController: {fileID: 22100000, guid: 4490efe1d430f924781757113c435a5b, type: 2}
   moveSpeed: 5
@@ -1068,6 +1068,39 @@ MonoBehaviour:
   fireLayer:
     serializedVersion: 2
     m_Bits: 0
+--- !u!114 &6431135219835290344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2012847893107841693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9baddcbce8144543b78cb488e36049e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  buildingPlacementPoint: {fileID: 0}
+  resourceManager: {fileID: 0}
+  uiinventory: {fileID: 0}
+  buildingPlacer: {fileID: 0}
+  buildingDataList: []
+--- !u!114 &641175705042040717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2012847893107841693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 924ef129fd3a5e9438d512d7ebd59787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wood: 0
+  rock: 0
+  branch: 0
 --- !u!1 &2096280393140235832
 GameObject:
   m_ObjectHideFlags: 0
