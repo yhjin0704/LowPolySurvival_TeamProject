@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2849687385816032412}
   - component: {fileID: 4301207060231571488}
   - component: {fileID: 1564593345129666165}
+  - component: {fileID: 3419261691536109469}
   m_Layer: 0
   m_Name: tent_red
   m_TagString: Untagged
@@ -83,3 +84,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!208 &3419261691536109469
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 463778061750964780}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 7.5, y: 1.136, z: 7.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.004, y: 1.074, z: 0.091000006}
+  m_TimeToStationary: 0.5
