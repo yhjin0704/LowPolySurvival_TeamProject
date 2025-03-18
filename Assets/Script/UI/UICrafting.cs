@@ -133,7 +133,7 @@ public class UICrafting : MonoBehaviour
     /// <returns></returns>
     ItemSlot GetItemStack(ItemData data)
     {
-        for (int i = 0; i < slots.Length; i++)
+        for (int i = 0; i < inventory.slots.Length; i++)
         {
             if (inventory.slots[i].item == data && inventory.slots[i].quantity < data.maxStackAmount)
             {
@@ -145,7 +145,7 @@ public class UICrafting : MonoBehaviour
 
     ItemSlot GetEmptySlot()
     {
-        for (int i = 0; i < slots.Length; i++)
+        for (int i = 0; i < inventory.slots.Length; i++)
         {
             if (inventory.slots[i].item == null)
             {
@@ -203,18 +203,6 @@ public class UICrafting : MonoBehaviour
         {
             RemoveMaterials();
             AddCraftedItem();
-        }
-        else
-        {
-            Debug.Log("제작불가, 아이템이 없습니다.");
-        }
-    }
-    public void OnBuildButton()
-    {
-        if(HasMaterials())
-        {
-            RemoveMaterials();
-            //제작 메서드
         }
         else
         {
