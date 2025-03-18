@@ -277,7 +277,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5683824699186561920, guid: b6bfea0f13282ba4eac01fc65568a50f, type: 3}
   m_PrefabInstance: {fileID: 2021779762}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1907783091}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6beeffcb0342eac4fb143f2dbb74efbb, type: 3}
@@ -1698,15 +1698,31 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa2ea98c3edc3404483e47d093759fa3, type: 3}
+--- !u!1 &1907783091 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8496488359373269871, guid: b6bfea0f13282ba4eac01fc65568a50f, type: 3}
+  m_PrefabInstance: {fileID: 2021779762}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1907783102 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6524136571238448261, guid: b6bfea0f13282ba4eac01fc65568a50f, type: 3}
   m_PrefabInstance: {fileID: 2021779762}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1907783091}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9baddcbce8144543b78cb488e36049e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1907783103 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1093460064090400018, guid: b6bfea0f13282ba4eac01fc65568a50f, type: 3}
+  m_PrefabInstance: {fileID: 2021779762}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1907783091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 924ef129fd3a5e9438d512d7ebd59787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &2021779762
@@ -1758,9 +1774,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1668113499}
     - target: {fileID: 6524136571238448261, guid: b6bfea0f13282ba4eac01fc65568a50f, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1907783091}
+    - target: {fileID: 6524136571238448261, guid: b6bfea0f13282ba4eac01fc65568a50f, type: 3}
       propertyPath: buildingPrefab
       value: 
       objectReference: {fileID: 1667259951044660279, guid: 9aefb3774b4ee4548a158df4c06eb1cc, type: 3}
+    - target: {fileID: 6524136571238448261, guid: b6bfea0f13282ba4eac01fc65568a50f, type: 3}
+      propertyPath: resourceManager
+      value: 
+      objectReference: {fileID: 1907783103}
     - target: {fileID: 6524136571238448261, guid: b6bfea0f13282ba4eac01fc65568a50f, type: 3}
       propertyPath: buildingPlacementPoint
       value: 

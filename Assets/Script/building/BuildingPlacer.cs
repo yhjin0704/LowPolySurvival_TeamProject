@@ -5,6 +5,7 @@ using UnityEngine;
 public class BuildingPlacer : MonoBehaviour
 {
     public GameObject player;
+    public ReSourceManager resourceManager;
     public GameObject buildingPrefab; // 설치할 건물 프리팹
     public LayerMask targetlayer;
     public BuildingSystem buildingSystem;
@@ -13,6 +14,16 @@ public class BuildingPlacer : MonoBehaviour
 
     void Update()
     {
+        if (buildingSystem == null)
+        {
+            Debug.LogError("BuildingSystem이 연결되지 않았습니다!");
+            return;
+        }
+        if (buildingSystem.buildingPlacementPoint == null)
+        {
+            Debug.LogError("buildingPlacementPoint가 설정되지 않았습니다!");
+            return;
+        }
         // 마우스 클릭 위치로 레이 쏘기
         if (Input.GetKeyDown(KeyCode.Y))
         {
@@ -25,16 +36,7 @@ public class BuildingPlacer : MonoBehaviour
                 buildingSystem.Build();
             }
         }
-        if (buildingSystem == null)
-        {
-            Debug.LogError("BuildingSystem이 연결되지 않았습니다!");
-            return;
-        }
-        if (buildingSystem.buildingPlacementPoint == null)
-        {
-            Debug.LogError("buildingPlacementPoint가 설정되지 않았습니다!");
-            return;
-        }
+       
 
     }
 }

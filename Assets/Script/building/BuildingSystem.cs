@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class BuildingSystem : MonoBehaviour
 {
+
+
     public GameObject player;
     public GameObject buildingPrefab;  // 배치할 건물의 프리팹
     public Transform buildingPlacementPoint;  // 건물 배치할 위치
