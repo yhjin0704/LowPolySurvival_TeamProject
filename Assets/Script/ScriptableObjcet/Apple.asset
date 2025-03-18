@@ -23,9 +23,9 @@ MonoBehaviour:
   maxStackAmount: 50
   consumables:
   - type: 0
-    value: 5
+    value: 10
   - type: 2
-    value: 25
+    value: 40
   damage: 0
   useStamina: 0
   equipPrefab: {fileID: 0}
