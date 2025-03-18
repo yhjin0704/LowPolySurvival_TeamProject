@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class DayNightCycle : MonoBehaviour
 {
+    public TemperatureSystem temperatureSystem;
+
     [Range(0.0f, 1.0f)]
     public float time;
     public float fullDayLength = 120f;
@@ -27,6 +29,15 @@ public class DayNightCycle : MonoBehaviour
     [Header("Other Lighting")]
     public AnimationCurve lightingIntensityMultiplier;//º¸Á¤¿ë °î¼±
     public AnimationCurve reflectionIntensityMultiplier;//¹Ý»ç±¤ °­µµ º¯È­ °î¼±
+
+    void Awake()
+    {
+        if (temperatureSystem == null)
+        {
+            temperatureSystem = FindObjectOfType<TemperatureSystem>();
+        }
+    }
+
     void Start()
     {
         timeRate = 0.5f / fullDayLength;
@@ -65,6 +76,11 @@ public class DayNightCycle : MonoBehaviour
         else if(lightSource.intensity > 0 && !go.activeInHierarchy)
         {
             go.SetActive(true);
+        }
+
+        if (temperatureSystem != null)
+        {
+            temperatureSystem.targetTemp = 5;
         }
     }
 }

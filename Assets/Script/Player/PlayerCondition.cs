@@ -6,17 +6,29 @@ using UnityEngine;
 public class PlayerCondition : MonoBehaviour
 {
     public UICondition uiCondition;
-
-    public DayNightCycle dayNightCycle; //CYS추가코드
+    public TemperatureSystem temperatureSystem;
 
     Condition health { get { return uiCondition.health; } }
     Condition hunger { get { return uiCondition.hunger; } }
     Condition thirst { get { return uiCondition.thirst; } }
     Condition stamina { get { return uiCondition.stamina; } }
+    Condition temp { get { return uiCondition.temp; } }
 
-    public float noHungerHealthDecay;
-    public float noThirstHealthDecay;
+    public float healthDecay = 1f;
     public event Action onTakeDamage;
+
+    private void Awake()
+    {
+        if (uiCondition == null)
+        {
+            uiCondition = FindObjectOfType<UICondition>();
+        }
+
+        if (temperatureSystem == null)
+        {
+            temperatureSystem = FindObjectOfType<TemperatureSystem>();
+        }
+    }
 
     private void Update()
     {
@@ -24,18 +36,19 @@ public class PlayerCondition : MonoBehaviour
         {
             return;
         }
+
         hunger.Subtract((hunger.passiveValue + hunger.plusValue) * Time.deltaTime);
         thirst.Subtract((thirst.passiveValue + thirst.plusValue) * Time.deltaTime);
         stamina.Add((stamina.passiveValue + stamina.plusValue) * Time.deltaTime);
 
         if (hunger.curValue <= 0f)
         {
-            health.Subtract(noHungerHealthDecay * Time.deltaTime);
+            TakeDamage(healthDecay * Time.deltaTime);
         }
 
         if (thirst.curValue <= 0f)
         {
-            health.Subtract(noThirstHealthDecay * Time.deltaTime);
+            TakeDamage(healthDecay * Time.deltaTime);
         }
 
         if (health.curValue <= 0f)

@@ -18,10 +18,10 @@ TagManager:
   - Ground
   - Interactable
   - hit
-  - snow
-  - desert
-  - 
-  - 
+  - Snow
+  - Desert
+  - FireArea
+  - Fire
   - 
   - 
   - 
