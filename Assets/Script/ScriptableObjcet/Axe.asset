@@ -17,11 +17,11 @@ MonoBehaviour:
   description: "\uB3C4\uB07C\uBB34\uAE45\uBE44\uB2C8\uB2E4"
   type: 1
   icon: {fileID: 21300000, guid: 06e8d836c76eb494db7ab3784ffcb0eb, type: 3}
-  dropPrefab: {fileID: 7586022857456254392, guid: 1ffb06bd0f7eb654cbfda9b9f7c51066, type: 3}
+  dropPrefab: {fileID: 6376482509980898326, guid: 1ffb06bd0f7eb654cbfda9b9f7c51066, type: 3}
   canStack: 0
   maxStackAmount: 0
   consumables: []
   damage: 80
   useStamina: 30
-  equipPrefab: {fileID: 0}
+  equipPrefab: {fileID: 7586022857456254392, guid: 9c170121f216d6e499fdc3086aad3534, type: 3}
   duration: 0

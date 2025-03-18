@@ -42,7 +42,7 @@ public class TemperatureSystem : MonoBehaviour
             dayNightCycle = FindObjectOfType<DayNightCycle>();
         }
 
-        // playerConditionÀÌ ¼³Á¤µÇÁö ¾Ê¾Ò´Ù¸é GetComponent·Î °¡Á®¿À±â
+        // playerConditionï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾Ò´Ù¸ï¿½ GetComponentï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         if (playerCondition == null)
         {
             playerCondition = player.condition;
@@ -58,7 +58,7 @@ public class TemperatureSystem : MonoBehaviour
 
         SetTargetTemp();
 
-        // ¿Âµµ ºÎµå·´°Ô º¯°æ
+        // ï¿½Âµï¿½ ï¿½Îµå·´ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         currentTemperature = Mathf.Lerp(currentTemperature, targetTemp, Time.deltaTime * temperatureChangeSpeed);
 
         Debug.Log("Current Temperature: " + currentTemperature);

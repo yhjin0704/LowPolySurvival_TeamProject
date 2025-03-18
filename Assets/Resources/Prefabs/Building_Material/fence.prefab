@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 5734590494499124481}
   - component: {fileID: 2656578254157361280}
   - component: {fileID: 3512492743317520673}
-  - component: {fileID: -6215118148921398214}
+  - component: {fileID: 3706096331576797086}
   - component: {fileID: 5386618796093882828}
   - component: {fileID: 2265762180692102558}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: fence
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,8 +86,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &-6215118148921398214
-MeshCollider:
+--- !u!65 &3706096331576797086
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -104,10 +104,9 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -8223828571603864074, guid: ae98287187aea8044b54d85fd41679b6, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 2.9992938, y: 1.53006, z: 0.3323964}
+  m_Center: {x: -0.0045947433, y: 0.7639407, z: -0.0016330183}
 --- !u!54 &5386618796093882828
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -134,7 +133,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &2265762180692102558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,4 +146,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2594edfc743df74eae572bf50086029, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 0}
+  data: {fileID: 11400000, guid: 614ce1497840ce544b32f8e18a218027, type: 2}

@@ -122,6 +122,7 @@ public class PlayerController : MonoBehaviour
             condition.TakeDamage(waterDamage);
         }
 
+        
         if (playerState.GetTempState() == coldState || playerState.GetTempState() == hotState)
         {
             condition.TakeDamage(tempDamage);
@@ -407,7 +408,7 @@ public class PlayerController : MonoBehaviour
     {
         if (playerState.ReturnState() == cupState)
         {
-            condition.Drink(5f);
+            condition.Drink(40f);
         }
     }
 

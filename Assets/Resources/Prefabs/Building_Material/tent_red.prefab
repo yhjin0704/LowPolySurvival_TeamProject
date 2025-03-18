@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 2849687385816032412}
   - component: {fileID: 4301207060231571488}
   - component: {fileID: 1564593345129666165}
-  - component: {fileID: 1797941203995706425}
+  - component: {fileID: 7494671259647888886}
   - component: {fileID: -9026917508701074033}
   - component: {fileID: 9114286516225933019}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tent_red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,8 +86,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &1797941203995706425
-MeshCollider:
+--- !u!65 &7494671259647888886
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -104,10 +104,9 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -5214683058280287352, guid: 9920c8b11a1808b41aa1f72316bb9a7d, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 3.2341044, y: 2.2716494, z: 3.4692593}
+  m_Center: {x: 0.003664136, y: 1.0744765, z: 0.09117514}
 --- !u!54 &-9026917508701074033
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -134,7 +133,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &9114286516225933019
 MonoBehaviour:
   m_ObjectHideFlags: 0
