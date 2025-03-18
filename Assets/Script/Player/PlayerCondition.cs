@@ -13,10 +13,21 @@ public class PlayerCondition : MonoBehaviour
     Condition hunger { get { return uiCondition.hunger; } }
     Condition thirst { get { return uiCondition.thirst; } }
     Condition stamina { get { return uiCondition.stamina; } }
+    Condition temperature { get { return uiCondition.temperature; } }
 
-    public float noHungerHealthDecay;
-    public float noThirstHealthDecay;
+    public float HealthDecay;
     public event Action onTakeDamage;
+    public TemperatureSystem temperatureSystem;
+    
+
+    private void Awake()
+    {
+        if (temperatureSystem == null)
+        {
+            temperatureSystem = PlayerManager.Instance.Player.GetComponent<TemperatureSystem>();
+        }
+        
+    }
 
     private void Update()
     {
@@ -33,18 +44,32 @@ public class PlayerCondition : MonoBehaviour
 
         if (hunger.curValue <= 0f)
         {
-            health.Subtract(noHungerHealthDecay * Time.deltaTime);
+            health.Subtract(HealthDecay * Time.deltaTime);
         }
 
         if (thirst.curValue <= 0f)
         {
-            health.Subtract(noThirstHealthDecay * Time.deltaTime);
+            health.Subtract(HealthDecay * Time.deltaTime);
+        }
+
+        if (temperatureSystem.currentTemperature <= 0f)
+        {
+            health.Subtract(HealthDecay * Time.deltaTime);
+        }
+
+        if (temperatureSystem.currentTemperature >= 30f)
+        {
+            health.Subtract(HealthDecay * Time.deltaTime);
         }
 
         if (health.curValue <= 0f)
         {
             Die();
         }
+
+ 
+
+
     }
 
     public void TakeDamage(float amount)
