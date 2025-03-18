@@ -43,6 +43,7 @@ public class ItemData : ScriptableObject
 
     [Header("Equip")]
     public float damage;
+    public float useStamina;
     public GameObject equipPrefab;
 
     [Header("Duration")]

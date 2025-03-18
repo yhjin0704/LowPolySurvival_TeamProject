@@ -5,6 +5,7 @@ using UnityEngine;
 public interface PlayerEquipState
 {
 
+    public abstract void ChangeController(ItemData data);
     public abstract void ChangeController();
 }
 
@@ -22,7 +23,13 @@ public class PlayerState : MonoBehaviour
         this.state = state;
     }
 
-    public void Change() 
+    public void Change(ItemData data) 
+    {
+        PlayerManager.Instance.Player.controller.DisableAllEquipItem();
+        state.ChangeController(data);
+    }
+
+    public void Change()
     {
         PlayerManager.Instance.Player.controller.DisableAllEquipItem();
         state.ChangeController();

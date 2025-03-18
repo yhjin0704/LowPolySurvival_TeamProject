@@ -13,11 +13,12 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody rigidbody;
     PlayerPunch punchState;
-    PlayerSword swordState;
+    PlayerAttackEquip equipState;
     PlayerState playerState;
     private PlayerCondition condition;
 
     private GameObject equipSword;
+    private GameObject equipAxe;
     private List<Transform> equipPos;
 
     [Header("Override Animator")]
@@ -73,11 +74,14 @@ public class PlayerController : MonoBehaviour
         equipPos.RemoveAt(0);
         //Debug.Log(equipPos[0].name);
         equipSword = GameObject.Find("EquipPos").transform.Find("Equip_Sword").gameObject;
+        equipAxe = GameObject.Find("EquipPos").transform.Find("Equip_Axe").gameObject;
         equipPos.Add(equipSword.transform);
+        equipPos.Add(equipAxe.transform);
         Debug.Log(equipSword.name);
+        Debug.Log(equipAxe.name);
 
         punchState = new PlayerPunch();
-        swordState = new PlayerSword();
+        equipState = new PlayerAttackEquip();
         playerState = new PlayerState(punchState);
         playerState.Change();
         Cursor.lockState = CursorLockMode.Locked;
@@ -90,14 +94,6 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         IsGrounded();
-
-        // 검 장착 테스트용
-        if (Input.GetKeyDown(KeyCode.F2))
-        {
-            playerState.setState(swordState);
-            playerState.Change();
-            Debug.Log("F2");
-        }
     }
     private void FixedUpdate()
     {
@@ -276,14 +272,20 @@ public class PlayerController : MonoBehaviour
         canLook = !toggle;
     }
 
-    public void ChangeSwordAnimator()
+    public void ChangeAnimatior(int id)
     {
-        animator.runtimeAnimatorController = swordController;
-    }
-
-    public void ChangePunchAnimator()
-    {
-        animator.runtimeAnimatorController = defaultController;
+        switch (id)
+        { 
+            case 100:
+                animator.runtimeAnimatorController = swordController;
+                break;
+            case 101:
+                animator.runtimeAnimatorController = swordController;
+                break;
+            default:
+                animator.runtimeAnimatorController = defaultController;
+                break;
+        }
     }
 
     public void SetDamage(float damage)
@@ -312,27 +314,31 @@ public class PlayerController : MonoBehaviour
         playerState.Change();
     }
 
-    public void ActiveSword()
+    public void EquipAttackState(ItemData data)
     {
-        if (isEquip == false)
-        {
-            isEquip = true;
-            equipSword.SetActive(true);
-        }
+        playerState.setState(equipState);
+        playerState.Change(data);
     }
 
-    public void EquipSword()
+    public void EquipAttack(ItemData data)
     {
-        playerState.setState(swordState);
-        playerState.Change();
-    }
-
-    public void EquipAttack(int ID)
-    {
-        switch (ID)
+        switch (data.ID)
         {
             case 100:
-                EquipSword();
+                EquipAttackState(data);
+                if (isEquip == false)
+                {
+                    isEquip = true;
+                    equipSword.SetActive(true);
+                }
+                break;
+            case 101:
+                EquipAttackState(data);
+                if (isEquip == false)
+                {
+                    isEquip = true;
+                    equipAxe.SetActive(true);
+                }
                 break;
         }
     }
