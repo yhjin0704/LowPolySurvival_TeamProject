@@ -71,6 +71,7 @@ public class PlayerController : MonoBehaviour
     {
         equipPos = GameObject.Find("EquipPos").GetComponentsInChildren<Transform>().Where(t => t != transform).ToList();
         equipPos.RemoveAt(0);
+        //Debug.Log(equipPos[0].name);
         equipSword = GameObject.Find("EquipPos").transform.Find("Equip_Sword").gameObject;
         equipPos.Add(equipSword.transform);
         Debug.Log(equipSword.name);
@@ -306,6 +307,7 @@ public class PlayerController : MonoBehaviour
     public void UnEquip()
     {
         DisableAllEquipItem();
+        isEquip = false;
         playerState.setState(punchState);
         playerState.Change();
     }
@@ -323,5 +325,15 @@ public class PlayerController : MonoBehaviour
     {
         playerState.setState(swordState);
         playerState.Change();
+    }
+
+    public void EquipAttack(int ID)
+    {
+        switch (ID)
+        {
+            case 100:
+                EquipSword();
+                break;
+        }
     }
 }

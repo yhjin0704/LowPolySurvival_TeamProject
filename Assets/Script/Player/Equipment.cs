@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+public enum AttackEquip
+{
+    Punch,
+    Sword,
+    Axe
+}
+
 public class Equipment : MonoBehaviour
 {
     public Equip curEquip;
