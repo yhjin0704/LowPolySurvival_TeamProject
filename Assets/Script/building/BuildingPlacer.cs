@@ -26,32 +26,23 @@ public class BuildingPlacer : MonoBehaviour
         }
         return false; // 배치할 수 없는 곳
     }
+
     void Update()
-    {
-        if (buildingSystem == null)
         {
-            Debug.LogError("BuildingSystem이 연결되지 않았습니다!");
-            return;
+                    if (Input.GetKeyDown(KeyCode.T)) // 텐트
+                    {
+                        buildingSystem.buildingType = BuildingSystem.BuildingType.Tent;
+                        buildingSystem.Build();
+                    }
+                    if (Input.GetKeyDown(KeyCode.Y)) // 모닥불
+                    {
+                        buildingSystem.buildingType = BuildingSystem.BuildingType.Campfire;
+                        buildingSystem.Build();
+                    }
+                    if (Input.GetKeyDown(KeyCode.U)) // 울타리
+                    {
+                        buildingSystem.buildingType = BuildingSystem.BuildingType.Fence;
+                        buildingSystem.Build();
+                    }
         }
-        if (buildingSystem.buildingPlacementPoint == null)
-        {
-            Debug.LogError("buildingPlacementPoint가 설정되지 않았습니다!");
-            return;
-        }
-        // 마우스 클릭 위치로 레이 쏘기
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit, 10f, targetlayer))
-            {
-                buildingSystem.buildingPlacementPoint.position = hit.point;
-                buildingSystem.Build();
-            }
-        }
-       
-
-
-    }
 }
