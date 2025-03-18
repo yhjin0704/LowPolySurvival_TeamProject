@@ -7,6 +7,7 @@ public class ReSourceManager : MonoBehaviour
     public int wood = 0;
     public int rock = 0;  // stone ¡æ rock
 
+
     //void Start()
     //{
     //    AddWood(20);
