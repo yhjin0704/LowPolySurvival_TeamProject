@@ -28,7 +28,10 @@ public class TemperatureSystem : MonoBehaviour
     bool isColdArea = false;
     bool isHotArea = false;
 
-    private void Awake()
+    
+ 
+
+    private void Start()
     {
         player = PlayerManager.Instance.Player;
 
@@ -42,10 +45,9 @@ public class TemperatureSystem : MonoBehaviour
             dayNightCycle = FindObjectOfType<DayNightCycle>();
         }
 
-        // playerCondition�� �������� �ʾҴٸ� GetComponent�� ��������
         if (playerCondition == null)
         {
-            playerCondition = player.condition;
+            playerCondition = PlayerManager.Instance.Player.condition;
         }
     }
 

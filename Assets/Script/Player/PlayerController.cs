@@ -416,6 +416,7 @@ public class PlayerController : MonoBehaviour
     {
         animator.SetTrigger("Death");
         ToggleCursor();
+        Cursor.lockState = CursorLockMode.None;
         isDIe = true;
     }
 

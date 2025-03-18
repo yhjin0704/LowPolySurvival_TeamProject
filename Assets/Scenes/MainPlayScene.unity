@@ -876,6 +876,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 1d1ea4da68b0a9a49a62fd6766194754, type: 2}
     - target: {fileID: 2036581416382854635, guid: b6bfea0f13282ba4eac01fc65568a50f, type: 3}
+      propertyPath: uiCondition
+      value: 
+      objectReference: {fileID: 3385817637469602060}
+    - target: {fileID: 2036581416382854635, guid: b6bfea0f13282ba4eac01fc65568a50f, type: 3}
       propertyPath: dayNightCycle
       value: 
       objectReference: {fileID: 1128309301}
@@ -1029,11 +1033,11 @@ PrefabInstance:
       objectReference: {fileID: 7184765353535645508, guid: 469ac250658782b48bc5bca6b0cd09b9, type: 3}
     - target: {fileID: 6431135219835290344, guid: b6bfea0f13282ba4eac01fc65568a50f, type: 3}
       propertyPath: buildingDataList.Array.data[0].rock
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6431135219835290344, guid: b6bfea0f13282ba4eac01fc65568a50f, type: 3}
       propertyPath: buildingDataList.Array.data[0].wood
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6431135219835290344, guid: b6bfea0f13282ba4eac01fc65568a50f, type: 3}
       propertyPath: buildingDataList.Array.data[1].rock
@@ -5317,6 +5321,7 @@ MonoBehaviour:
   hunger: {fileID: 3318834234066017012}
   stamina: {fileID: 8775276833954421780}
   thirst: {fileID: 7552748636040881101}
+  temp: {fileID: 0}
 --- !u!222 &3493957730759914012
 CanvasRenderer:
   m_ObjectHideFlags: 0
