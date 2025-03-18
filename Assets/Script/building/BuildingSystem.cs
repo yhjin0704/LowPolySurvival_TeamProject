@@ -6,8 +6,6 @@ public class BuildingSystem : MonoBehaviour
     public GameObject player;
     public Transform buildingPlacementPoint;  // 건물 배치할 위치
     public ReSourceManager resourceManager;   // 자원 관리 시스템
-    public UIInventory uiinventory;
-
     private Vector3 placementPosition;
     private int selectedBuildingIndex = 0; // 선택된 건물 인덱스
 
@@ -52,6 +50,7 @@ public class BuildingSystem : MonoBehaviour
         if (IsValidPlacement(placementPosition))
         {
             // 자원 요구량 확인
+            
             if (resourceManager.CanBuild(selectedBuilding.wood, selectedBuilding.rock, selectedBuilding.branch))
             {
                 // 건물 배치

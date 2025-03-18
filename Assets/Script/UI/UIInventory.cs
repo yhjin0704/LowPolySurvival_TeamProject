@@ -277,4 +277,36 @@ public class UIInventory : MonoBehaviour
     {
         UnEquip(selectedItemIndex);
     }
+
+    public int GetItemQuantity(ItemData data)
+    {
+        for(int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i].item != null)
+            {
+                if (slots[i].item.name == data.name)
+                {
+                    return slots[i].quantity;
+                }
+            }
+            
+        }
+
+        return 0;
+        
+    }
+
+    public void SetItemQunatity(ItemData data, int amount)
+    {
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i].item != null)
+            {
+                if (slots[i].item.name == data.name)
+                {
+                    slots[i].quantity -= amount;
+                }
+            }
+        }
+    }
 }
