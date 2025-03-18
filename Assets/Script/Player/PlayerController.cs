@@ -407,7 +407,7 @@ public class PlayerController : MonoBehaviour
     {
         if (playerState.ReturnState() == cupState)
         {
-            condition.Drink(5f);
+            condition.Drink(40f);
         }
     }
 
