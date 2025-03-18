@@ -93,32 +93,36 @@ public class UICrafting : MonoBehaviour
     public void AddCraftedItem()
     {
         ItemData data = selectedRecipe.ItemRecipe.desiredItem;
+        int itemsToAdd = selectedRecipe.ItemRecipe.quantities;
 
-        if (data.canStack)
+        for (int i = 0; i < itemsToAdd; i++)
         {
-            ItemSlot slot = GetItemStack(data);
-            if (slot != null)
+            if (data.canStack)
             {
-                slot.quantity++;
+                ItemSlot slot = GetItemStack(data);
+                if (slot != null)
+                {
+                    slot.quantity++;
+                    inventory.UpdateUI();
+                    PlayerManager.Instance.Player.itemData = null;
+                    continue;
+                }
+            }
+
+            ItemSlot emptySlot = GetEmptySlot();
+
+            if (emptySlot != null)
+            {
+                emptySlot.item = data;
+                emptySlot.quantity = 1;
                 inventory.UpdateUI();
                 PlayerManager.Instance.Player.itemData = null;
-                return;
+                continue;
             }
-        }
-
-        ItemSlot emptySlot = GetEmptySlot();
-
-        if (emptySlot != null)
-        {
-            emptySlot.item = data;
-            emptySlot.quantity = 1;
-            inventory.UpdateUI();
+            ThrowItem(data);
             PlayerManager.Instance.Player.itemData = null;
-            return;
         }
 
-        ThrowItem(data);
-        PlayerManager.Instance.Player.itemData = null;
     }
 
     public void ThrowItem(ItemData data)
