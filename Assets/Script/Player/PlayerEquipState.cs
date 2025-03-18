@@ -19,7 +19,7 @@ public class PlayerPunch : PlayerEquipState
     }
 }
 
-public class PlayerSword : PlayerEquipState
+public class PlayerAttackEquip : PlayerEquipState
 {
     public void ChangeController(ItemData data)
     {

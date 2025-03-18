@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody rigidbody;
     PlayerPunch punchState;
-    PlayerSword swordState;
+    PlayerAttackEquip equipState;
     PlayerState playerState;
     private PlayerCondition condition;
 
@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log(equipAxe.name);
 
         punchState = new PlayerPunch();
-        swordState = new PlayerSword();
+        equipState = new PlayerAttackEquip();
         playerState = new PlayerState(punchState);
         playerState.Change();
         Cursor.lockState = CursorLockMode.Locked;
@@ -314,9 +314,9 @@ public class PlayerController : MonoBehaviour
         playerState.Change();
     }
 
-    public void EquipSword(ItemData data)
+    public void EquipAttackState(ItemData data)
     {
-        playerState.setState(swordState);
+        playerState.setState(equipState);
         playerState.Change(data);
     }
 
@@ -325,7 +325,7 @@ public class PlayerController : MonoBehaviour
         switch (data.ID)
         {
             case 100:
-                EquipSword(data);
+                EquipAttackState(data);
                 if (isEquip == false)
                 {
                     isEquip = true;
@@ -333,7 +333,7 @@ public class PlayerController : MonoBehaviour
                 }
                 break;
             case 101:
-                EquipSword(data);
+                EquipAttackState(data);
                 if (isEquip == false)
                 {
                     isEquip = true;
