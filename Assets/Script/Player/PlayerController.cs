@@ -21,10 +21,15 @@ public class PlayerController : MonoBehaviour
     private GameObject equipAxe;
     private List<Transform> equipPos;
 
+    [Header("UnderWater")]
+    public float waterDamage;
+
+
     [Header("Override Animator")]
     private Animator animator;
     public AnimatorController defaultController;
     public AnimatorOverrideController swordController;
+
 
     [Header("Movement")]
     private Vector2 curMovementInput;
@@ -76,9 +81,7 @@ public class PlayerController : MonoBehaviour
         equipSword = GameObject.Find("EquipPos").transform.Find("Equip_Sword").gameObject;
         //equipAxe = GameObject.Find("EquipPos").transform.Find("Equip_Axe").gameObject;
         equipPos.Add(equipSword.transform);
-        //equipPos.Add(equipAxe.transform);
-        Debug.Log(equipSword.name);
-        //Debug.Log(equipAxe.name);
+        equipPos.Add(equipAxe.transform);
 
         punchState = new PlayerPunch();
         equipState = new PlayerAttackEquip();
@@ -94,6 +97,11 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         IsGrounded();
+
+        if (UnderWater())
+        {
+            condition.TakeDamage(waterDamage);
+        }
     }
     private void FixedUpdate()
     {
@@ -103,7 +111,7 @@ public class PlayerController : MonoBehaviour
             condition.ConsumeStamina(dashStamina);
         }
 
-        if (condition.IsStaminaZero())
+        if (condition.IsStaminaZero() || Approximately(rigidbody.velocity, Vector3.zero, 0.1f))
         {
             ToggleDash();
         }
@@ -127,12 +135,12 @@ public class PlayerController : MonoBehaviour
         if (context.phase == InputActionPhase.Performed)
         {
             curMovementInput = context.ReadValue<Vector2>();
-            animator.SetBool("IsWalk", true);
+            
         }
         else if (context.phase == InputActionPhase.Canceled)
         {
             curMovementInput = Vector2.zero;
-            animator.SetBool("IsWalk", false);
+            
         }
     }
 
@@ -159,8 +167,11 @@ public class PlayerController : MonoBehaviour
         if (!isDash && !condition.IsStaminaZero())
         {
             resultSpeed = dashSpeed * moveSpeed;
-            isDash = true;
-            animator.SetBool("IsDash", true);
+            if(!Approximately(rigidbody.velocity, Vector3.zero, 0.1f))
+            {
+                isDash = true;
+                animator.SetBool("IsDash", true);
+            }
         }
         else
         {
@@ -178,6 +189,15 @@ public class PlayerController : MonoBehaviour
         dir.y = rigidbody.velocity.y;
 
         rigidbody.velocity = dir;
+
+        if(!Approximately(rigidbody.velocity, Vector3.zero, 0.1f))
+        {
+            animator.SetBool("IsWalk", true);
+        }
+        else
+        {
+            animator.SetBool("IsWalk", false);
+        }
     }
 
     void CameraLook()
@@ -250,7 +270,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log(hit.collider.name);
             if (hit.collider.TryGetComponent(out IBreakableObject breakbleObject))
             {
-                Debug.Log("ÆÝÄ¡ÆÝÄ¡");
+                Debug.Log("ï¿½ï¿½Ä¡ï¿½ï¿½Ä¡");
                 breakbleObject.TakeDamage(nowDamage);
             }
         }
@@ -341,5 +361,16 @@ public class PlayerController : MonoBehaviour
                 }
                 break;
         }
+    }
+
+    bool UnderWater()
+    {
+        return transform.position.y < -1.6f;
+    }
+
+    public bool Approximately(Vector3 a, Vector3 b, float threshold)
+    {
+        float dist = Vector3.Distance(a, b);
+        return dist <= threshold;
     }
 }
