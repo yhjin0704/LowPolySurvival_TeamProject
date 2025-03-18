@@ -74,11 +74,11 @@ public class PlayerController : MonoBehaviour
         equipPos.RemoveAt(0);
         //Debug.Log(equipPos[0].name);
         equipSword = GameObject.Find("EquipPos").transform.Find("Equip_Sword").gameObject;
-        equipAxe = GameObject.Find("EquipPos").transform.Find("Equip_Axe").gameObject;
+        //equipAxe = GameObject.Find("EquipPos").transform.Find("Equip_Axe").gameObject;
         equipPos.Add(equipSword.transform);
-        equipPos.Add(equipAxe.transform);
+        //equipPos.Add(equipAxe.transform);
         Debug.Log(equipSword.name);
-        Debug.Log(equipAxe.name);
+        //Debug.Log(equipAxe.name);
 
         punchState = new PlayerPunch();
         equipState = new PlayerAttackEquip();
