@@ -2557,6 +2557,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1128309301}
     - target: {fileID: 4895632988306871632, guid: b6bfea0f13282ba4eac01fc65568a50f, type: 3}
+      propertyPath: jumpPower
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 4895632988306871632, guid: b6bfea0f13282ba4eac01fc65568a50f, type: 3}
       propertyPath: tempDamage
       value: 0.025
       objectReference: {fileID: 0}
