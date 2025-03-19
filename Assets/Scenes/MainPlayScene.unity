@@ -2475,15 +2475,15 @@ PrefabInstance:
     - target: {fileID: 641175705042040717, guid: b6bfea0f13282ba4eac01fc65568a50f, type: 3}
       propertyPath: datas.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 600d3721ab7fd2f4890248281baf8b42, type: 2}
+      objectReference: {fileID: 11400000, guid: cd041320fba70ca4cb8eb808f56f2a52, type: 2}
     - target: {fileID: 641175705042040717, guid: b6bfea0f13282ba4eac01fc65568a50f, type: 3}
       propertyPath: datas.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: 668128d1b9b746044bc64e43fcbc0100, type: 2}
+      objectReference: {fileID: 11400000, guid: 22f7c78e6db9228448e53bcbee0dc185, type: 2}
     - target: {fileID: 641175705042040717, guid: b6bfea0f13282ba4eac01fc65568a50f, type: 3}
       propertyPath: datas.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: 1d1ea4da68b0a9a49a62fd6766194754, type: 2}
+      objectReference: {fileID: 11400000, guid: 614ce1497840ce544b32f8e18a218027, type: 2}
     - target: {fileID: 2036581416382854635, guid: b6bfea0f13282ba4eac01fc65568a50f, type: 3}
       propertyPath: uiCondition
       value: 
@@ -2556,6 +2556,10 @@ PrefabInstance:
       propertyPath: dayNightCycle
       value: 
       objectReference: {fileID: 1128309301}
+    - target: {fileID: 4895632988306871632, guid: b6bfea0f13282ba4eac01fc65568a50f, type: 3}
+      propertyPath: jumpPower
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 4895632988306871632, guid: b6bfea0f13282ba4eac01fc65568a50f, type: 3}
       propertyPath: tempDamage
       value: 0.025
@@ -2649,7 +2653,15 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6431135219835290344, guid: b6bfea0f13282ba4eac01fc65568a50f, type: 3}
+      propertyPath: buildingDataList.Array.data[0].tent
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6431135219835290344, guid: b6bfea0f13282ba4eac01fc65568a50f, type: 3}
       propertyPath: buildingDataList.Array.data[0].wood
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6431135219835290344, guid: b6bfea0f13282ba4eac01fc65568a50f, type: 3}
+      propertyPath: buildingDataList.Array.data[1].fire
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6431135219835290344, guid: b6bfea0f13282ba4eac01fc65568a50f, type: 3}
@@ -2667,6 +2679,10 @@ PrefabInstance:
     - target: {fileID: 6431135219835290344, guid: b6bfea0f13282ba4eac01fc65568a50f, type: 3}
       propertyPath: buildingDataList.Array.data[3].wood
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6431135219835290344, guid: b6bfea0f13282ba4eac01fc65568a50f, type: 3}
+      propertyPath: buildingDataList.Array.data[2].fence
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6431135219835290344, guid: b6bfea0f13282ba4eac01fc65568a50f, type: 3}
       propertyPath: buildingDataList.Array.data[0].branch
@@ -8866,13 +8882,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1492471138}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.46174863, z: 0, w: 0.8870109}
   m_LocalPosition: {x: 160, y: 12.315506, z: -120}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1499920040}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 55, z: 0}
 --- !u!65 &1492471140
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8892,8 +8908,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 40, y: 20, z: 40}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 121.252014, y: 20, z: 147.73189}
+  m_Center: {x: -1.1700025, y: 0, z: 37.047104}
 --- !u!1001 &1497632995
 PrefabInstance:
   m_ObjectHideFlags: 0

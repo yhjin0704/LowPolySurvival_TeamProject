@@ -45,7 +45,6 @@ public class PlayerCupEquip : PlayerEquipState
 
     public void ChangeController()
     {
-        //throw new System.NotImplementedException();
     }
 }
 

@@ -44,7 +44,6 @@ public class DayNightCycle : MonoBehaviour
         time = startTime;
     }
 
-    // Update is called once per frame
     void Update()
     {
         time = (time + timeRate * Time.deltaTime) % 1.0f;
