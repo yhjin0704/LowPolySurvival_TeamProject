@@ -7,18 +7,18 @@ public class ReSourceManager : MonoBehaviour
     public UIInventory uiinventory;
     public ItemData[] datas;
 
-    public bool CanBuild(int requiredWood, int requiredRock, int requiredBranch)
+    public bool CanBuild(int requiredTent, int requiredFire, int requiredFence)
     {
-        return uiinventory.GetItemQuantity(datas[0]) >= requiredWood && uiinventory.GetItemQuantity(datas[1]) >= requiredRock && uiinventory.GetItemQuantity(datas[2]) >= requiredBranch;
+        return uiinventory.GetItemQuantity(datas[0]) >= requiredTent && uiinventory.GetItemQuantity(datas[1]) >= requiredFire && uiinventory.GetItemQuantity(datas[2]) >= requiredFence;
     }
 
-    public void UseResources(int requiredWood, int requiredRock, int requiredBranch)
+    public void UseResources(int requiredTent, int requiredFire, int requiredFence)
     {
-        if (CanBuild(requiredWood, requiredRock, requiredBranch))
+        if (CanBuild(requiredTent, requiredFire, requiredFence))
         {
-            uiinventory.SetItemQunatity(datas[0], requiredWood);
-            uiinventory.SetItemQunatity(datas[1], requiredRock);
-            uiinventory.SetItemQunatity(datas[2], requiredBranch);
+            uiinventory.SetItemQunatity(datas[0], requiredTent);
+            uiinventory.SetItemQunatity(datas[1], requiredFire);
+            uiinventory.SetItemQunatity(datas[2], requiredFence);
         }
     }
 }

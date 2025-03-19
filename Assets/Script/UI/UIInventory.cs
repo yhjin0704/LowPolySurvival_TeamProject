@@ -264,7 +264,6 @@ public class UIInventory : MonoBehaviour
     {
         slots[index].equipped = false;
         controller.UnEquip();
-        //PlayerManager.Instance.Player.equip.UnEquip();
         UpdateUI();
 
         if (selectedItemIndex == index)
@@ -289,11 +288,9 @@ public class UIInventory : MonoBehaviour
                     return slots[i].quantity;
                 }
             }
-            
         }
 
         return 0;
-        
     }
 
     public void SetItemQunatity(ItemData data, int amount)

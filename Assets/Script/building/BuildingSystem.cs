@@ -32,9 +32,9 @@ public class BuildingSystem : MonoBehaviour
     public struct BuildingData
     {
         public GameObject prefab;
-        public int wood;
-        public int rock;
-        public int branch;
+        public int tent;
+        public int fire;
+        public int fence;
     }
 
     // 건물 배치 함수
@@ -51,13 +51,13 @@ public class BuildingSystem : MonoBehaviour
         {
             // 자원 요구량 확인
             
-            if (resourceManager.CanBuild(selectedBuilding.wood, selectedBuilding.rock, selectedBuilding.branch))
+            if (resourceManager.CanBuild(selectedBuilding.tent, selectedBuilding.fire, selectedBuilding.fence))
             {
                 // 건물 배치
                 Instantiate(selectedBuilding.prefab, placementPosition, player.transform.rotation);
 
                 // 자원 차감
-                resourceManager.UseResources(selectedBuilding.wood, selectedBuilding.rock, selectedBuilding.branch);
+                resourceManager.UseResources(selectedBuilding.tent, selectedBuilding.fire, selectedBuilding.fence);
                 Debug.Log($"{selectedBuilding.prefab.name} 건물이 성공적으로 설치되었습니다.");
             }
             else
