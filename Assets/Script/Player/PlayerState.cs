@@ -9,32 +9,19 @@ public interface PlayerEquipState
     public abstract void ChangeController();
 }
 
-public interface PlayerTemperartureState
-{
-    public abstract void ChangeTemperarture();
-}
-
 public class PlayerState
 {
     private PlayerEquipState state;
-    private PlayerTemperartureState temperartureState;
 
-    public PlayerState(PlayerEquipState state, PlayerTemperartureState TemperartureState)
+    public PlayerState(PlayerEquipState state)
     {
         this.state = state;
-        this.temperartureState = TemperartureState;
     }
 
     public void setState(PlayerEquipState state)
     {
         if(state != this.state)
             this.state = state;
-    }
-
-    public void SetTemperartureState(PlayerTemperartureState TemperartureState)
-    {
-        if(temperartureState != TemperartureState)
-            this.temperartureState = TemperartureState;
     }
 
     public void Change(ItemData data) 
@@ -48,18 +35,9 @@ public class PlayerState
         PlayerManager.Instance.Player.controller.DisableAllEquipItem();
         state.ChangeController();
     }
-    public void TempChange()
-    {
-        temperartureState.ChangeTemperarture();
-    }
 
     public PlayerEquipState ReturnState()
     {
         return this.state;
-    }
-
-    public PlayerTemperartureState GetTempState()
-    {
-        return this.temperartureState;
     }
 }
