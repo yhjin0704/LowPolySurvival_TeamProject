@@ -87,8 +87,6 @@ public class UIInventory : MonoBehaviour
         return inventoryWindow.activeInHierarchy;
     }
 
-    // PlayerController 먼저 수정
-
     public void AddItem()
     {
         ItemData data = PlayerManager.Instance.Player.itemData;
@@ -159,14 +157,11 @@ public class UIInventory : MonoBehaviour
         return null;
     }
 
-    // Player 스크립트 먼저 수정
     public void ThrowItem(ItemData data)
     {
         Instantiate(data.dropPrefab, dropPosition.position, Quaternion.Euler(Vector3.one * Random.value * 360));
     }
 
-
-    // ItemSlot 스크립트 먼저 수정
     public void SelectItem(int index)
     {
         if (slots[index].item == null) return;
@@ -227,7 +222,6 @@ public class UIInventory : MonoBehaviour
             if (slots[selectedItemIndex].equipped)
             {
                 Debug.Log("장착해제");
-                //UnEquip(selectedItemIndex);
             }
 
             selectedItem.item = null;
@@ -254,7 +248,6 @@ public class UIInventory : MonoBehaviour
         Debug.Log(selectedItem.item.ID);
         curEquipIndex = selectedItemIndex;
         string a = slots[selectedItemIndex].item.displayName;
-        //PlayerManager.Instance.Player.equip.EquipNew(selectedItem);
         UpdateUI();
 
         SelectItem(selectedItemIndex);

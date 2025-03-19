@@ -286,7 +286,6 @@ public class PlayerController : MonoBehaviour
     public void OnHit()
     {
         Ray ray = camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
-        //Ray ray = new Ray(transform.position + new Vector3(0, 0.5f,0), Vector3.forward * attackDistance);
         Debug.DrawRay(ray.origin, ray.direction, Color.white);
         RaycastHit hit;
 
